@@ -19,6 +19,8 @@ const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
 const int MAX_LASER = 10;
 
+const float APEAR_POINT = 1000.f;
+
 CloudStage::CloudStage(class Application* a)
     : Stage(a)
     , stageCounter(0)
@@ -107,7 +109,7 @@ void CloudStage::UpdateStage()
             if(!ufoEnemy[i]->GetDisp())
             {
                 ufoEnemy[i]->SetDisp(true);
-                ufoEnemy[i]->SetPosition(Vector3(std::rand() % 200 - 100, std::rand() % 150 - 75 , 800));
+                ufoEnemy[i]->SetPosition(Vector3(std::rand() % 200 - 100, std::rand() % 150 - 75 , APEAR_POINT));
                 break;
             }
         }
@@ -120,7 +122,7 @@ void CloudStage::UpdateStage()
             if(!moaiEnemy[i]->GetDisp())
             {
                 moaiEnemy[i]->SetDisp(true);
-                moaiEnemy[i]->SetPosition(Vector3(std::rand() % 200 - 100, std::rand() % 150 - 75 , 800));
+                moaiEnemy[i]->SetPosition(Vector3(std::rand() % 200 - 100, std::rand() % 150 - 75 , APEAR_POINT));
                 break;
             }
         }
@@ -133,7 +135,7 @@ void CloudStage::UpdateStage()
             if(!shipEnemy[i]->GetDisp())
             {
                 shipEnemy[i]->SetDisp(true);
-                shipEnemy[i]->SetPosition(Vector3(std::rand() % 200 - 100, std::rand() % 150 - 75 , 800));
+                shipEnemy[i]->SetPosition(Vector3(std::rand() % 200 - 100, std::rand() % 150 - 75 , APEAR_POINT));
                 break;
             }
         }
@@ -150,7 +152,7 @@ void CloudStage::GenerateCloud()
             if(!cloudActor[i]->GetDisp())
             {
                 cloudActor[i]->SetDisp(true);
-                cloudActor[i]->SetPosition(Vector3(std::rand() % 600 - 300, std::rand() % 400 - 200 , 1000));
+                cloudActor[i]->SetPosition(Vector3(std::rand() % 600 - 300, std::rand() % 400 - 200 , APEAR_POINT));
                 break;
             }
         }

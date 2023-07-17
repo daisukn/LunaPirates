@@ -216,78 +216,11 @@
 		7EA398E02A65581C00856DB1 /* LunaPirates */ = {
 			isa = PBXGroup;
 			children = (
-				7EA3995A2A65583300856DB1 /* Actor.cpp */,
-				7EA399252A65582F00856DB1 /* Application.cpp */,
-				7EA3995F2A65583300856DB1 /* BillboardComponent.cpp */,
-				7EA3995E2A65583300856DB1 /* Bone.cpp */,
-				7EA399202A65582F00856DB1 /* BoundingVolumeComponent.cpp */,
-				7EA398EC2A65582D00856DB1 /* CameraComponent.cpp */,
-				7EA399632A65583300856DB1 /* CloudBGActor.cpp */,
-				7EA399522A65583200856DB1 /* CloudStage.cpp */,
-				7EA398EF2A65582E00856DB1 /* ColliderComponent.cpp */,
-				7EA399592A65583300856DB1 /* Component.cpp */,
-				7EA3995C2A65583300856DB1 /* DebuggerComponent.cpp */,
-				7EA399272A65582F00856DB1 /* DragonActor.cpp */,
-				7EA399242A65582F00856DB1 /* FollowCamera.cpp */,
-				7EA399512A65583200856DB1 /* InputSystem.cpp */,
-				7EA399232A65582F00856DB1 /* LaserActor.cpp */,
-				7EA399462A65583100856DB1 /* main.cpp */,
-				7EA3992D2A65583000856DB1 /* Math.cpp */,
-				7EA399312A65583000856DB1 /* Mesh.cpp */,
-				7EA3991F2A65582F00856DB1 /* MeshComponent.cpp */,
-				7EA398EE2A65582E00856DB1 /* MoaiEnemy.cpp */,
-				7EA398E92A65582D00856DB1 /* MoveComponent.cpp */,
-				7EA399612A65583300856DB1 /* ObjectActor.cpp */,
-				7EA399642A65583300856DB1 /* ParticleComponent.cpp */,
-				7EA3994A2A65583100856DB1 /* PhysWorld.cpp */,
-				7EA399282A65583000856DB1 /* PlaneActor.cpp */,
-				7EA3994B2A65583200856DB1 /* Polygon.cpp */,
-				7EA399332A65583000856DB1 /* Renderer.cpp */,
-				7EA3994C2A65583200856DB1 /* Shader.cpp */,
-				7EA399212A65582F00856DB1 /* ShipEnemy.cpp */,
-				7EA399442A65583100856DB1 /* SkeletalMeshComponent.cpp */,
-				7EA399452A65583100856DB1 /* SpriteComponent.cpp */,
-				7EA3992F2A65583000856DB1 /* Stage.cpp */,
-				7EA399552A65583200856DB1 /* Texture.cpp */,
-				7EA399562A65583200856DB1 /* TitleStage.cpp */,
-				7EA3992C2A65583000856DB1 /* UfoEnemy.cpp */,
-				7EA3995D2A65583300856DB1 /* VertexArray.cpp */,
-				7EA399542A65583200856DB1 /* Actor.h */,
-				7EA399582A65583300856DB1 /* Animation.h */,
-				7EA398E82A65582D00856DB1 /* Application.h */,
-				7EA3994F2A65583200856DB1 /* BillboardComponent.h */,
-				7EA399502A65583200856DB1 /* Bone.h */,
-				7EA399352A65583100856DB1 /* BoundingVolumeComponent.h */,
-				7EA399622A65583300856DB1 /* CameraComponent.h */,
-				7EA3992B2A65583000856DB1 /* CloudBGActor.h */,
-				7EA399302A65583000856DB1 /* CloudStage.h */,
-				7EA398EB2A65582D00856DB1 /* ColliderComponent.h */,
-				7EA399362A65583100856DB1 /* Component.h */,
-				7EA399532A65583200856DB1 /* DebuggerComponent.h */,
-				7EA399472A65583100856DB1 /* DragonActor.h */,
-				7EA3994E2A65583200856DB1 /* FollowCamera.h */,
-				7EA399482A65583100856DB1 /* InputSystem.h */,
-				7EA399572A65583200856DB1 /* LaserActor.h */,
-				7EA399262A65582F00856DB1 /* Math.h */,
-				7EA3995B2A65583300856DB1 /* Mesh.h */,
-				7EA399602A65583300856DB1 /* MeshComponent.h */,
-				7EA398ED2A65582D00856DB1 /* MoaiEnemy.h */,
-				7EA399322A65583000856DB1 /* MoveComponent.h */,
-				7EA399432A65583100856DB1 /* ObjectActor.h */,
-				7EA399492A65583100856DB1 /* ParticleComponent.h */,
-				7EA398EA2A65582D00856DB1 /* PhysWorld.h */,
-				7EA399662A65583400856DB1 /* PlaneActor.h */,
-				7EA399292A65583000856DB1 /* Polygon.h */,
-				7EA3992E2A65583000856DB1 /* Renderer.h */,
-				7EA399342A65583000856DB1 /* Shader.h */,
-				7EA399222A65582F00856DB1 /* ShipEnemy.h */,
-				7EA398F02A65582E00856DB1 /* SkeletalMeshComponent.h */,
-				7EA3992A2A65583000856DB1 /* SpriteComponent.h */,
-				7EA398F32A65582E00856DB1 /* Stage.h */,
-				7EA399652A65583400856DB1 /* Texture.h */,
-				7EA398F22A65582E00856DB1 /* TitleStage.h */,
-				7EA398F12A65582E00856DB1 /* UfoEnemy.h */,
-				7EA3994D2A65583200856DB1 /* VertexArray.h */,
+				7EA3998E2A655EF200856DB1 /* Actor */,
+				7EA399932A655FA500856DB1 /* Stage */,
+				7EA3998F2A655F1F00856DB1 /* Sys */,
+				7EA399922A655F6A00856DB1 /* Components */,
+				7EA399912A655F4100856DB1 /* Library */,
 				7EA398F42A65582F00856DB1 /* Assets */,
 				7EA399372A65583100856DB1 /* Shaders */,
 			);
@@ -395,6 +328,113 @@
 				7EA3998C2A65585200856DB1 /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7EA3998E2A655EF200856DB1 /* Actor */ = {
+			isa = PBXGroup;
+			children = (
+				7EA399542A65583200856DB1 /* Actor.h */,
+				7EA3995A2A65583300856DB1 /* Actor.cpp */,
+				7EA399632A65583300856DB1 /* CloudBGActor.cpp */,
+				7EA3992B2A65583000856DB1 /* CloudBGActor.h */,
+				7EA399272A65582F00856DB1 /* DragonActor.cpp */,
+				7EA399472A65583100856DB1 /* DragonActor.h */,
+				7EA399242A65582F00856DB1 /* FollowCamera.cpp */,
+				7EA3994E2A65583200856DB1 /* FollowCamera.h */,
+				7EA399232A65582F00856DB1 /* LaserActor.cpp */,
+				7EA399572A65583200856DB1 /* LaserActor.h */,
+				7EA399612A65583300856DB1 /* ObjectActor.cpp */,
+				7EA399432A65583100856DB1 /* ObjectActor.h */,
+				7EA399282A65583000856DB1 /* PlaneActor.cpp */,
+				7EA399662A65583400856DB1 /* PlaneActor.h */,
+				7EA399212A65582F00856DB1 /* ShipEnemy.cpp */,
+				7EA399222A65582F00856DB1 /* ShipEnemy.h */,
+				7EA398EE2A65582E00856DB1 /* MoaiEnemy.cpp */,
+				7EA398ED2A65582D00856DB1 /* MoaiEnemy.h */,
+				7EA3992C2A65583000856DB1 /* UfoEnemy.cpp */,
+				7EA398F12A65582E00856DB1 /* UfoEnemy.h */,
+			);
+			name = Actor;
+			sourceTree = "<group>";
+		};
+		7EA3998F2A655F1F00856DB1 /* Sys */ = {
+			isa = PBXGroup;
+			children = (
+				7EA399252A65582F00856DB1 /* Application.cpp */,
+				7EA398E82A65582D00856DB1 /* Application.h */,
+				7EA399512A65583200856DB1 /* InputSystem.cpp */,
+				7EA399482A65583100856DB1 /* InputSystem.h */,
+				7EA399462A65583100856DB1 /* main.cpp */,
+				7EA3994A2A65583100856DB1 /* PhysWorld.cpp */,
+				7EA398EA2A65582D00856DB1 /* PhysWorld.h */,
+				7EA399332A65583000856DB1 /* Renderer.cpp */,
+				7EA3992E2A65583000856DB1 /* Renderer.h */,
+			);
+			name = Sys;
+			sourceTree = "<group>";
+		};
+		7EA399912A655F4100856DB1 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				7EA399582A65583300856DB1 /* Animation.h */,
+				7EA3995E2A65583300856DB1 /* Bone.cpp */,
+				7EA399502A65583200856DB1 /* Bone.h */,
+				7EA3992D2A65583000856DB1 /* Math.cpp */,
+				7EA399262A65582F00856DB1 /* Math.h */,
+				7EA399312A65583000856DB1 /* Mesh.cpp */,
+				7EA3995B2A65583300856DB1 /* Mesh.h */,
+				7EA3994B2A65583200856DB1 /* Polygon.cpp */,
+				7EA399292A65583000856DB1 /* Polygon.h */,
+				7EA3994C2A65583200856DB1 /* Shader.cpp */,
+				7EA399342A65583000856DB1 /* Shader.h */,
+				7EA399552A65583200856DB1 /* Texture.cpp */,
+				7EA399652A65583400856DB1 /* Texture.h */,
+				7EA3995D2A65583300856DB1 /* VertexArray.cpp */,
+				7EA3994D2A65583200856DB1 /* VertexArray.h */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		7EA399922A655F6A00856DB1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7EA3995F2A65583300856DB1 /* BillboardComponent.cpp */,
+				7EA3994F2A65583200856DB1 /* BillboardComponent.h */,
+				7EA399202A65582F00856DB1 /* BoundingVolumeComponent.cpp */,
+				7EA399352A65583100856DB1 /* BoundingVolumeComponent.h */,
+				7EA398EC2A65582D00856DB1 /* CameraComponent.cpp */,
+				7EA399622A65583300856DB1 /* CameraComponent.h */,
+				7EA398EF2A65582E00856DB1 /* ColliderComponent.cpp */,
+				7EA398EB2A65582D00856DB1 /* ColliderComponent.h */,
+				7EA399592A65583300856DB1 /* Component.cpp */,
+				7EA399362A65583100856DB1 /* Component.h */,
+				7EA3995C2A65583300856DB1 /* DebuggerComponent.cpp */,
+				7EA399532A65583200856DB1 /* DebuggerComponent.h */,
+				7EA3991F2A65582F00856DB1 /* MeshComponent.cpp */,
+				7EA399602A65583300856DB1 /* MeshComponent.h */,
+				7EA398E92A65582D00856DB1 /* MoveComponent.cpp */,
+				7EA399322A65583000856DB1 /* MoveComponent.h */,
+				7EA399642A65583300856DB1 /* ParticleComponent.cpp */,
+				7EA399492A65583100856DB1 /* ParticleComponent.h */,
+				7EA399442A65583100856DB1 /* SkeletalMeshComponent.cpp */,
+				7EA398F02A65582E00856DB1 /* SkeletalMeshComponent.h */,
+				7EA399452A65583100856DB1 /* SpriteComponent.cpp */,
+				7EA3992A2A65583000856DB1 /* SpriteComponent.h */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		7EA399932A655FA500856DB1 /* Stage */ = {
+			isa = PBXGroup;
+			children = (
+				7EA399522A65583200856DB1 /* CloudStage.cpp */,
+				7EA399302A65583000856DB1 /* CloudStage.h */,
+				7EA3992F2A65583000856DB1 /* Stage.cpp */,
+				7EA398F32A65582E00856DB1 /* Stage.h */,
+				7EA399562A65583200856DB1 /* TitleStage.cpp */,
+				7EA398F22A65582E00856DB1 /* TitleStage.h */,
+			);
+			name = Stage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

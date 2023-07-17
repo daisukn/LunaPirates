@@ -15,7 +15,7 @@
 #include <algorithm>
 
 
-#define __GAME_DEBUG
+//#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()
@@ -338,7 +338,7 @@ void Renderer::SetLightUniforms(Shader* shader)
     
     
     // フォグ
-    shader->SetFloatUniform("uFoginfo.maxDist", 800.0f);
+    shader->SetFloatUniform("uFoginfo.maxDist", 1100.0f);
     shader->SetFloatUniform("uFoginfo.minDist", 1.0f);
     
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.75f, 0.96f, 0.99f) );
