@@ -54,7 +54,6 @@ void FollowCamera::Update(float deltaTime)
     }
 */
     
-
 	// ビューマトリックスを生成
     Matrix4 view = Matrix4::CreateLookAt(actualPos, target, Vector3::UnitY);
 	SetViewMatrix(view);
