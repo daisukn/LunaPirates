@@ -19,7 +19,7 @@ ShipEnemy::ShipEnemy(Application* a)
     
     
     collComp = std::make_unique<ColliderComponent>(this);
-    collComp->SetColliderType(C_PLAYER);
+    collComp->SetColliderType(C_ENEMY);
     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/ship.fbx")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 300, 500), Vector3(1, 0.5, 1));
     collComp->GetBoundingVolume()->CreateVArray();
@@ -41,5 +41,19 @@ void ShipEnemy::UpdateActor(float deltaTime)
             collComp->GetBoundingVolume()->SetVisible(false);
         }
     }
+    collComp->SetDisp(isDisp);
+    if(collComp->GetCollided())
+    {
+        if(collComp->GetTargetColliders()[0]->GetColliderType() == C_PLAYER
+           || collComp->GetTargetColliders()[0]->GetColliderType() == C_LASER)
+        {
+            isDisp = false;
+            skComp->SetVisible(false);
+            collComp->GetBoundingVolume()->SetVisible(false);
+            collComp->SetCollided(false);
+        }
+
+    }
+ 
 }
 

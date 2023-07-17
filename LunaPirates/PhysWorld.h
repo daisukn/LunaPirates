@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Math.h"
+#include "ColliderComponent.h"
 #include <vector>
 
 /*
@@ -44,6 +45,8 @@ public:
     void AddCollider(class ColliderComponent* c);
     void RemoveCollider(class ColliderComponent* c);
 
+    // コライダータイプ別に登録
+    void AddColliderType(class ColliderComponent* c, ColliderType t);
     
 private:
     
@@ -51,6 +54,8 @@ private:
     bool CompareLengthOBB(const struct OBB* cA, const struct OBB* cB, const Vector3 vSep, const Vector3 vDistance);
     bool JudgeWithOBB(class ColliderComponent* col1, class ColliderComponent* col2);
     bool IsCollideBoxOBB(const OBB* cA, const OBB* cB);
+    
+    bool JudgeWithAABB(class ColliderComponent* col1, class ColliderComponent* col2);
 
     
     
@@ -61,6 +66,11 @@ private:
     // 物理計算をするアクターを保持
     //std::vector<class Actor*> actors;
     std::vector<class ColliderComponent*> colliders;
+    
+    std::vector<class ColliderComponent*> collPlayer;
+    std::vector<class ColliderComponent*> collEnemy;
+    std::vector<class ColliderComponent*> collLaser;
+    std::vector<class ColliderComponent*> collBullet;
 
 
     // 地表面をVarrayで持つ（WorldTransform未対応）

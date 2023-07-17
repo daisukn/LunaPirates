@@ -214,7 +214,7 @@ void Application::UpdateGame()
 
     // 物理計算系
     //physWorld->ComputeGroundHeight();
-    //physWorld->Test();
+    physWorld->Test();
     
 
     activeStage->UpdateStage();

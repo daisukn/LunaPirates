@@ -18,7 +18,7 @@ PlaneActor::PlaneActor(Application* app)
     , animID(0)
     , isMovable(true)
     , prevPos(Vector3::Zero)
-{
+ {
     // メッシュ初期化
     skeltalMeshComp = std::make_unique<SkeletalMeshComponent>(this);
     skeltalMeshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/plane.fbx"));
@@ -107,7 +107,7 @@ void PlaneActor::ActorInput(const InputState &state)
 
 void PlaneActor::UpdateActor(float deltaTime)
 {
-
+    collComp->SetDisp(true);
 }
 
 

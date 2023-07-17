@@ -14,7 +14,7 @@ MoaiEnemy::MoaiEnemy(Application* a)
 
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
-    collComp->SetColliderType(C_PLAYER);
+    collComp->SetColliderType(C_ENEMY);
     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/moai.lwo")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
@@ -39,4 +39,18 @@ void MoaiEnemy::UpdateActor(float deltaTime)
 
         }
     }
+    collComp->SetDisp(isDisp);
+    if(collComp->GetCollided())
+    {
+        if(collComp->GetTargetColliders()[0]->GetColliderType() == C_PLAYER
+           || collComp->GetTargetColliders()[0]->GetColliderType() == C_LASER)
+        {
+            isDisp = false;
+            meshComp->SetVisible(false);
+            collComp->GetBoundingVolume()->SetVisible(false);
+            collComp->SetCollided(false);
+        }
+
+    }
+ 
 }

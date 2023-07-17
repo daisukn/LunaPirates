@@ -28,15 +28,35 @@ void PhysWorld::Test()
         c->ClearCollidBuffer();
     }
     
-    // Player vs Enemy or Obstacle
-    for (auto c1 : colliders)
+    // Player vs Enemy
+    for (auto c1 : collPlayer)
     {
-        if (c1->GetColliderType() == C_PLAYER)
+        if (c1->GetDisp())
         {
-            for (auto c2 : colliders)
+            for (auto c2 : collEnemy)
             {
-                if (c2->GetColliderType() == C_ENEMY || c2->GetColliderType() == C_OBSTACLE)
+                if (c2->GetDisp())
                 {
+                    
+                    if (JudgeWithOBB(c1, c2))
+                    {
+                        c1->Collided(c2);
+                        c2->Collided(c1);
+                    }
+                }
+            }
+        }
+    }
+    // Laser vs Enemy
+    for (auto c1 : collLaser)
+    {
+        if (c1->GetDisp())
+        {
+            for (auto c2 : collEnemy)
+            {
+                if (c2->GetDisp())
+                {
+                    
                     if (JudgeWithOBB(c1, c2))
                     {
                         c1->Collided(c2);
@@ -137,7 +157,44 @@ bool PhysWorld::IsCollideBoxOBB(const OBB* cA, const OBB* cB){
 }
 
 
+// AABBによる衝突判定
+bool PhysWorld::JudgeWithAABB(ColliderComponent* col1, ColliderComponent* col2)
+{
+    auto cube1 = col1->GetBoundingVolume()->GetBoundingBox();
+    auto cube2 = col2->GetBoundingVolume()->GetBoundingBox();
+    
+    Cube aabb1, aabb2;
+    aabb1.max = cube1->max + col1->GetActor()->GetPosition();
+    aabb2.max = cube2->max + col2->GetActor()->GetPosition();
 
+    
+    return !(   aabb1.max.x < aabb2.min.x || aabb1.min.x > aabb2.max.x ||
+                aabb1.max.y < aabb2.min.y || aabb1.min.y > aabb2.max.y ||
+                aabb1.max.z < aabb2.min.z || aabb1.min.z > aabb2.max.z);
+}
+
+
+// コライダーの登録
+void PhysWorld::AddColliderType(ColliderComponent* c, ColliderType t)
+{
+    switch(t)
+    {
+        case C_NONE:
+            break;
+        case C_PLAYER:
+            collPlayer.emplace_back(c);
+            break;
+        case C_ENEMY:
+            collEnemy.emplace_back(c);
+            break;
+        case C_BULLET:
+            collBullet.emplace_back(c);
+            break;
+        case C_LASER:
+            collLaser.emplace_back(c);
+            break;
+    }
+}
 
 // 高さを知らせるべきActorを登録
 void PhysWorld::AddCollider(ColliderComponent* c)
