@@ -6,7 +6,7 @@
 #include "ColliderComponent.h"
 
 UfoEnemy::UfoEnemy(Application* a)
-    : ObjectActor(a)
+    : StageObjectActor(a)
     , ang(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);

@@ -6,8 +6,9 @@
 #include "ColliderComponent.h"
 #include "Mesh.h"
 
+
 ShipEnemy::ShipEnemy(Application* a)
-    : ObjectActor(a)
+    : StageObjectActor(a)
 {
     skComp = std::make_unique<SkeletalMeshComponent>(this);
     skComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship.fbx"));

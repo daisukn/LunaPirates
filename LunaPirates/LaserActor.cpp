@@ -5,7 +5,7 @@
 #include "Mesh.h"
 
 LaserActor::LaserActor(Application* a)
-    : ObjectActor(a)
+    : StageObjectActor(a)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/laser.lwo"));

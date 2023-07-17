@@ -16,10 +16,10 @@ private:
     std::unique_ptr<class DragonActor> dragonActor;
 
     std::vector<std::unique_ptr<class CloudBGActor>> cloudActor;
-    std::vector<std::unique_ptr<class ObjectActor>> ufoEnemy;
-    std::vector<std::unique_ptr<class ObjectActor>> moaiEnemy;
-    std::vector<std::unique_ptr<class ObjectActor>> shipEnemy;
-    std::vector<std::unique_ptr<class ObjectActor>> laserActor;
+    std::vector<std::unique_ptr<class StageObjectActor>> ufoEnemy;
+    std::vector<std::unique_ptr<class StageObjectActor>> moaiEnemy;
+    std::vector<std::unique_ptr<class StageObjectActor>> shipEnemy;
+    std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
 
     std::unique_ptr<class Actor> skyActor;
     std::unique_ptr<class MeshComponent> skyMesh;

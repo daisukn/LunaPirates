@@ -14,16 +14,16 @@
 
 
 PlaneActor::PlaneActor(Application* app)
-    : Actor(app)
+    : StageObjectActor(app)
     , animID(0)
     , isMovable(true)
     , prevPos(Vector3::Zero)
 {
     // メッシュ初期化
-    meshComp = std::make_unique<SkeletalMeshComponent>(this);
-    meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/plane.fbx"));
-    meshComp->SetAnimID(animID, PLAY_CYCLIC);
-    meshComp->SetToonRender(true);
+    skeltalMeshComp = std::make_unique<SkeletalMeshComponent>(this);
+    skeltalMeshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/plane.fbx"));
+    skeltalMeshComp->SetAnimID(animID, PLAY_CYCLIC);
+    skeltalMeshComp->SetToonRender(true);
     
     
     // 場所調整
@@ -94,7 +94,7 @@ void PlaneActor::FieldMove(const InputState &state)
 void PlaneActor::ApplyMotion()
 {
 
-    meshComp->SetAnimID(animID, PLAY_CYCLIC);
+    skeltalMeshComp->SetAnimID(animID, PLAY_CYCLIC);
 
 }
 

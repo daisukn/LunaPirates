@@ -1,9 +1,9 @@
 #ifndef __LASERACTOR_H
 #define __LASERACTOR_H
 
-#include "ObjectActor.h"
+#include "StageObjectActor.h"
 
-class LaserActor : public ObjectActor
+class LaserActor : public StageObjectActor
 {
 public:
     LaserActor(class Application* a);

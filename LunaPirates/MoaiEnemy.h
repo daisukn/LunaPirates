@@ -1,9 +1,9 @@
 #ifndef __MOAIENEMY_H
 #define __MOAIENEMY_H
 
-#include "ObjectActor.h"
+#include "StageObjectActor.h"
 
-class MoaiEnemy : public ObjectActor
+class MoaiEnemy : public StageObjectActor
 {
 public:
     MoaiEnemy(class Application* a);

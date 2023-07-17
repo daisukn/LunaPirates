@@ -10,10 +10,10 @@
 
 
 // ゲームオブジェクトの基底クラス
-class ObjectActor : public Actor
+class StageObjectActor : public Actor
 {
 public:
-    ObjectActor(class Application* a);
+    StageObjectActor(class Application* a);
 
     void UpdateActor(float deltaTime) override;
 
@@ -23,11 +23,17 @@ public:
     bool GetDisp() const { return isDisp; }
     void SetDisp(bool b) { isDisp = b; }
     
+    void SetOwnerStage(class Stage* s) { ownerStage = s; }
+
+    
 protected:
     std::unique_ptr<class MeshComponent> meshComp;
     std::unique_ptr<class ColliderComponent> collComp;
     bool isDisp;
 
+    
+    // オーナーのステージ
+    class Stage* ownerStage;
 };
 
 

@@ -1,10 +1,10 @@
 #ifndef __UFOENEMY_H
 #define __UFOENEMY_H
 
-#include "ObjectActor.h"
+#include "StageObjectActor.h"
 
 
-class UfoEnemy : public ObjectActor
+class UfoEnemy : public StageObjectActor
 {
 public:
     UfoEnemy(class Application* a);

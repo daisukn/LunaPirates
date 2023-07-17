@@ -21,7 +21,7 @@ class ColliderComponent : public Component
 {
 public:
     ColliderComponent(class Actor* a);
-    ~ColliderComponent();
+    virtual ~ColliderComponent();
 
     // 自分のタイプ
     void SetColliderType(const ColliderType t) { type = t; }
@@ -33,7 +33,7 @@ public:
     
     void Update(float deltaTime) override;
     
-    class Actor* GetActor() { return owner; }
+    class Actor* GetActor() const { return owner; }
     class BoundingVolumeComponent* GetBoundingVolume() const { return boundingVolume; }
     
     

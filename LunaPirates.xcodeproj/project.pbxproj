@@ -37,13 +37,14 @@
 		7EA399822A65584500856DB1 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3995A2A65583300856DB1 /* Actor.cpp */; };
 		7EA399832A65584500856DB1 /* TitleStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399562A65583200856DB1 /* TitleStage.cpp */; };
 		7EA399842A65584500856DB1 /* ColliderComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA398EF2A65582E00856DB1 /* ColliderComponent.cpp */; };
-		7EA399852A65584500856DB1 /* ObjectActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399612A65583300856DB1 /* ObjectActor.cpp */; };
+		7EA399852A65584500856DB1 /* StageObjectActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399612A65583300856DB1 /* StageObjectActor.cpp */; };
 		7EA399862A65584500856DB1 /* CameraComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA398EC2A65582D00856DB1 /* CameraComponent.cpp */; };
 		7EA399872A65584500856DB1 /* InputSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399512A65583200856DB1 /* InputSystem.cpp */; };
 		7EA399882A65584500856DB1 /* LaserActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399232A65582F00856DB1 /* LaserActor.cpp */; };
 		7EA399892A65584500856DB1 /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3992D2A65583000856DB1 /* Math.cpp */; };
 		7EA3998A2A65584500856DB1 /* BillboardComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3995F2A65583300856DB1 /* BillboardComponent.cpp */; };
 		7EA3998D2A65585200856DB1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA3998C2A65585200856DB1 /* OpenGL.framework */; };
+		7EA399962A65743800856DB1 /* BulletActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399942A65743800856DB1 /* BulletActor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -145,7 +146,7 @@
 		7EA399402A65583100856DB1 /* Phong.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Phong.vert; sourceTree = "<group>"; };
 		7EA399412A65583100856DB1 /* Skinned.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skinned.vert; sourceTree = "<group>"; };
 		7EA399422A65583100856DB1 /* Sprite.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Sprite.frag; sourceTree = "<group>"; };
-		7EA399432A65583100856DB1 /* ObjectActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectActor.h; sourceTree = "<group>"; };
+		7EA399432A65583100856DB1 /* StageObjectActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StageObjectActor.h; sourceTree = "<group>"; };
 		7EA399442A65583100856DB1 /* SkeletalMeshComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkeletalMeshComponent.cpp; sourceTree = "<group>"; };
 		7EA399452A65583100856DB1 /* SpriteComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteComponent.cpp; sourceTree = "<group>"; };
 		7EA399462A65583100856DB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -175,13 +176,15 @@
 		7EA3995E2A65583300856DB1 /* Bone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bone.cpp; sourceTree = "<group>"; };
 		7EA3995F2A65583300856DB1 /* BillboardComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BillboardComponent.cpp; sourceTree = "<group>"; };
 		7EA399602A65583300856DB1 /* MeshComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshComponent.h; sourceTree = "<group>"; };
-		7EA399612A65583300856DB1 /* ObjectActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectActor.cpp; sourceTree = "<group>"; };
+		7EA399612A65583300856DB1 /* StageObjectActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StageObjectActor.cpp; sourceTree = "<group>"; };
 		7EA399622A65583300856DB1 /* CameraComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraComponent.h; sourceTree = "<group>"; };
 		7EA399632A65583300856DB1 /* CloudBGActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CloudBGActor.cpp; sourceTree = "<group>"; };
 		7EA399642A65583300856DB1 /* ParticleComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleComponent.cpp; sourceTree = "<group>"; };
 		7EA399652A65583400856DB1 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		7EA399662A65583400856DB1 /* PlaneActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaneActor.h; sourceTree = "<group>"; };
 		7EA3998C2A65585200856DB1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7EA399942A65743800856DB1 /* BulletActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BulletActor.cpp; sourceTree = "<group>"; };
+		7EA399952A65743800856DB1 /* BulletActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletActor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,8 +346,8 @@
 				7EA3994E2A65583200856DB1 /* FollowCamera.h */,
 				7EA399232A65582F00856DB1 /* LaserActor.cpp */,
 				7EA399572A65583200856DB1 /* LaserActor.h */,
-				7EA399612A65583300856DB1 /* ObjectActor.cpp */,
-				7EA399432A65583100856DB1 /* ObjectActor.h */,
+				7EA399612A65583300856DB1 /* StageObjectActor.cpp */,
+				7EA399432A65583100856DB1 /* StageObjectActor.h */,
 				7EA399282A65583000856DB1 /* PlaneActor.cpp */,
 				7EA399662A65583400856DB1 /* PlaneActor.h */,
 				7EA399212A65582F00856DB1 /* ShipEnemy.cpp */,
@@ -353,6 +356,8 @@
 				7EA398ED2A65582D00856DB1 /* MoaiEnemy.h */,
 				7EA3992C2A65583000856DB1 /* UfoEnemy.cpp */,
 				7EA398F12A65582E00856DB1 /* UfoEnemy.h */,
+				7EA399942A65743800856DB1 /* BulletActor.cpp */,
+				7EA399952A65743800856DB1 /* BulletActor.h */,
 			);
 			name = Actor;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 			files = (
 				7EA399862A65584500856DB1 /* CameraComponent.cpp in Sources */,
 				7EA399802A65584500856DB1 /* Shader.cpp in Sources */,
+				7EA399962A65743800856DB1 /* BulletActor.cpp in Sources */,
 				7EA399742A65584500856DB1 /* DragonActor.cpp in Sources */,
 				7EA399702A65584500856DB1 /* CloudStage.cpp in Sources */,
 				7EA399782A65584500856DB1 /* main.cpp in Sources */,
@@ -516,7 +522,7 @@
 				7EA399772A65584500856DB1 /* SkeletalMeshComponent.cpp in Sources */,
 				7EA399752A65584500856DB1 /* BoundingVolumeComponent.cpp in Sources */,
 				7EA399832A65584500856DB1 /* TitleStage.cpp in Sources */,
-				7EA399852A65584500856DB1 /* ObjectActor.cpp in Sources */,
+				7EA399852A65584500856DB1 /* StageObjectActor.cpp in Sources */,
 				7EA399872A65584500856DB1 /* InputSystem.cpp in Sources */,
 				7EA3997B2A65584500856DB1 /* ShipEnemy.cpp in Sources */,
 				7EA3998A2A65584500856DB1 /* BillboardComponent.cpp in Sources */,

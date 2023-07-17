@@ -5,7 +5,7 @@
 #include "Mesh.h"
 
 MoaiEnemy::MoaiEnemy(Application* a)
-    : ObjectActor(a)
+    : StageObjectActor(a)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/moai.lwo"));

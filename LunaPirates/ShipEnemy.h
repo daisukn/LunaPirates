@@ -1,9 +1,9 @@
 #ifndef __SHIPENEMY_H
 #define __SHIPENEMY_H
 
-#include "ObjectActor.h"
+#include "StageObjectActor.h"
 
-class ShipEnemy : public ObjectActor
+class ShipEnemy : public StageObjectActor
 {
 public:
     ShipEnemy(class Application* a);

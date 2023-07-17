@@ -1,7 +1,7 @@
 #ifndef __PLANEACTOR_H
 #define __PLANEACTOR_H
 
-#include "Actor.h"
+#include "StageObjectActor.h"
 #include "SkeletalMeshComponent.h"
 #include "MoveComponent.h"
 #include "FollowCamera.h"
@@ -10,7 +10,7 @@
 
 
 // 飛行機
-class PlaneActor : public Actor
+class PlaneActor : public StageObjectActor
 {
 public:
     PlaneActor(class Application* app);
@@ -20,24 +20,22 @@ public:
 
     void SetMeshVisible(bool visible);
     
-    void SetOwnerStage(class Stage* s) { ownerStage = s; }
     
 private:
     //  前フレームの場所
     Vector3 prevPos;
     
-    // オーナーのステージ
-    class Stage* ownerStage;
+
     
     // モーションID
     int animID;
     
-    std::unique_ptr<class SkeletalMeshComponent> meshComp;
+    std::unique_ptr<class SkeletalMeshComponent> skeltalMeshComp;
     std::unique_ptr<class MoveComponent> moveComp;
     std::unique_ptr<class FollowCamera> cameraComp;
     
     
-    std::unique_ptr<class ColliderComponent> collComp;
+    //std::unique_ptr<class ColliderComponent> collComp;
     
     // フィールド移動用
     void FieldMove(const struct InputState& state);
