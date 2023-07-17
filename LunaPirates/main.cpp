@@ -1,14 +1,17 @@
-//
-//  main.cpp
-//  LunaPirates
-//
-//  Created by Daisuke Nishimori on 2023/07/17.
-//
-
-#include <iostream>
-
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+#include "Application.h"
+// エントリポイント
+int main(int, char**)
+{
+    class Application* app = new Application();
+    
+    if (app->Initialize())
+    {
+        app->RunLoop();
+    }
+    app->Shutdown();
+    delete app;
     return 0;
 }
+
+
+
