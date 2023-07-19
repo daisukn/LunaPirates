@@ -21,7 +21,7 @@ public:
     void Update(float deltaTime) override;
     
     // 再生するモーションのID
-    void SetAnimID(const unsigned int animID, const PlayMode mode);
+    virtual void SetAnimID(const unsigned int animID, const PlayMode mode) override;
     
     bool GetIsPlaing() const;
 

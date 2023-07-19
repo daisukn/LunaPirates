@@ -9,7 +9,6 @@ CloudBGActor::CloudBGActor(Application* a)
 {
     cloudBillboard = std::make_unique<BillboardComponent>(this);
     cloudBillboard->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/cloud_1.png"));
-//    cloudBillboard->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/moku.png"));
 }
 
 void CloudBGActor::UpdateActor(float deltaTime)

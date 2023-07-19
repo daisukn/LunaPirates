@@ -10,11 +10,20 @@
 ShipEnemy::ShipEnemy(Application* a)
     : StageObjectActor(a)
 {
+/*
     skComp = std::make_unique<SkeletalMeshComponent>(this);
     skComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship.fbx"));
     skComp->SetAnimID(0, PLAY_CYCLIC);
     skComp->SetVisible(false);
     skComp->SetToonRender(true, 1.04f);
+*/
+    meshComp = std::make_unique<SkeletalMeshComponent>(this);
+    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship.fbx"));
+    meshComp->SetAnimID(0, PLAY_CYCLIC);
+    meshComp->SetVisible(false);
+    meshComp->SetToonRender(true, 1.04f);
+
+
     SetScale(0.1f);
     
     
@@ -30,14 +39,14 @@ void ShipEnemy::UpdateActor(float deltaTime)
 {
     if(isDisp)
     {
-        skComp->SetVisible(true);
+        meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
         auto v = GetPosition();
         SetPosition(Vector3(v.x, v.y, v.z - 1.5));
         if(v.z < 0)
         {
             isDisp = false;
-            skComp->SetVisible(false);
+            meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
         }
     }
@@ -48,7 +57,7 @@ void ShipEnemy::UpdateActor(float deltaTime)
            || collComp->GetTargetColliders()[0]->GetColliderType() == C_LASER)
         {
             isDisp = false;
-            skComp->SetVisible(false);
+            meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
             collComp->SetCollided(false);
         }

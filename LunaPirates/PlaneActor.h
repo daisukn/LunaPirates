@@ -6,6 +6,8 @@
 #include "MoveComponent.h"
 #include "FollowCamera.h"
 #include "ColliderComponent.h"
+#include "TargetScopeActor.h"
+
 #include <memory>
 
 
@@ -22,25 +24,19 @@ public:
     
     
 private:
-    //  前フレームの場所
-    Vector3 prevPos;
-    
-
-    
+   
     // モーションID
     int animID;
     
-    std::unique_ptr<class SkeletalMeshComponent> skeltalMeshComp;
+    //std::unique_ptr<class SkeletalMeshComponent> skeltalMeshComp;
     std::unique_ptr<class MoveComponent> moveComp;
     std::unique_ptr<class FollowCamera> cameraComp;
     
-    
-    //std::unique_ptr<class ColliderComponent> collComp;
-    
+    std::unique_ptr<class TargetScopeActor> scopeActor;
+
     // フィールド移動用
     void FieldMove(const struct InputState& state);
-    // モーションを適用
-    void ApplyMotion();
+
     
     // 動作可能=true 動作不可能=false
     bool isMovable;

@@ -7,7 +7,7 @@
 LaserActor::LaserActor(Application* a)
     : StageObjectActor(a)
 {
-    meshComp = std::make_unique<MeshComponent>(this);
+    meshComp = std::make_unique<MeshComponent>(this, false, true);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/laser.lwo"));
     meshComp->SetVisible(false);
     //meshComp->SetToonRender(true, 1.04f);
@@ -33,7 +33,7 @@ void LaserActor::UpdateActor(float deltaTime)
         meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
         auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z+5));
+        SetPosition(Vector3(v.x, v.y, v.z+10));
         if(v.z > 1000)
         {
             isDisp = false;

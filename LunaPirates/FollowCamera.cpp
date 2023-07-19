@@ -30,29 +30,13 @@ void FollowCamera::Update(float deltaTime)
 	// 加速度を更新
     velocity += acel * deltaTime;
 	// カメラの場所を更新
-    actualPos += velocity * deltaTime;
+    //actualPos += velocity * deltaTime;
+    actualPos = idealPos;
 	// ターゲットは所有アクターの前方
     Vector3 target = owner->GetPosition() + owner->GetForward() * targetDist;
     
    
-/*    // 調整
-    if(actualPos.y < -20)
-    {
-        actualPos.y = -20;
-    }
-    if(actualPos.y > 20)
-    {
-        actualPos.y = 20;
-    }
-    if(actualPos.x < -20)
-    {
-        actualPos.x = -20;
-    }
-    if(actualPos.x > 20)
-    {
-        actualPos.x = 20;
-    }
-*/
+
     
 	// ビューマトリックスを生成
     Matrix4 view = Matrix4::CreateLookAt(actualPos, target, Vector3::UnitY);
@@ -80,10 +64,10 @@ Vector3 FollowCamera::ComputeCameraPos() const
 	// カメラの位置を所有アクターの上のほうにセット
 	Vector3 cameraPos = owner->GetPosition();
     {
-        cameraPos.x /= 2;
-        cameraPos.y /= 2;
+        cameraPos.x = cameraPos.x /3 *2;
+        cameraPos.y = cameraPos.y /3 *2;
     }
     cameraPos -= owner->GetForward() * horzDist;
-    cameraPos += Vector3::UnitY * vertDist;
+    //cameraPos += Vector3::UnitY * vertDist;
 	return cameraPos;
 }

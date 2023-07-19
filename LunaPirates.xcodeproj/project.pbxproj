@@ -45,6 +45,7 @@
 		7EA3998A2A65584500856DB1 /* BillboardComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3995F2A65583300856DB1 /* BillboardComponent.cpp */; };
 		7EA3998D2A65585200856DB1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA3998C2A65585200856DB1 /* OpenGL.framework */; };
 		7EA399962A65743800856DB1 /* BulletActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399942A65743800856DB1 /* BulletActor.cpp */; };
+		7EA3999A2A68075600856DB1 /* TargetScopeActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399982A68075600856DB1 /* TargetScopeActor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -185,6 +186,8 @@
 		7EA3998C2A65585200856DB1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		7EA399942A65743800856DB1 /* BulletActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BulletActor.cpp; sourceTree = "<group>"; };
 		7EA399952A65743800856DB1 /* BulletActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BulletActor.h; sourceTree = "<group>"; };
+		7EA399982A68075600856DB1 /* TargetScopeActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TargetScopeActor.cpp; sourceTree = "<group>"; };
+		7EA399992A68075600856DB1 /* TargetScopeActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TargetScopeActor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +354,8 @@
 				7EA399662A65583400856DB1 /* PlaneActor.h */,
 				7EA399942A65743800856DB1 /* BulletActor.cpp */,
 				7EA399952A65743800856DB1 /* BulletActor.h */,
+				7EA399982A68075600856DB1 /* TargetScopeActor.cpp */,
+				7EA399992A68075600856DB1 /* TargetScopeActor.h */,
 			);
 			name = Actor;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 				7EA399872A65584500856DB1 /* InputSystem.cpp in Sources */,
 				7EA3997B2A65584500856DB1 /* ShipEnemy.cpp in Sources */,
 				7EA3998A2A65584500856DB1 /* BillboardComponent.cpp in Sources */,
+				7EA3999A2A68075600856DB1 /* TargetScopeActor.cpp in Sources */,
 				7EA3996F2A65584500856DB1 /* DebuggerComponent.cpp in Sources */,
 				7EA3996B2A65584500856DB1 /* SpriteComponent.cpp in Sources */,
 				7EA399792A65584500856DB1 /* VertexArray.cpp in Sources */,

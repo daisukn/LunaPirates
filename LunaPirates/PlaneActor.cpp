@@ -11,42 +11,45 @@
 #include "MoveComponent.h"
 #include "BoundingVolumeComponent.h"
 #include "CloudStage.h"
+#include "TargetScopeActor.h"
 
 
 PlaneActor::PlaneActor(Application* app)
     : StageObjectActor(app)
     , animID(0)
     , isMovable(true)
-    , prevPos(Vector3::Zero)
  {
-    // メッシュ初期化
-    skeltalMeshComp = std::make_unique<SkeletalMeshComponent>(this);
-    skeltalMeshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/plane.fbx"));
-    skeltalMeshComp->SetAnimID(animID, PLAY_CYCLIC);
-    skeltalMeshComp->SetToonRender(true);
+     // メッシュ初期化
+     meshComp = std::make_unique<SkeletalMeshComponent>(this);
+     meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/plane.fbx"));
+     meshComp->SetAnimID(animID, PLAY_CYCLIC);
+     meshComp->SetToonRender(true);
+     
+  
+     // 場所調整
+     SetPosition(Vector3(0.0f, 0.0f, -0.0f));
+     //SetScale(0.01);
     
-    
-    // 場所調整
-    SetPosition(Vector3(0.0f, 0.0f, -0.0f));
-    //SetScale(0.01);
-    
-    // カメラ初期化
-    cameraComp = std::make_unique<FollowCamera>(this);
-    // 移動コンポーネント
-    moveComp = std::make_unique<MoveComponent>(this);
+     // カメラ初期化
+     cameraComp = std::make_unique<FollowCamera>(this);
+     // 移動コンポーネント
+     moveComp = std::make_unique<MoveComponent>(this);
 
     
-    // コライダー
-    collComp = std::make_unique<ColliderComponent>(this);
-    collComp->SetColliderType(C_PLAYER);
-    collComp->GetBoundingVolume()->ComputeBoundingVolume(app->GetRenderer()->GetMesh("Assets/plane.fbx")->GetVertexArray());
-    collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 0.5, 1));
-    collComp->GetBoundingVolume()->CreateVArray();
-    collComp->GetBoundingVolume()->SetVisible(true);
+     // コライダー
+     collComp = std::make_unique<ColliderComponent>(this);
+     collComp->SetColliderType(C_PLAYER);
+     collComp->GetBoundingVolume()->ComputeBoundingVolume(app->GetRenderer()->GetMesh("Assets/plane.fbx")->GetVertexArray());
+     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 0.5, 1));
+     collComp->GetBoundingVolume()->CreateVArray();
+     collComp->GetBoundingVolume()->SetVisible(true);
 
     
-//    collComp->GetBoundingVolume()->ComputeBoundingVolume(Vector3(150, 150, 400), Vector3(300, 300, 800));
-//    collComp->GetBoundingVolume()->CreateVArray();
+
+     // ターゲットスコープ
+     scopeActor = std::make_unique<TargetScopeActor>(app);
+     scopeActor->SetOwnerStage(ownerStage);
+     scopeActor->SetDisp(true);
     
 }
 
@@ -57,25 +60,25 @@ void PlaneActor::FieldMove(const InputState &state)
     
     
 
-    float speed = 50;
+    float speed = 80;
 
     
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_UP) == EHeld)
     {
-        if(GetPosition().y < 40) upSpeed += speed;
+        if(GetPosition().y < 50) upSpeed += speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_DOWN) == EHeld)
     {
-        if(GetPosition().y > -40) upSpeed -= speed;
+        if(GetPosition().y > -50) upSpeed -= speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT) == EHeld)
     {
-        if(GetPosition().x > -80) rightSpeed -= speed;
+        if(GetPosition().x > -100) rightSpeed -= speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT) == EHeld)
     {
-        if(GetPosition().x < 80) rightSpeed += speed;
+        if(GetPosition().x < 100) rightSpeed += speed;
     }
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)
@@ -91,14 +94,6 @@ void PlaneActor::FieldMove(const InputState &state)
 }
 
 
-void PlaneActor::ApplyMotion()
-{
-
-    skeltalMeshComp->SetAnimID(animID, PLAY_CYCLIC);
-
-}
-
-
 void PlaneActor::ActorInput(const InputState &state)
 {
     FieldMove(state);
@@ -108,6 +103,8 @@ void PlaneActor::ActorInput(const InputState &state)
 void PlaneActor::UpdateActor(float deltaTime)
 {
     collComp->SetDisp(true);
+    auto v = GetPosition();
+    scopeActor->SetPosition(Vector3(v.x, v.y, v.z+30));
 }
 
 

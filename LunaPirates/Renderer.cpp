@@ -15,7 +15,7 @@
 #include <algorithm>
 
 
-//#define __GAME_DEBUG
+#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()
@@ -215,6 +215,7 @@ void Renderer::Draw()
 
     for (auto bb : billboardComps)
     {
+        
         bb->Draw(billboardShader.get());
     }
     glDepthMask(GL_TRUE);
@@ -514,7 +515,21 @@ void Renderer::RemoveParticleComp(ParticleComponent* part)
 // ビルボードコンポーネント登録
 void Renderer::AddBillboardComp(BillboardComponent* billboard)
 {
-    billboardComps.emplace_back(billboard);
+    // DrawOrderを探して 自分より優先度の高いものの次を見つける
+    int myDrawOrder = billboard->GetDrawOrder();
+    auto iter = billboardComps.begin();
+    for (;iter != billboardComps.end(); ++iter)
+    {
+        if (myDrawOrder < (*iter)->GetDrawOrder())
+        {
+            break;
+        }
+    }
+
+    // 見つけた箇所に挿入
+    billboardComps.insert(iter, billboard);
+    
+    
 }
 
 // パーティクルコンポーネント登録

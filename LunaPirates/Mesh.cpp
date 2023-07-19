@@ -293,7 +293,7 @@ unsigned int Mesh::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim
         }
     }
     
-    //assert(0);
+    assert(0);
 
     return 0;
 }

@@ -22,10 +22,11 @@ public:
 
     void SetVisible(bool visible) { isVisible = visible; }
     bool GetVisible() const { return isVisible; }
-    
+
+    int GetDrawOrder() const { return drawOrder; }
 
 private:
-
+    int drawOrder;
     bool isVisible;
     class Texture* texture;
 

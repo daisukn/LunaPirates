@@ -5,7 +5,6 @@
 
 #include "BillboardComponent.h"
 #include "MoveComponent.h"
-#include "FollowCamera.h"
 #include <memory>
 
 
@@ -24,8 +23,7 @@ public:
     void SetDisp(bool b) { isDisp = b; }
     
 private:
-    //  前フレームの場所
-    Vector3 prevPos;
+
     
     std::unique_ptr<class MoveComponent> moveComp;
     

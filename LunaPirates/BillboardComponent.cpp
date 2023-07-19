@@ -5,8 +5,9 @@
 #include "Actor.h"
 #include "Renderer.h"
 
-BillboardComponent::BillboardComponent(class Actor* a, int drawOrder)
+BillboardComponent::BillboardComponent(class Actor* a, int order)
     : Component(a)
+    , drawOrder(order)
 {
     owner->GetApp()->GetRenderer()->AddBillboardComp(this);
 }
@@ -36,7 +37,10 @@ void BillboardComponent::Draw(Shader* shader)
         
         // スケールを復元
         Matrix4 scaleMat = Matrix4::CreateScale(texture->GetWidth(), texture->GetHeight(), 1);
-        Matrix4 world = scaleMat * invVew;
+        Matrix4 world = scaleMat * Matrix4::CreateScale(owner->GetScale()) * invVew;
+//        world *= Matrix4::CreateScale(owner->GetScale());
+//        Matrix4 world = scaleMat * invVew;
+//        world *= Matrix4::CreateScale(owner->GetScale());
 
         // シェーダー に送る
         shader->SetMatrixUniform("uWorldTransform", world);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "Animation.h"
 //#include <cstddef>
 
 // Meshを管理するComponent（Rendererから呼ばれる）
@@ -29,6 +30,9 @@ public:
     void SetBlendAdd(bool b) { isBlendAdd = b; }
     bool GetBlendAdd() const { return isBlendAdd; }
     
+    
+    // 再生するモーションのID（SkerltalMeshでオーバーライドする。インターフェース確保のため）
+    virtual void SetAnimID(const unsigned int animID, const PlayMode mode){}
     
 protected:
     class Mesh* mesh;      // メッシュ
