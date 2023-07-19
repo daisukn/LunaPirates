@@ -14,7 +14,7 @@
 // コンストラクタ
 ParticleComponent::ParticleComponent(Actor* a, int drawOrder)
     : Component(a)
-    , bVisible(false)
+    , isVisible(false)
     , position(Vector3(0.0f, 0.0f, 0.0f))
     , numParts(0)
     , lifeTime(0.0f)
@@ -59,7 +59,7 @@ void ParticleComponent::Draw(Shader *shader)
         
         for (int i = 0; i < numParts; i++)
         {
-            if(parts[i].bVisible)
+            if(parts[i].isVisible)
             {
                 shader->SetVectorUniform("uPosition", parts[i].pos);
                 glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
@@ -82,12 +82,12 @@ void ParticleComponent::GenerateParts()
     // 乱数初期化
     std::random_device rnd;
     
-    if (bVisible)
+    if (isVisible)
     {
     
         for (int i = 0; i < numParts; i++)
         {
-            if (!parts[i].bVisible)
+            if (!parts[i].isVisible)
             {
                 // スピードの調整がちょっと強引なので再考する
                 //float x  = (float)(rand10(mt) - 5) / 10;
@@ -100,7 +100,7 @@ void ParticleComponent::GenerateParts()
                 // パーツのパラメータをセット
                 parts[i].pos = position;
                 parts[i].dir = Vector3(x, y, z);
-                parts[i].bVisible = true;
+                parts[i].isVisible = true;
                 parts[i].lifeTime = 0.0f;
                 parts[i].size = partSize;
                 
@@ -118,7 +118,7 @@ void ParticleComponent::Update(float deltaTime)
     // 時間経過で消える
     if (lifeTime > totalLife)
     {
-        bVisible = false;
+        isVisible = false;
     }
     
     
@@ -126,7 +126,7 @@ void ParticleComponent::Update(float deltaTime)
     for (int i = 0; i < numParts; i++)
     {
          
-        if(parts[i].bVisible)
+        if(parts[i].isVisible)
         {
             // 重力を反映
             if (isGravity)
@@ -140,7 +140,7 @@ void ParticleComponent::Update(float deltaTime)
         
             if(parts[i].lifeTime > partLifecycle)
             {
-                parts[i].bVisible = false;
+                parts[i].isVisible = false;
             }
         }
     }
@@ -158,10 +158,10 @@ void ParticleComponent::Update(float deltaTime)
 void ParticleComponent::CreateParticles(Vector3 pos, unsigned int num, float life, float part_life, float size, bool grav)
 {
     // すでに表示されていたらキャンセル
-    if(!bVisible)
+    if(!isVisible)
     {
         position = pos;
-        bVisible = true;
+        isVisible = true;
         numParts = num;
         lifeTime = 0.0f;
         totalLife = life;

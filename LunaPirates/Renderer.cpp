@@ -15,6 +15,10 @@
 #include <algorithm>
 
 
+
+const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL;
+//const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
+
 #define __GAME_DEBUG
 
 // コンストラクタ
@@ -53,9 +57,7 @@ bool Renderer::Initialize(std::string title, float scWidth, float scHeight)
     
     
     //ウインドウ生成
-    window = SDL_CreateWindow(strTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL
-                              );
-                              //| SDL_WINDOW_FULLSCREEN);
+    window = SDL_CreateWindow(strTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(screenWidth), static_cast<int>(screenHeight), WINDOW_FLAGS);
     if (!window )
     {
         std::cout << "Unable to create window" << std::endl;
@@ -312,7 +314,7 @@ bool Renderer::LoadShaders()
     
     // ビューマトリックス、プロジェクションマトリックス（デフォルト値）
     viewMatrix = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitZ, Vector3::UnitY);
-    projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(45.0f), screenWidth, screenHeight, 1.0f, 10000.0f);
+    projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(30.0f), screenWidth, screenHeight, 10.0f, 10000.0f);
     
     // シェーダーに送る
     meshShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);

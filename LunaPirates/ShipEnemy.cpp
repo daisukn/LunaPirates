@@ -18,7 +18,7 @@ ShipEnemy::ShipEnemy(Application* a)
     skComp->SetToonRender(true, 1.04f);
 */
     meshComp = std::make_unique<SkeletalMeshComponent>(this);
-    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship.fbx"));
+    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship2.fbx"));
     meshComp->SetAnimID(0, PLAY_CYCLIC);
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);

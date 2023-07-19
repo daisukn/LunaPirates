@@ -25,7 +25,7 @@ public:
     // コンストラクタ
     Renderer();
     // デストラクタ
-    ~Renderer();
+    virtual ~Renderer();
       
     // 初期化
     bool Initialize(std::string title, float scWidth, float scHeight);

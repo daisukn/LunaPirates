@@ -9,7 +9,7 @@
 struct ParticleParts
 {
 
-    bool bVisible;
+    bool isVisible;
     Vector3 pos;
     Vector3 dir;
     float size;
@@ -19,7 +19,7 @@ struct ParticleParts
     ParticleParts()
         :pos(Vector3(0.0f, 0.0f, 0.0f))
         ,dir(Vector3(0.0f, 0.0f, 0.0f))
-        ,bVisible(false)
+        ,isVisible(false)
         ,lifeTime(0.0f)
         ,size(0.0)
 
@@ -50,7 +50,7 @@ public:
 private:
     // 所有アクターとの相対位置
     Vector3 position;
-    bool bVisible;
+    bool isVisible;
     unsigned int numParts;
     float lifeTime;
     float totalLife;
