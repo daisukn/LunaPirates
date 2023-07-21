@@ -45,16 +45,29 @@ void ShipEnemy::UpdateActor(float deltaTime)
 {
     if(isDisp)
     {
-        meshComp->SetVisible(true);
-        collComp->GetBoundingVolume()->SetVisible(true);
-        auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z - 1.5));
-        if(v.z < 0)
+        if(state == StateNormal)
         {
-            isDisp = false;
-            meshComp->SetVisible(false);
-            collComp->GetBoundingVolume()->SetVisible(false);
+            meshComp->SetVisible(true);
+            collComp->GetBoundingVolume()->SetVisible(true);
+            auto v = GetPosition();
+            SetPosition(Vector3(v.x, v.y, v.z - 1.5));
+            if(v.z < 0)
+            {
+                isDisp = false;
+                meshComp->SetVisible(false);
+                collComp->GetBoundingVolume()->SetVisible(false);
+            }
         }
+        else if(state == StateExploted)
+        {
+            if(!explosion->GetVisible())
+            {
+                isDisp = false;
+            }
+        }
+        
+        
+
     }
     collComp->SetDisp(isDisp);
     if(collComp->GetCollided())
@@ -62,11 +75,11 @@ void ShipEnemy::UpdateActor(float deltaTime)
         if(collComp->GetTargetColliders()[0]->GetColliderType() == C_PLAYER
            || collComp->GetTargetColliders()[0]->GetColliderType() == C_LASER)
         {
-            isDisp = false;
             meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
             collComp->SetCollided(false);
             
+            state = StateExploted;
             explosion->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 20.0f, false);
 
         }

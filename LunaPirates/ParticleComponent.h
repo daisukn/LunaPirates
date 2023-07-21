@@ -46,6 +46,9 @@ public:
     // パーティクル発生
     void CreateParticles(Vector3 pos, unsigned int num, float life, float part_life, float size, bool grav = false);
     
+    
+    bool GetVisible() const { return isVisible; }
+    
 
 private:
     // 所有アクターとの相対位置

@@ -192,7 +192,7 @@ void Application::LoadData()
     
     
     // ライト
-    renderer->SetAmbientLight(Vector3(1.f, 1.f, 1.f));
+    renderer->SetAmbientLight(Vector3(0.9f, 0.9f, 0.9f));
     DirectionalLight& dir = renderer->GetDirectionalLight();
     dir.Direction = Vector3(0.f, 0.f, 1.f);
     dir.DiffuseColor = Vector3(0.4f, 0.4f, 0.4f);

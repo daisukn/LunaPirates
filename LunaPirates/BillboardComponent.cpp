@@ -38,9 +38,6 @@ void BillboardComponent::Draw(Shader* shader)
         // スケールを復元
         Matrix4 scaleMat = Matrix4::CreateScale(texture->GetWidth(), texture->GetHeight(), 1);
         Matrix4 world = scaleMat * Matrix4::CreateScale(owner->GetScale()) * invVew;
-//        world *= Matrix4::CreateScale(owner->GetScale());
-//        Matrix4 world = scaleMat * invVew;
-//        world *= Matrix4::CreateScale(owner->GetScale());
 
         // シェーダー に送る
         shader->SetMatrixUniform("uWorldTransform", world);

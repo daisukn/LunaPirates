@@ -190,16 +190,17 @@ void Renderer::Draw()
     // Zバッファに書き込まない
     glDepthMask(GL_FALSE);
     //加算合成
-//    glBlendFunc(GL_ONE, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    //glBlendFunc(GL_ONE, GL_ONE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     spriteVerts->SetActive();
-    billboardShader->SetActive();
-    billboardShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    particleShader->SetActive();
+    particleShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
 
     for (auto parts : particleComps)
     {
-        parts->Draw(billboardShader.get());
+        parts->Draw(particleShader.get());
     }
     //glDepthMask(GL_TRUE);
     
@@ -260,7 +261,7 @@ bool Renderer::LoadShaders()
 
     
     
-    // パーティクル/Billboard用シェーダー
+    // Billboard用シェーダー
     billboardShader = std::make_unique<Shader>();
     if (!billboardShader->Load("Shaders/Billboard.vert", "Shaders/Billboard.frag"))
     {
@@ -268,6 +269,14 @@ bool Renderer::LoadShaders()
     }
     billboardShader->SetActive();
     
+    
+    // Particle用シェーダー
+    particleShader = std::make_unique<Shader>();
+    if (!particleShader->Load("Shaders/Billboard.vert", "Shaders/Particle.frag"))
+    {
+        return false;
+    }
+    particleShader->SetActive();
     
     // メッシュ用シェーダー生成
     meshShader = std::make_unique<Shader>();
@@ -342,11 +351,11 @@ void Renderer::SetLightUniforms(Shader* shader)
     
     
     // フォグ
-    shader->SetFloatUniform("uFoginfo.maxDist", 1100.0f);
+    shader->SetFloatUniform("uFoginfo.maxDist", 1500.0f);
     shader->SetFloatUniform("uFoginfo.minDist", 1.0f);
     
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.75f, 0.96f, 0.99f) );
-    shader->SetVectorUniform("uFoginfo.color", Vector3(0.80f, 0.96f, 0.99f) );
+    shader->SetVectorUniform("uFoginfo.color", Vector3(0.69f, 0.859f, 0.894f) );
 
 
 }

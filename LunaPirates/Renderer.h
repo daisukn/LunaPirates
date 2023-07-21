@@ -111,6 +111,8 @@ private:
     std::unique_ptr<class Shader> spriteShader;
     // ビルボード用シェーダー
     std::unique_ptr<class Shader> billboardShader;
+    // パーティクル用シェーダー
+    std::unique_ptr<class Shader> particleShader;
     // シェーダー一括ロード
     bool LoadShaders();
 

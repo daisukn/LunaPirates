@@ -53,7 +53,7 @@ void ParticleComponent::Draw(Shader *shader)
         
         // スケールを復元
         Matrix4 scaleMat = Matrix4::CreateScale(partSize, partSize, 1);
-        Matrix4 world = scaleMat * invVew;
+        Matrix4 world = scaleMat * Matrix4::CreateScale(owner->GetScale()) * invVew;
 
         // シェーダー に送る
         shader->SetMatrixUniform("uWorldTransform", world);

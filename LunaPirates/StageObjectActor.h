@@ -8,6 +8,11 @@
 #include "ColliderComponent.h"
 #include <memory>
 
+enum ObjectState
+{
+    StateNormal,
+    StateExploted
+};
 
 // ゲームオブジェクトの基底クラス
 class StageObjectActor : public Actor
@@ -32,6 +37,7 @@ protected:
     std::unique_ptr<class ColliderComponent> collComp;
     bool isDisp;
 
+    ObjectState state;
     
     // オーナーのステージ
     class Stage* ownerStage;

@@ -35,7 +35,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/daisuke/Documents/Xcode/LunaPirates/LunaPirates"
+      customWorkingDirectory = "/Users/daisuke/Library/Mobile Documents/com~apple~CloudDocs/Documents/Xcode/LunaPirates/LunaPirates"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
