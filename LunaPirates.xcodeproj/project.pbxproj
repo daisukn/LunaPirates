@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1812902A6AE15F001C84A4 /* ExplosionActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */; };
 		7EA399672A65584500856DB1 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399252A65582F00856DB1 /* Application.cpp */; };
 		7EA399682A65584500856DB1 /* Bone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3995E2A65583300856DB1 /* Bone.cpp */; };
 		7EA399692A65584500856DB1 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399592A65583300856DB1 /* Component.cpp */; };
@@ -61,6 +62,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ExplosionActor.cpp; sourceTree = "<group>"; };
+		7E18128F2A6AE15F001C84A4 /* ExplosionActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExplosionActor.h; sourceTree = "<group>"; };
 		7EA398DE2A65581C00856DB1 /* LunaPirates */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LunaPirates; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA398E82A65582D00856DB1 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		7EA398E92A65582D00856DB1 /* MoveComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MoveComponent.cpp; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 				7EA399952A65743800856DB1 /* BulletActor.h */,
 				7EA399982A68075600856DB1 /* TargetScopeActor.cpp */,
 				7EA399992A68075600856DB1 /* TargetScopeActor.h */,
+				7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */,
+				7E18128F2A6AE15F001C84A4 /* ExplosionActor.h */,
 			);
 			name = Actor;
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				7EA3998A2A65584500856DB1 /* BillboardComponent.cpp in Sources */,
 				7EA3999A2A68075600856DB1 /* TargetScopeActor.cpp in Sources */,
 				7EA3996F2A65584500856DB1 /* DebuggerComponent.cpp in Sources */,
+				7E1812902A6AE15F001C84A4 /* ExplosionActor.cpp in Sources */,
 				7EA3996B2A65584500856DB1 /* SpriteComponent.cpp in Sources */,
 				7EA399792A65584500856DB1 /* VertexArray.cpp in Sources */,
 				7EA3997A2A65584500856DB1 /* Mesh.cpp in Sources */,

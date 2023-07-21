@@ -15,10 +15,11 @@ UfoEnemy::UfoEnemy(Application* a)
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
 
-   
+    
     // 爆発
-    explosion = std::make_unique<ParticleComponent>(this);
-    explosion->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/explosion.png"));
+    explosion = std::make_unique<ExplosionActor>(a);
+
+
     
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
@@ -37,35 +38,53 @@ void UfoEnemy::UpdateActor(float deltaTime)
     SetRotation(rot);
     
 
-    
-    if(isDisp)
+    if(!isDisp) return;
+ 
+    if(state == StateNormal)
     {
         meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
+        
         auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z-2));
+        SetPosition(Vector3(v.x, v.y, v.z - 1.5));
         if(v.z < 0)
         {
             isDisp = false;
             meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
         }
-    }
-
-    collComp->SetDisp(isDisp);
-    if(collComp->GetCollided())
-    {
-        if(collComp->GetTargetColliders()[0]->GetColliderType() == C_PLAYER
-           || collComp->GetTargetColliders()[0]->GetColliderType() == C_LASER)
+        
+        
+        collComp->SetDisp(isDisp);
+        if(collComp->GetCollided())
         {
-            isDisp = false;
-            meshComp->SetVisible(false);
-            collComp->GetBoundingVolume()->SetVisible(false);
-            collComp->SetCollided(false);
-            
-            explosion->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 20.0f, false);
+            for(auto col : collComp->GetTargetColliders())
+            {
+                if(col->GetColliderType() == C_PLAYER
+                   || col->GetColliderType() == C_LASER)
+                {
+                    meshComp->SetVisible(false);
+                    collComp->GetBoundingVolume()->SetVisible(false);
+                    collComp->SetCollided(false);
+                    
+                    state = StateExploted;
+                    explosion->Appear(GetPosition());
+                    break;
+                    
+                }
+            }
+
         }
 
+        
     }
+    else if(state == StateExploted)
+    {
+        if(!explosion->GetDisp())
+        {
+            isDisp = false;
+        }
+    }
+        
  
 }

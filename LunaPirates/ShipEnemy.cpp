@@ -11,13 +11,7 @@
 ShipEnemy::ShipEnemy(Application* a)
     : StageObjectActor(a)
 {
-/*
-    skComp = std::make_unique<SkeletalMeshComponent>(this);
-    skComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship.fbx"));
-    skComp->SetAnimID(0, PLAY_CYCLIC);
-    skComp->SetVisible(false);
-    skComp->SetToonRender(true, 1.04f);
-*/
+
     meshComp = std::make_unique<SkeletalMeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship2.fbx"));
     meshComp->SetAnimID(0, PLAY_CYCLIC);
@@ -26,8 +20,7 @@ ShipEnemy::ShipEnemy(Application* a)
     
     
     // 爆発
-    explosion = std::make_unique<ParticleComponent>(this);
-    explosion->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/explosion.png"));
+    explosion = std::make_unique<ExplosionActor>(a);
 
 
     SetScale(0.1f);
@@ -41,50 +34,60 @@ ShipEnemy::ShipEnemy(Application* a)
     
 }
 
+ShipEnemy::~ShipEnemy()
+{
+}
+
 void ShipEnemy::UpdateActor(float deltaTime)
 {
-    if(isDisp)
+    if(!isDisp) return;
+ 
+    if(state == StateNormal)
     {
-        if(state == StateNormal)
-        {
-            meshComp->SetVisible(true);
-            collComp->GetBoundingVolume()->SetVisible(true);
-            auto v = GetPosition();
-            SetPosition(Vector3(v.x, v.y, v.z - 1.5));
-            if(v.z < 0)
-            {
-                isDisp = false;
-                meshComp->SetVisible(false);
-                collComp->GetBoundingVolume()->SetVisible(false);
-            }
-        }
-        else if(state == StateExploted)
-        {
-            if(!explosion->GetVisible())
-            {
-                isDisp = false;
-            }
-        }
+        meshComp->SetVisible(true);
+        collComp->GetBoundingVolume()->SetVisible(true);
         
-        
-
-    }
-    collComp->SetDisp(isDisp);
-    if(collComp->GetCollided())
-    {
-        if(collComp->GetTargetColliders()[0]->GetColliderType() == C_PLAYER
-           || collComp->GetTargetColliders()[0]->GetColliderType() == C_LASER)
+        auto v = GetPosition();
+        SetPosition(Vector3(v.x, v.y, v.z - 1.5));
+        if(v.z < 0)
         {
+            isDisp = false;
             meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
-            collComp->SetCollided(false);
-            
-            state = StateExploted;
-            explosion->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 20.0f, false);
+        }
+        
+        
+        collComp->SetDisp(isDisp);
+        if(collComp->GetCollided())
+        {
+            for(auto col : collComp->GetTargetColliders())
+            {
+                if(col->GetColliderType() == C_PLAYER
+                   || col->GetColliderType() == C_LASER)
+                {
+                    meshComp->SetVisible(false);
+                    collComp->GetBoundingVolume()->SetVisible(false);
+                    collComp->SetCollided(false);
+                    
+                    state = StateExploted;
+                    explosion->Appear(GetPosition());
+                    break;
+                    
+                }
+            }
 
         }
 
+        
     }
- 
+    else if(state == StateExploted)
+    {
+        if(!explosion->GetDisp())
+        {
+            isDisp = false;
+        }
+    }
+        
+     
 }
 

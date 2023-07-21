@@ -25,8 +25,7 @@ public:
 private:
 
     
-    std::unique_ptr<class MoveComponent> moveComp;
-    
+
     std::unique_ptr<class BillboardComponent> cloudBillboard;
     
    

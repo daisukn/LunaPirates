@@ -151,21 +151,27 @@ void Application::AddActor(Actor* actor)
 void Application::RemoveActor(Actor* actor)
 {
     // Pendingにないか確認
-    auto iter = std::find(pendingActors.begin(), pendingActors.end(), actor);
-    if (iter != pendingActors.end())
+    if (!pendingActors.empty())
     {
-        std::iter_swap(iter, pendingActors.end() - 1);
-        pendingActors.pop_back();
+        auto iter = std::find(pendingActors.begin(), pendingActors.end(), actor);
+        if (iter != pendingActors.end())
+        {
+            std::iter_swap(iter, pendingActors.end() - 1);
+            pendingActors.pop_back();
+        }
     }
+
 
     // actorsにある場合は削除
-    iter = std::find(actors.begin(), actors.end(), actor);
-    if (iter != actors.end() && !actors.empty())
+    if (!actors.empty())
     {
-        std::iter_swap(iter, actors.end() - 1);
-        actors.pop_back();
+        auto iter = std::find(actors.begin(), actors.end(), actor);
+        if (iter != actors.end())
+        {
+            std::iter_swap(iter, actors.end() - 1);
+            actors.pop_back();
+        }
     }
-
 }
 
 
@@ -189,8 +195,6 @@ void Application::UnloadData()
 // Actors, Renderer関連
 void Application::LoadData()
 {
-    
-    
     // ライト
     renderer->SetAmbientLight(Vector3(0.9f, 0.9f, 0.9f));
     DirectionalLight& dir = renderer->GetDirectionalLight();
@@ -273,7 +277,6 @@ void Application::TransitionStage()
     switch (stageTransition)
     {
         case STAGE_TITLE:
-            //std::cout << "きたよ" << std::endl;
             stageTransition = STAGE_CLOUD;
             activeStage = new CloudStage(this);
             break;

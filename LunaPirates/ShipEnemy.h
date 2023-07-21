@@ -2,7 +2,7 @@
 #define __SHIPENEMY_H
 
 #include "StageObjectActor.h"
-#include "ParticleComponent.h"
+#include "ExplosionActor.h"
 #include <memory>
 
 
@@ -10,9 +10,10 @@ class ShipEnemy : public StageObjectActor
 {
 public:
     ShipEnemy(class Application* a);
+    virtual ~ShipEnemy();
     void UpdateActor(float deltaTime) override;
 private:
-    std::unique_ptr<class ParticleComponent> explosion;
+    std::unique_ptr<class ExplosionActor> explosion;
 };
 
 

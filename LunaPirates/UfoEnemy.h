@@ -2,7 +2,7 @@
 #define __UFOENEMY_H
 
 #include "StageObjectActor.h"
-#include "ParticleComponent.h"
+#include "ExplosionActor.h"
 #include <memory>
 
 class UfoEnemy : public StageObjectActor
@@ -12,8 +12,8 @@ public:
     void UpdateActor(float deltaTime) override;
 private:
     float ang;
-    
-    std::unique_ptr<class ParticleComponent> explosion;
+    std::unique_ptr<class ExplosionActor> explosion;
+
     
 };
 

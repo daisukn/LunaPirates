@@ -21,14 +21,13 @@ Actor::Actor(Application* a)
 // デストラクタ
 Actor::~Actor()
 {
-    // Applicaationから削除
+    // Applicationから削除
     app->RemoveActor(this);
 
     // 保持しているComponentはここで削除
-	while (!components.empty())
-    {
-		delete components.back();
-	}
+    components.clear();
+    
+
 }
 
 // メインルーチン
