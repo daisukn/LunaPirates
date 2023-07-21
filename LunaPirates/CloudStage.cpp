@@ -109,8 +109,7 @@ void CloudStage::UpdateStage()
         {
             if(!ufoEnemy[i]->GetDisp())
             {
-                ufoEnemy[i]->SetDisp(true);
-                ufoEnemy[i]->SetPosition(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT));
+                ufoEnemy[i]->Appear(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT));
                 break;
             }
         }
@@ -122,8 +121,7 @@ void CloudStage::UpdateStage()
         {
             if(!moaiEnemy[i]->GetDisp())
             {
-                moaiEnemy[i]->SetDisp(true);
-                moaiEnemy[i]->SetPosition(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT));
+                moaiEnemy[i]->Appear(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT));
                 break;
             }
         }
@@ -135,8 +133,7 @@ void CloudStage::UpdateStage()
         {
             if(!shipEnemy[i]->GetDisp())
             {
-                shipEnemy[i]->SetDisp(true);
-                shipEnemy[i]->SetPosition(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT));
+                shipEnemy[i]->Appear(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT));
                 break;
             }
         }
@@ -166,8 +163,7 @@ void CloudStage::InputAction_A()
     {
         if(!laserActor[i]->GetDisp())
         {
-            laserActor[i]->SetDisp(true);
-            laserActor[i]->SetPosition(planeActor->GetPosition());
+            laserActor[i]->Appear(planeActor->GetPosition());
             break;
         }
     }

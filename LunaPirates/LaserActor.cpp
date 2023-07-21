@@ -33,7 +33,7 @@ void LaserActor::UpdateActor(float deltaTime)
         meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
         auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z+10));
+        SetPosition(Vector3(v.x, v.y, v.z+20));
         if(v.z > 1000)
         {
             isDisp = false;

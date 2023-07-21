@@ -1,6 +1,9 @@
 #ifndef __STAGE_H
 #define __STAGE_H
 
+#include "Math.h"
+#include <memory>
+#include <vector>
 
 class Stage
 {
@@ -18,14 +21,15 @@ public:
     
     bool GetQuitStage() const { return isQuitStage; }
     
-    
     virtual void InputAction_A() { /* overrideする */ }
-    
     
 protected:
     class Application* app;
     
     bool isQuitStage; // trueになったら遷移する
+    
+
+private:
 };
 
 

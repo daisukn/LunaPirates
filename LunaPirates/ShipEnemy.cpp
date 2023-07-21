@@ -5,6 +5,7 @@
 #include "BoundingVolumeComponent.h"
 #include "ColliderComponent.h"
 #include "Mesh.h"
+#include "Stage.h"
 
 
 ShipEnemy::ShipEnemy(Application* a)
@@ -22,6 +23,11 @@ ShipEnemy::ShipEnemy(Application* a)
     meshComp->SetAnimID(0, PLAY_CYCLIC);
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
+    
+    
+    // 爆発
+    explosion = std::make_unique<ParticleComponent>(this);
+    explosion->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/explosion.png"));
 
 
     SetScale(0.1f);
@@ -60,6 +66,9 @@ void ShipEnemy::UpdateActor(float deltaTime)
             meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
             collComp->SetCollided(false);
+            
+            explosion->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 20.0f, false);
+
         }
 
     }

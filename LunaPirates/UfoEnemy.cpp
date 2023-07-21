@@ -4,6 +4,7 @@
 #include "BoundingVolumeComponent.h"
 #include "Mesh.h"
 #include "ColliderComponent.h"
+#include "ParticleComponent.h"
 
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
@@ -15,6 +16,10 @@ UfoEnemy::UfoEnemy(Application* a)
     meshComp->SetToonRender(true, 1.04f);
 
    
+    // 爆発
+    explosion = std::make_unique<ParticleComponent>(this);
+    explosion->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/explosion.png"));
+    
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_ENEMY);
@@ -57,6 +62,8 @@ void UfoEnemy::UpdateActor(float deltaTime)
             meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
             collComp->SetCollided(false);
+            
+            explosion->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 20.0f, false);
         }
 
     }

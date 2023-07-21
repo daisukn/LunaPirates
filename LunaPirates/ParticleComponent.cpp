@@ -36,6 +36,8 @@ ParticleComponent::~ParticleComponent()
 // 描画（Rendererから呼ばれる）
 void ParticleComponent::Draw(Shader *shader)
 {
+    if (!isVisible) return;
+    
     if (texture)
     {
         // Ownerのマトリックスを取得（Positionでも良いかもしれない。）

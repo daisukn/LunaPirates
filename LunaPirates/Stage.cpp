@@ -1,6 +1,7 @@
 #include "Stage.h"
 #include "Application.h"
 
+
 Stage::Stage(class Application* a)
     : app(a)
     , isQuitStage(false)
@@ -37,3 +38,5 @@ void Stage::StageInput(const struct InputState &state)
 {
     
 }
+
+

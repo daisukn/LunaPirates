@@ -20,6 +20,7 @@ private:
     std::vector<std::unique_ptr<class StageObjectActor>> moaiEnemy;
     std::vector<std::unique_ptr<class StageObjectActor>> shipEnemy;
     std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
+    
 
     std::unique_ptr<class Actor> skyActor;
     std::unique_ptr<class MeshComponent> skyMesh;

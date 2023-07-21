@@ -190,7 +190,8 @@ void Renderer::Draw()
     // Zバッファに書き込まない
     glDepthMask(GL_FALSE);
     //加算合成
-    glBlendFunc(GL_ONE, GL_ONE);
+//    glBlendFunc(GL_ONE, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     spriteVerts->SetActive();
     billboardShader->SetActive();

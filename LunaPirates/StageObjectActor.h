@@ -24,7 +24,8 @@ public:
     void SetDisp(bool b) { isDisp = b; }
     
     void SetOwnerStage(class Stage* s) { ownerStage = s; }
-
+    
+    virtual void Appear(Vector3 pos);
     
 protected:
     std::unique_ptr<class MeshComponent> meshComp;
