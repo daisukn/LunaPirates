@@ -30,7 +30,7 @@ public:
     
     void SetOwnerStage(class Stage* s) { ownerStage = s; }
     
-    virtual void Appear(Vector3 pos);
+    virtual void Appear(Vector3 pos, int type);
     
 protected:
     std::unique_ptr<class MeshComponent> meshComp;
@@ -38,6 +38,8 @@ protected:
     bool isDisp;
 
     ObjectState state;
+    
+    int behaveType;
     
     // オーナーのステージ
     class Stage* ownerStage;

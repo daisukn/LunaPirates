@@ -31,6 +31,7 @@ private:
     
     void GenerateCloud();
     void AppearLayout() override;
+    void AppearRandom();
 
 public:
     CloudStage(class Application* a);

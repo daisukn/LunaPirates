@@ -214,6 +214,19 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		7E1812962A6BCC4F001C84A4 /* Effect */ = {
+			isa = PBXGroup;
+			children = (
+				7EA399632A65583300856DB1 /* CloudBGActor.cpp */,
+				7EA3992B2A65583000856DB1 /* CloudBGActor.h */,
+				7EA399982A68075600856DB1 /* TargetScopeActor.cpp */,
+				7EA399992A68075600856DB1 /* TargetScopeActor.h */,
+				7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */,
+				7E18128F2A6AE15F001C84A4 /* ExplosionActor.h */,
+			);
+			name = Effect;
+			sourceTree = "<group>";
+		};
 		7EA398D52A65581C00856DB1 = {
 			isa = PBXGroup;
 			children = (
@@ -352,25 +365,20 @@
 		7EA3998E2A655EF200856DB1 /* Actor */ = {
 			isa = PBXGroup;
 			children = (
-				7EA399972A6579BA00856DB1 /* Enemy */,
 				7EA399542A65583200856DB1 /* Actor.h */,
 				7EA3995A2A65583300856DB1 /* Actor.cpp */,
-				7EA399632A65583300856DB1 /* CloudBGActor.cpp */,
-				7EA3992B2A65583000856DB1 /* CloudBGActor.h */,
+				7EA399612A65583300856DB1 /* StageObjectActor.cpp */,
+				7EA399432A65583100856DB1 /* StageObjectActor.h */,
+				7E1812962A6BCC4F001C84A4 /* Effect */,
+				7EA399972A6579BA00856DB1 /* Enemy */,
 				7EA399242A65582F00856DB1 /* FollowCamera.cpp */,
 				7EA3994E2A65583200856DB1 /* FollowCamera.h */,
 				7EA399232A65582F00856DB1 /* LaserActor.cpp */,
 				7EA399572A65583200856DB1 /* LaserActor.h */,
-				7EA399612A65583300856DB1 /* StageObjectActor.cpp */,
-				7EA399432A65583100856DB1 /* StageObjectActor.h */,
 				7EA399282A65583000856DB1 /* PlaneActor.cpp */,
 				7EA399662A65583400856DB1 /* PlaneActor.h */,
 				7EA399942A65743800856DB1 /* BulletActor.cpp */,
 				7EA399952A65743800856DB1 /* BulletActor.h */,
-				7EA399982A68075600856DB1 /* TargetScopeActor.cpp */,
-				7EA399992A68075600856DB1 /* TargetScopeActor.h */,
-				7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */,
-				7E18128F2A6AE15F001C84A4 /* ExplosionActor.h */,
 			);
 			name = Actor;
 			sourceTree = "<group>";
