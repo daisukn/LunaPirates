@@ -8,6 +8,7 @@
 BillboardComponent::BillboardComponent(class Actor* a, int order)
     : Component(a)
     , drawOrder(order)
+    , scale(1.0f)
 {
     owner->GetApp()->GetRenderer()->AddBillboardComp(this);
 }
@@ -36,7 +37,7 @@ void BillboardComponent::Draw(Shader* shader)
         invVew.mat[3][2] = mat.mat[3][2];
         
         // スケールを復元
-        Matrix4 scaleMat = Matrix4::CreateScale(texture->GetWidth(), texture->GetHeight(), 1);
+        Matrix4 scaleMat = Matrix4::CreateScale(texture->GetWidth() * scale, texture->GetHeight() * scale, 1);
         Matrix4 world = scaleMat * Matrix4::CreateScale(owner->GetScale()) * invVew;
 
         // シェーダー に送る

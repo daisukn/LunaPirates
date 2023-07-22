@@ -18,7 +18,7 @@ ColliderComponent::ColliderComponent(Actor* a)
 
 ColliderComponent::~ColliderComponent()
 {
-    //owner->GetApp()->GetPhysWorld()->RemoveCollider(this);
+    owner->GetApp()->GetPhysWorld()->RemoveCollider(this);
 }
 
 void ColliderComponent::Update(float deltaTime)

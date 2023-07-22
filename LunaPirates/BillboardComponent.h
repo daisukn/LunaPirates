@@ -22,12 +22,15 @@ public:
 
     void SetVisible(bool visible) { isVisible = visible; }
     bool GetVisible() const { return isVisible; }
+    
+    void SetScale(float f){ scale = f;}
 
     int GetDrawOrder() const { return drawOrder; }
 
 private:
     int drawOrder;
     bool isVisible;
+    float scale;
     class Texture* texture;
 
 };

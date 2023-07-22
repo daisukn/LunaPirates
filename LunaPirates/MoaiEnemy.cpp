@@ -4,6 +4,8 @@
 #include "BoundingVolumeComponent.h"
 #include "Mesh.h"
 
+const int MAX_MAIBULLET = 12;
+
 MoaiEnemy::MoaiEnemy(Application* a)
     : StageObjectActor(a)
 {
@@ -24,7 +26,17 @@ MoaiEnemy::MoaiEnemy(Application* a)
     collComp->GetBoundingVolume()->CreateVArray();
     
     
+    // 弾幕
+    for(int i = 0; i < MAX_MAIBULLET; i++)
+    {
+        bullet.push_back(std::make_unique<BulletActor>(a));
+    }
     
+}
+
+MoaiEnemy::~MoaiEnemy()
+{
+    bullet.clear();
 }
 
 void MoaiEnemy::UpdateActor(float deltaTime)
@@ -77,6 +89,24 @@ void MoaiEnemy::UpdateActor(float deltaTime)
             isDisp = false;
         }
     }
+    
+    
+    cntLifetime++;
+    
+    if(cntLifetime == 300)
+    {
+        for(int j = 0;  j < 6; j++)
+        {
+            for(int i = 0; i < MAX_MAIBULLET; i++)
+            {
+                if(!bullet[i]->GetDisp())
+                {
+                    bullet[i]->SetAngle((float)j*60);
+                    bullet[i]->Appear(GetPosition(), 0);
+                    break;
+                }
+            }
+        }
+    }
         
-     
 }

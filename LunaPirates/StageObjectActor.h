@@ -41,6 +41,9 @@ protected:
     
     int behaveType;
     
+    // カウンター
+    int cntLifetime;
+    
     // オーナーのステージ
     class Stage* ownerStage;
 };

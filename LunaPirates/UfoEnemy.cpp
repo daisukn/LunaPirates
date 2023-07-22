@@ -46,7 +46,7 @@ void UfoEnemy::UpdateActor(float deltaTime)
         collComp->GetBoundingVolume()->SetVisible(true);
         
         auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z - 1.5));
+        SetPosition(Vector3(v.x+sin(ang/50)*6, v.y+sin(ang/20)*3, v.z - 1.5));
         if(v.z < 0)
         {
             isDisp = false;
