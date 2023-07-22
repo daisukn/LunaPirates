@@ -48,7 +48,7 @@ public:
     
     
     bool GetVisible() const { return isVisible; }
-    
+    int GetDrawOrder() const { return drawOrder; }
 
 private:
     // 所有アクターとの相対位置
@@ -61,13 +61,14 @@ private:
     float partSize;
 
     bool isGravity;
-    
+    int drawOrder;
     // パーティクル破片を生成
     void GenerateParts();
 
     std::vector<ParticleParts> parts;
     
     class Texture* texture;
+    
 
 }; 
 

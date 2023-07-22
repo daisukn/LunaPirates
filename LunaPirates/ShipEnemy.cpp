@@ -21,6 +21,7 @@ ShipEnemy::ShipEnemy(Application* a)
     
     // 爆発
     explosion = std::make_unique<ExplosionActor>(a);
+    explosion->SetScale(4);
 
 
     SetScale(0.1f);

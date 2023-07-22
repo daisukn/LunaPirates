@@ -17,6 +17,7 @@ MoaiEnemy::MoaiEnemy(Application* a)
 
     // 爆発
     explosion = std::make_unique<ExplosionActor>(a);
+    explosion->SetScale(2);
     
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);

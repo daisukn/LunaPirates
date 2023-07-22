@@ -19,7 +19,7 @@
 const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL;
 //const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
 
-//#define __GAME_DEBUG
+#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()
@@ -510,7 +510,16 @@ void Renderer::RemoveBackGroudMeshComp(MeshComponent* mesh)
 // パーティクルコンポーネント登録
 void Renderer::AddParticleComp(ParticleComponent* part)
 {
-    particleComps.emplace_back(part);
+    int myDrawOrder = part->GetDrawOrder();
+    auto iter = particleComps.begin();
+    for (;iter != particleComps.end(); ++iter)
+    {
+        if (myDrawOrder < (*iter)->GetDrawOrder())
+        {
+            break;
+        }
+    }
+    particleComps.insert(iter, part);
 }
 
 // パーティクルコンポーネント削除
