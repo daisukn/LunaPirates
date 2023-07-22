@@ -7,6 +7,7 @@
 #include "FollowCamera.h"
 #include "ColliderComponent.h"
 #include "TargetScopeActor.h"
+#include "LaserActor.h"
 
 #include <memory>
 
@@ -40,6 +41,9 @@ private:
     
     // 動作可能=true 動作不可能=false
     bool isMovable;
+    
+    void ShotLaser();
+    std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
 
 };
 

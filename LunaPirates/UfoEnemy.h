@@ -11,7 +11,8 @@ public:
     UfoEnemy(class Application* a);
     void UpdateActor(float deltaTime) override;
 private:
-    float ang;
+    float angY;
+    float angle;
     std::unique_ptr<class ExplosionActor> explosion;
 
     

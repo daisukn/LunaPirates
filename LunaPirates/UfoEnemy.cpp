@@ -8,7 +8,8 @@
 
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
-    , ang(0.0f)
+    , angY(0.0f)
+    , angle(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ufo.lwo"));
@@ -32,21 +33,23 @@ UfoEnemy::UfoEnemy(Application* a)
 
 void UfoEnemy::UpdateActor(float deltaTime)
 {
-    ang += 180 * deltaTime;
-    
-    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(ang));
-    SetRotation(rot);
-    
+
 
     if(!isDisp) return;
- 
+
+    angY += 180 * deltaTime;
+    angle += 1.f;
+    
+    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(angY));
+    SetRotation(rot);
+    
     if(state == StateNormal)
     {
         meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
         
         auto v = GetPosition();
-        SetPosition(Vector3(v.x+sin(ang/50)*6, v.y+sin(ang/20)*3, v.z - 1.5));
+        SetPosition(Vector3(v.x+sin(angle/50)*6, v.y+sin(angle/20)*3, v.z - 1.5));
         if(v.z < 0)
         {
             isDisp = false;

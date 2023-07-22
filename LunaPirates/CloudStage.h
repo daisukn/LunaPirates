@@ -4,7 +4,6 @@
 #include "Stage.h"
 #include "UfoEnemy.h"
 #include "MoaiEnemy.h"
-#include "LaserActor.h"
 #include <memory>
 #include <vector>
 
@@ -19,7 +18,7 @@ private:
     std::vector<std::unique_ptr<class StageObjectActor>> ufoEnemy;
     std::vector<std::unique_ptr<class StageObjectActor>> moaiEnemy;
     std::vector<std::unique_ptr<class StageObjectActor>> shipEnemy;
-    std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
+
     
 
     std::unique_ptr<class Actor> skyActor;
@@ -42,9 +41,7 @@ public:
     virtual void UpdateStage() override;
     
     virtual void StageInput(const struct InputState& state) override;
-    
-    virtual void InputAction_A() override;
-    
+        
 };
 
 

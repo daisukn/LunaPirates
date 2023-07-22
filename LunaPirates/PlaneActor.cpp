@@ -13,6 +13,7 @@
 #include "CloudStage.h"
 #include "TargetScopeActor.h"
 
+const int MAX_LASER = 20;
 
 PlaneActor::PlaneActor(Application* app)
     : StageObjectActor(app)
@@ -45,6 +46,12 @@ PlaneActor::PlaneActor(Application* app)
      collComp->GetBoundingVolume()->SetVisible(true);
 
     
+     // レーザー
+     for(int i = 0; i < MAX_LASER; i++)
+     {
+         laserActor.push_back( std::make_unique<LaserActor>(app));
+     }
+     
 
      // ターゲットスコープ
      scopeActor = std::make_unique<TargetScopeActor>(app);
@@ -83,7 +90,7 @@ void PlaneActor::FieldMove(const InputState &state)
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)
     {
-        ownerStage->InputAction_A();
+        ShotLaser();
     }
     
     
@@ -114,4 +121,15 @@ void PlaneActor::SetMeshVisible(bool visible)
     meshComp->SetVisible(visible);
 }
 
+void PlaneActor::ShotLaser()
+{
+    for(int i = 0; i < MAX_LASER; i++)
+    {
+        if(!laserActor[i]->GetDisp())
+        {
+            laserActor[i]->Appear(GetPosition(), 0);
+            break;
+        }
+    }
+}
 

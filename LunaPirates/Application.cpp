@@ -9,7 +9,7 @@
 #include <algorithm>
 
 
-//#define __HIREZO__
+#define __HIREZO__
 
 #ifdef __HIREZO__
 const float SCREEN_W = 1600.f;

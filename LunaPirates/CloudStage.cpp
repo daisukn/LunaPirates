@@ -17,7 +17,6 @@ const int MAX_CLOUD = 50;
 const int MAX_UFO = 20;
 const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
-const int MAX_LASER = 20;
 
 const float APEAR_POINT = 1000.f;
 
@@ -64,11 +63,6 @@ void CloudStage::LoadStageData()
     {
         shipEnemy.push_back( std::make_unique<ShipEnemy>(app));
     }
-    for(int i = 0;  i < MAX_LASER; i++)
-    {
-        laserActor.push_back( std::make_unique<LaserActor>(app));
-    }
-    
     
     
 
@@ -128,19 +122,6 @@ void CloudStage::GenerateCloud()
             }
         }
     }
-}
-
-void CloudStage::InputAction_A()
-{
-    for(int i = 0; i < MAX_LASER; i++)
-    {
-        if(!laserActor[i]->GetDisp())
-        {
-            laserActor[i]->Appear(planeActor->GetPosition(), 0);
-            break;
-        }
-    }
-    
 }
 
 
