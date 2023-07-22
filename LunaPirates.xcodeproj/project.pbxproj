@@ -64,6 +64,7 @@
 /* Begin PBXFileReference section */
 		7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ExplosionActor.cpp; sourceTree = "<group>"; };
 		7E18128F2A6AE15F001C84A4 /* ExplosionActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExplosionActor.h; sourceTree = "<group>"; };
+		7E1812952A6BA531001C84A4 /* Stage1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Stage1.txt; sourceTree = "<group>"; };
 		7EA398DE2A65581C00856DB1 /* LunaPirates */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LunaPirates; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA398E82A65582D00856DB1 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		7EA398E92A65582D00856DB1 /* MoveComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MoveComponent.cpp; sourceTree = "<group>"; };
@@ -205,6 +206,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E1812942A6BA4F8001C84A4 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				7E1812952A6BA531001C84A4 /* Stage1.txt */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		7EA398D52A65581C00856DB1 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +234,7 @@
 		7EA398E02A65581C00856DB1 /* LunaPirates */ = {
 			isa = PBXGroup;
 			children = (
+				7E1812942A6BA4F8001C84A4 /* Setting */,
 				7EA3998E2A655EF200856DB1 /* Actor */,
 				7EA399932A655FA500856DB1 /* Stage */,
 				7EA3998F2A655F1F00856DB1 /* Sys */,

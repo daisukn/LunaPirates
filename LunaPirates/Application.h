@@ -71,7 +71,7 @@ private:
     //class CameraActor* cameraAct;
 
     // ステージデータ
-    class Stage* activeStage;
+    std::unique_ptr<class Stage> activeStage;
     int activeStageID;
     StageTransitionID stageTransition;
     void TransitionStage();

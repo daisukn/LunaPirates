@@ -9,7 +9,7 @@
 #include <algorithm>
 
 
-#define __HIREZO__
+//#define __HIREZO__
 
 #ifdef __HIREZO__
 const float SCREEN_W = 1600.f;
@@ -35,7 +35,7 @@ Application::Application()
 // デストラクタ
 Application::~Application()
 {
-    delete activeStage;
+    //delete activeStage;
 }
 
 
@@ -204,7 +204,7 @@ void Application::LoadData()
     
     // ステージ読み込み
     stageTransition = STAGE_TITLE;
-    activeStage = new TitleStage(this);
+    activeStage = std::make_unique<TitleStage>(this);
 }
 
 // ゲームメインルーチン
@@ -270,15 +270,14 @@ void Application::TransitionStage()
 {
 
     //activeStage->UnloadStageData();
-    delete activeStage;
-    activeStage = nullptr;
+    //delete activeStage;
+    activeStage.reset();
 
-    
-    switch (stageTransition)
+        switch (stageTransition)
     {
         case STAGE_TITLE:
             stageTransition = STAGE_CLOUD;
-            activeStage = new CloudStage(this);
+            activeStage = std::make_unique<CloudStage>(this);
             break;
     
         case STAGE_CLOUD:

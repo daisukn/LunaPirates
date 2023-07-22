@@ -86,6 +86,12 @@ void CloudStage::LoadStageData()
     app->GetRenderer()->SetClearColor(0.596f, 0.733f, 0.858f);
     //app->GetRenderer()->SetClearColor(0.05f, 0.01f, 0.258f);
     
+    
+    LoadStageLayout("Setting/Stage1.txt");
+    for(auto l : layout)
+    {
+        std::cout << l.frame << " " << l.x << " " << l.y << " " << l.z << " " << l.objType << " " << l.behaveType << std::endl;
+    }
 }
 
 void CloudStage::UnloadStageData()
@@ -97,12 +103,98 @@ void CloudStage::StageInput(const struct InputState &state)
     
 }
 
+
 void CloudStage::UpdateStage()
 {
     stageCounter++;
     GenerateCloud();
 
+    AppearLayout();
     
+    
+}
+
+void CloudStage::GenerateCloud()
+{
+    if(stageCounter % 2 == 0)
+    {
+        for(int i = 0; i < MAX_CLOUD; i++)
+        {
+            if(!cloudActor[i]->GetDisp())
+            {
+                cloudActor[i]->SetDisp(true);
+                cloudActor[i]->SetPosition(Vector3(std::rand() % 600 - 300, std::rand() % 400 - 200 , APEAR_POINT));
+                break;
+            }
+        }
+    }
+}
+
+void CloudStage::InputAction_A()
+{
+    for(int i = 0; i < MAX_LASER; i++)
+    {
+        if(!laserActor[i]->GetDisp())
+        {
+            laserActor[i]->Appear(planeActor->GetPosition());
+            break;
+        }
+    }
+    
+}
+
+
+void CloudStage::AppearLayout()
+{
+    if(numLayout > stageCounter)
+    {
+        return;
+    }
+    
+    
+    while(layout[cntLayout].frame == stageCounter)
+    {
+        switch(layout[cntLayout].objType)
+        {
+            case 1: // UFO
+                for(int i = 0; i < MAX_UFO; i++)
+                {
+                    if(!ufoEnemy[i]->GetDisp())
+                    {
+                        ufoEnemy[i]->Appear(Vector3(layout[cntLayout].x, layout[cntLayout].y ,layout[cntLayout].z));
+                        break;
+                    }
+                }
+                break;
+            case 2: // moai
+                for(int i = 0; i < MAX_MOAI; i++)
+                {
+                    if(!moaiEnemy[i]->GetDisp())
+                    {
+                        moaiEnemy[i]->Appear(Vector3(layout[cntLayout].x, layout[cntLayout].y ,layout[cntLayout].z));
+                        break;
+                    }
+                }
+                break;
+            case 3: // ship
+                for(int i = 0; i < MAX_SHIP; i++)
+                {
+                    if(!shipEnemy[i]->GetDisp())
+                    {
+                        shipEnemy[i]->Appear(Vector3(layout[cntLayout].x, layout[cntLayout].y ,layout[cntLayout].z));
+                        break;
+                    }
+                }
+                break;
+        }
+        cntLayout++;
+    }
+
+}
+
+
+/*
+{
     if(stageCounter % 40 == 0)
     {
         for(int i = 0; i < MAX_UFO; i++)
@@ -138,34 +230,5 @@ void CloudStage::UpdateStage()
             }
         }
     }
-    
 }
-
-void CloudStage::GenerateCloud()
-{
-    if(stageCounter % 2 == 0)
-    {
-        for(int i = 0; i < MAX_CLOUD; i++)
-        {
-            if(!cloudActor[i]->GetDisp())
-            {
-                cloudActor[i]->SetDisp(true);
-                cloudActor[i]->SetPosition(Vector3(std::rand() % 600 - 300, std::rand() % 400 - 200 , APEAR_POINT));
-                break;
-            }
-        }
-    }
-}
-
-void CloudStage::InputAction_A()
-{
-    for(int i = 0; i < MAX_LASER; i++)
-    {
-        if(!laserActor[i]->GetDisp())
-        {
-            laserActor[i]->Appear(planeActor->GetPosition());
-            break;
-        }
-    }
-    
-}
+*/

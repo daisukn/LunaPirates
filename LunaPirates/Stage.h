@@ -4,6 +4,19 @@
 #include "Math.h"
 #include <memory>
 #include <vector>
+#include <string>
+
+
+struct StageLayout
+{
+    int frame;
+    int objType;
+    int behaveType;
+    float x;
+    float y;
+    float z;
+};
+
 
 class Stage
 {
@@ -27,6 +40,12 @@ protected:
     class Application* app;
     
     bool isQuitStage; // trueになったら遷移する
+    
+    std::vector<struct StageLayout> layout;
+    void LoadStageLayout(std::string filename);
+    virtual void AppearLayout();
+    int cntLayout;
+    int numLayout;
     
 
 private:

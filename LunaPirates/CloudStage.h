@@ -30,7 +30,7 @@ private:
     unsigned int stageCounter;
     
     void GenerateCloud();
-    
+    void AppearLayout() override;
 
 public:
     CloudStage(class Application* a);
