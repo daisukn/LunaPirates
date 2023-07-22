@@ -11,6 +11,8 @@
 
 #include <vector>
 
+const int NUM_VERTEX = 12;
+
 // コンストラクタ
 BoundingVolumeComponent::BoundingVolumeComponent(Actor* a)
 //    : Component(a)
@@ -19,18 +21,16 @@ BoundingVolumeComponent::BoundingVolumeComponent(Actor* a)
     , isVisible(false)
 {
     // new するタイミングは要検討
-    boundingBox = new Cube();
-    obb = new OBB();
-    polygons = new Polygon[12];
+    boundingBox = std::make_unique<Cube>();
+    obb = std::make_unique<OBB>();
+    polygons.reset(new Polygon[NUM_VERTEX]);
     
 }
 
 // デストラクタ
 BoundingVolumeComponent::~BoundingVolumeComponent()
 {
-    if(boundingBox) { delete boundingBox; boundingBox = nullptr; }
-    if(obb) { delete obb; obb = nullptr; }
-    if(polygons) { delete [] polygons; polygons = nullptr; }
+
 }
 
 
@@ -54,6 +54,8 @@ void BoundingVolumeComponent::OnUpdateWorldTransform()
               Vector3((fabsf(obb->max.x) + fabsf(obb->min.x)) / 2,
                         (fabsf(obb->max.y) + fabsf(obb->min.y)) / 2,
                         (fabsf(obb->max.z) + fabsf(obb->min.z)) / 2);
+    
+
     
       // 角度、AXIS、ちょっと怪しいかも。。。
     obb->rot = Vector3(obb->axisX.x, obb->axisY.y, obb->axisZ.z);
@@ -244,7 +246,8 @@ void BoundingVolumeComponent::CreateVArray()
     };
     
     
-    vArray = new VertexArray(BBverts, 8, (unsigned int*)BBindex, (unsigned int)36);
+    //vArray = new VertexArray(BBverts, 8, (unsigned int*)BBindex, (unsigned int)36);
+    vArray = std::make_unique<VertexArray>(BBverts, 8, (unsigned int*)BBindex, (unsigned int)36);
     // マテリアル非対応なのでTextureで代用
     texture = owner->GetApp()->GetRenderer()->GetTexture("Assets/BoundingVolume.png");
     

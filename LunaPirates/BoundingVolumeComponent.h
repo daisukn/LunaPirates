@@ -7,6 +7,7 @@
 #include "Math.h"
 
 #include <vector>
+#include <memory>
 
 
 // OBB計算用のStruct
@@ -65,27 +66,31 @@ public:
     void Draw(class Shader* shader) override;
     
     // バウンディングボックス取得
-    struct Cube* GetBoundingBox() const { return boundingBox; }
-    struct OBB* GetOBB() const { return obb; }
+    struct Cube* GetBoundingBox() const { return boundingBox.get(); }
+    struct OBB* GetOBB() const { return obb.get(); }
     
-    struct Polygon* GetPlygons() const { return polygons; }
+    struct Polygon* GetPlygons() const { return polygons.get(); }
     
     void SetVisible(bool b) { isVisible = b; }
     bool GetVisibile() const { return isVisible; }
+    
+    bool GetRadius() const { return radius; }
+    void SetRadius(float f) { radius = f; }
 
 private:
  
     // デバッグ用に表示するかどうか
     bool isVisible;
     
-    struct Polygon* polygons;
+    std::unique_ptr<struct Polygon[]> polygons;
     void CreatePolygons();
 
-    class VertexArray* vArray;
+    std::unique_ptr<class VertexArray> vArray;
     class Texture* texture;
+    
 
-    struct Cube* boundingBox;
-    struct OBB* obb;
+    std::unique_ptr<struct Cube> boundingBox;
+    std::unique_ptr<struct OBB> obb;
     float radius;
     
 };

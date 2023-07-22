@@ -55,7 +55,7 @@ private:
     bool JudgeWithOBB(class ColliderComponent* col1, class ColliderComponent* col2);
     bool IsCollideBoxOBB(const OBB* cA, const OBB* cB);
     
-    bool JudgeWithAABB(class ColliderComponent* col1, class ColliderComponent* col2);
+    bool JudgeWithRadius(class ColliderComponent* col1, class ColliderComponent* col2);
 
     
     

@@ -17,6 +17,7 @@
 
 
 #include <vector>
+#include <memory>
 #include <iostream>
 #include <cassert>
 
@@ -64,6 +65,11 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
+    while (!vArray.empty())
+    {
+        delete vArray.back();
+        vArray.pop_back();
+    }
 }
 
 

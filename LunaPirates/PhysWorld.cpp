@@ -37,11 +37,13 @@ void PhysWorld::Test()
             {
                 if (c2->GetDisp())
                 {
-                    
-                    if (JudgeWithOBB(c1, c2))
+                    //if (JudgeWithRadius(c1, c2))
                     {
-                        c1->Collided(c2);
-                        c2->Collided(c1);
+                        if (JudgeWithOBB(c1, c2) )
+                        {
+                            c1->Collided(c2);
+                            c2->Collided(c1);
+                        }
                     }
                 }
             }
@@ -56,11 +58,13 @@ void PhysWorld::Test()
             {
                 if (c2->GetDisp())
                 {
-                    
-                    if (JudgeWithOBB(c1, c2))
+                    //if (JudgeWithRadius(c1, c2) )
                     {
-                        c1->Collided(c2);
-                        c2->Collided(c1);
+                        if (JudgeWithOBB(c1, c2))
+                        {
+                            c1->Collided(c2);
+                            c2->Collided(c1);
+                        }
                     }
                 }
             }
@@ -157,22 +161,21 @@ bool PhysWorld::IsCollideBoxOBB(const OBB* cA, const OBB* cB){
 }
 
 
-// AABBによる衝突判定
-bool PhysWorld::JudgeWithAABB(ColliderComponent* col1, ColliderComponent* col2)
+bool PhysWorld::JudgeWithRadius(class ColliderComponent* col1, class ColliderComponent* col2)
 {
-    auto cube1 = col1->GetBoundingVolume()->GetBoundingBox();
-    auto cube2 = col2->GetBoundingVolume()->GetBoundingBox();
+    auto ditance = col1->GetPosition() - col2->GetPosition();
+    float len = ditance.Length();
+    float thleshold = col1->GetBoundingVolume()->GetRadius() + col2->GetBoundingVolume()->GetRadius();
     
-    Cube aabb1, aabb2;
-    aabb1.max = cube1->max + col1->GetActor()->GetPosition();
-    aabb2.max = cube2->max + col2->GetActor()->GetPosition();
-
-    
-    return !(   aabb1.max.x < aabb2.min.x || aabb1.min.x > aabb2.max.x ||
-                aabb1.max.y < aabb2.min.y || aabb1.min.y > aabb2.max.y ||
-                aabb1.max.z < aabb2.min.z || aabb1.min.z > aabb2.max.z);
+    if(thleshold*2 > len)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-
 
 // コライダーの登録
 void PhysWorld::AddColliderType(ColliderComponent* c, ColliderType t)
