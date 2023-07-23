@@ -28,7 +28,8 @@ SpriteComponent::~SpriteComponent()
 // 描画
 void SpriteComponent::Draw(Shader* shader)
 {
-	if (texture){
+	if (texture)
+    {
 		// Textureサイズからスケールマトリックスを作成
 		Matrix4 scaleMat = Matrix4::CreateScale(static_cast<float>(texWidth), static_cast<float>(texHeight), 1.0f);
 		// ワールド座標生成

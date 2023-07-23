@@ -1,6 +1,4 @@
-#ifndef __COMPONENT_H
-#define __COMPONENT_H
-
+#pragma once
 
 #include "Component.h"
 
@@ -58,5 +56,3 @@ private:
     std::vector<ColliderComponent*> targetColliders;
     
 };
-
-#endif // __COMPONENT_H

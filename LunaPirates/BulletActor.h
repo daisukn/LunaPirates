@@ -1,5 +1,4 @@
-#ifndef __BULLETACTOR_H
-#define __BULLETACTOR_H
+#pragma once
 
 #include "StageObjectActor.h"
 #include "BillboardComponent.h"
@@ -15,6 +14,3 @@ private:
     std::unique_ptr<class BillboardComponent> flare;
     float angle;
 };
-
-
-#endif // __BULLETACTOR_H

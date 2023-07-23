@@ -1,5 +1,4 @@
-#ifndef __PLANEACTOR_H
-#define __PLANEACTOR_H
+#pragma once
 
 #include "StageObjectActor.h"
 #include "SkeletalMeshComponent.h"
@@ -47,8 +46,3 @@ private:
 
 };
 
-
-
-
-
-#endif // __PLANEACTOR_H

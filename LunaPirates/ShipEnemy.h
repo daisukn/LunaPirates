@@ -1,5 +1,4 @@
-#ifndef __SHIPENEMY_H
-#define __SHIPENEMY_H
+#pragma once
 
 #include "StageObjectActor.h"
 #include "ExplosionActor.h"
@@ -25,9 +24,3 @@ private:
     typedef void (ShipEnemy::*Behavior)(float deltaTime);
     std::vector<Behavior> BehaviorTable;
 };
-
-
-
-#endif // __SHIPENEMY_H
-
-

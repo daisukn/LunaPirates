@@ -1,6 +1,4 @@
-#ifndef __DRAGONACTOR_H
-#define __DRAGONACTOR_H
-
+#pragma once
 
 #include "Actor.h"
 
@@ -33,6 +31,3 @@ private:
 
 };
 
-
-
-#endif // __DRAGONACTOR_H

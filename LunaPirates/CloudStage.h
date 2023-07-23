@@ -1,5 +1,4 @@
-#ifndef __CLOUDSTAGE_H
-#define __CLOUDSTAGE_H
+#pragma once
 
 #include "Stage.h"
 #include "UfoEnemy.h"
@@ -44,5 +43,3 @@ public:
         
 };
 
-
-#endif // __CLOUDSTAGE_H

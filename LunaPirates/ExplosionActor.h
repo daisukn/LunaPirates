@@ -1,6 +1,4 @@
-#ifndef __EXPLOSIONACTOR_H
-#define __EXPLOSIONACTOR_H
-
+#pragma once
 
 #include "Actor.h"
 #include "Math.h"
@@ -30,6 +28,3 @@ private:
     bool isDisp;
     
 };
-
-
-#endif // __EXPLOSIONACTOR_H

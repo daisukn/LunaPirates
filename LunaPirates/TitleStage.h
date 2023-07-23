@@ -1,5 +1,4 @@
-#ifndef __TITLESTAGE_H
-#define __TITLESTAGE_H
+#pragma once
 
 #include "Stage.h"
 #include <memory>
@@ -19,5 +18,3 @@ public:
     virtual void StageInput(const struct InputState& state) override;
 };
 
-
-#endif // __TITLESTAGE_H

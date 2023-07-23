@@ -1,5 +1,4 @@
-#ifndef __APPLICATION_H
-#define __APPLICATION_H
+#pragma once
 
 #include <SDL2/SDL.h>
 #include <vector>
@@ -86,5 +85,3 @@ private:
 
 };
 
-
-#endif // __APPLICATION_H

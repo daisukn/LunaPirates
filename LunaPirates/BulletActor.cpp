@@ -34,7 +34,6 @@ BulletActor::BulletActor(Application* a)
 void BulletActor::UpdateActor(float deltaTime)
 {
     collComp->SetDisp(isDisp);
-    flare->SetVisible(true);
     
     float speed = -5.0f;
     float a = Math::ToRadians(angle);
@@ -42,6 +41,7 @@ void BulletActor::UpdateActor(float deltaTime)
     if(isDisp)
     {
         meshComp->SetVisible(true);
+        flare->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
         auto v = GetPosition();
         SetPosition(Vector3(v.x + cos(a) * speed/3, v.y + sin(a)*speed/3, v.z + speed));
@@ -49,6 +49,7 @@ void BulletActor::UpdateActor(float deltaTime)
         {
             isDisp = false;
             meshComp->SetVisible(false);
+            flare->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
 
         }

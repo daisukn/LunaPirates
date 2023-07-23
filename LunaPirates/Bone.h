@@ -1,5 +1,4 @@
-#ifndef __BONE_H
-#define __BONE_H
+#pragma once
 
 #include "Math.h"
 #include <cstring>
@@ -53,5 +52,3 @@ struct BoneInfo
 
     }
 };
-
-#endif // __BONE_H

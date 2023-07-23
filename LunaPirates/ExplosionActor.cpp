@@ -31,6 +31,6 @@ void ExplosionActor::Appear(Vector3 pos)
 {
     isDisp = true;
     SetPosition(pos);
-    explosionPart->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 20.0f, true);
-    smokePart->CreateParticles(Vector3(0,0,0), 3, 0.8f, 0.4f, 20.0f, false);
+    explosionPart->CreateParticles(Vector3(0,0,0), 10, 0.8f, 0.5f, 15.0f);
+    smokePart->CreateParticles(Vector3(0,0.1,0), 5, 0.8f, 0.4f, 20.0f, ParticleComponent::P_SMOKE);
 }

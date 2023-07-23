@@ -19,7 +19,7 @@
 const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL;
 //const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
 
-#define __GAME_DEBUG
+//#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()
@@ -190,7 +190,7 @@ void Renderer::Draw()
     // Zバッファに書き込まない
     glDepthMask(GL_FALSE);
     //加算合成
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     //glBlendFunc(GL_ONE, GL_ONE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -324,7 +324,7 @@ bool Renderer::LoadShaders()
     
     // ビューマトリックス、プロジェクションマトリックス（デフォルト値）
     viewMatrix = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitZ, Vector3::UnitY);
-    projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(30.0f), screenWidth, screenHeight, 10.0f, 10000.0f);
+    projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(30.0f), screenWidth, screenHeight, 1.0f, 10000.0f);
     
     // シェーダーに送る
     meshShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
@@ -351,8 +351,8 @@ void Renderer::SetLightUniforms(Shader* shader)
     
     
     // フォグ
-    shader->SetFloatUniform("uFoginfo.maxDist", 1500.0f);
-    shader->SetFloatUniform("uFoginfo.minDist", 1.0f);
+    shader->SetFloatUniform("uFoginfo.maxDist", 990.0f);
+    shader->SetFloatUniform("uFoginfo.minDist", 500.0f);
     
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.75f, 0.96f, 0.99f) );
     shader->SetVectorUniform("uFoginfo.color", Vector3(0.69f, 0.859f, 0.894f) );
@@ -428,13 +428,13 @@ void Renderer::CreateSpriteVerts()
         2, 1, 0,
         0, 3, 2
     };
-    spriteVerts = new VertexArray((float*)vertices, (unsigned int)4, (unsigned int*)indices, (unsigned int)6);
+    spriteVerts = std::make_unique<VertexArray>((float*)vertices, (unsigned int)4, (unsigned int*)indices, (unsigned int)6);
 }
 
 
 
 // メッシュ取り出し
-Mesh* Renderer::GetMesh(const std::string & fileName)
+Mesh* Renderer::GetMesh(const std::string& fileName)
 {
     Mesh* m = nullptr;
     auto iter = meshes.find(fileName);
@@ -502,9 +502,6 @@ void Renderer::RemoveBackGroudMeshComp(MeshComponent* mesh)
     }
  
 }
-
-
-
 
 
 // パーティクルコンポーネント登録

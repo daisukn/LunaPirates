@@ -1,5 +1,4 @@
-#ifndef __MOAIENEMY_H
-#define __MOAIENEMY_H
+#pragma once
 
 #include "StageObjectActor.h"
 #include "ExplosionActor.h"
@@ -32,7 +31,4 @@ private:
     std::vector<Behavior> BehaviorTable;
 };
 
-
-
-#endif // __MOAIENEMY_H
 

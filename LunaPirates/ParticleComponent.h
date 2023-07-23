@@ -31,6 +31,14 @@ struct ParticleParts
 class ParticleComponent : public Component
 {
 public:
+    enum ParticleMode
+    {
+        P_SPARK,
+        P_SMOKE,
+        P_WATER
+    };
+    
+    
     ParticleComponent(class Actor* a, int drawOrder = 100);
     ~ParticleComponent();
     
@@ -44,7 +52,7 @@ public:
     void Update(float deltaTime) override;
 
     // パーティクル発生
-    void CreateParticles(Vector3 pos, unsigned int num, float life, float part_life, float size, bool grav = false);
+    void CreateParticles(Vector3 pos, unsigned int num, float life, float part_life, float size, ParticleMode mode = P_SPARK);
     
     
     bool GetVisible() const { return isVisible; }
@@ -60,7 +68,8 @@ private:
     float partLifecycle;
     float partSize;
 
-    bool isGravity;
+    ParticleMode partMode;
+    //bool isGravity;
     int drawOrder;
     // パーティクル破片を生成
     void GenerateParts();

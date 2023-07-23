@@ -1,5 +1,4 @@
-#ifndef __BOUNDINGVOLUMECOMPONENT_H
-#define __BOUNDINGVOLUMECOMPONENT_H
+#pragma once
 
 #include "Component.h"
 #include "DebuggerComponent.h"
@@ -95,5 +94,3 @@ private:
     
 };
 
-
-#endif // __BOUNDINGVOLUMECOMPONENT_H

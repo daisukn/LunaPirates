@@ -1,5 +1,4 @@
-#ifndef __OBJECTACTOR_H
-#define __OBJECTACTOR_H
+#pragma once
 
 #include "Actor.h"
 #include "MeshComponent.h"
@@ -48,9 +47,3 @@ protected:
     class Stage* ownerStage;
 };
 
-
-
-
-
-
-#endif // __UFOACTOR_H

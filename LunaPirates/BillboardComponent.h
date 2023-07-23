@@ -1,5 +1,4 @@
-#ifndef __BILLBOARDCOMPONENT_H
-#define __BILLBOARDCOMPONENT_H
+#pragma once
 
 #include "Component.h"
 
@@ -35,7 +34,3 @@ private:
 
 };
 
-
-
-
-#endif // __BILLBOARDCOMPONENT_H

@@ -1,5 +1,4 @@
-#ifndef __UFOENEMY_H
-#define __UFOENEMY_H
+#pragma once
 
 #include "StageObjectActor.h"
 #include "ExplosionActor.h"
@@ -26,8 +25,4 @@ private:
     std::vector<Behavior> BehaviorTable;
     
 };
-
-
-
-#endif // __UFOENEMY_H
 

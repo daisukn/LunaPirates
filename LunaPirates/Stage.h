@@ -1,5 +1,4 @@
-#ifndef __STAGE_H
-#define __STAGE_H
+#pragma once
 
 #include "Math.h"
 #include <memory>
@@ -50,5 +49,3 @@ protected:
 private:
 };
 
-
-#endif // __STAGE_H

@@ -1,5 +1,4 @@
-#ifndef __ANIMATION_H
-#define __ANIMATION_H
+#pragma once
 
 // 再生モード
 enum PlayMode
@@ -7,5 +6,3 @@ enum PlayMode
     PLAY_ONCE,
     PLAY_CYCLIC
 };
-
-#endif // __ANIMATION_H

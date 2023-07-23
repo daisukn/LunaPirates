@@ -1,5 +1,4 @@
-#ifndef __ACTOR_H
-#define __ACTOR_H
+#pragma once
 
 #include "Math.h"
 #include <vector>
@@ -99,5 +98,3 @@ private:
     
 
 };
-
-#endif // __ACTOR_H

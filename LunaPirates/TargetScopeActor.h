@@ -1,5 +1,4 @@
-#ifndef __TARGETSCOPEACTOR_H
-#define __TARGETSCOPEACTOR_H
+#pragma once
 
 #include "StageObjectActor.h"
 #include "BillboardComponent.h"
@@ -15,5 +14,3 @@ private:
     std::unique_ptr<class BillboardComponent> scopeBillboard;
 };
 
-
-#endif // __TARGETSCOPEACTOR_H

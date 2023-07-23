@@ -117,7 +117,7 @@ private:
     bool LoadShaders();
 
     // スプライト用ポリゴン（Billboardでも使う）
-    class VertexArray* spriteVerts;
+    std::unique_ptr<class VertexArray> spriteVerts;
     // スプライト用ポリゴンの生成
     void CreateSpriteVerts();
     

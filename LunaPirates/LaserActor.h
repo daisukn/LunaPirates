@@ -1,5 +1,4 @@
-#ifndef __LASERACTOR_H
-#define __LASERACTOR_H
+#pragma once
 
 #include "StageObjectActor.h"
 
@@ -11,4 +10,3 @@ public:
 };
 
 
-#endif // __LASERACTOR_H

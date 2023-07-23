@@ -1,5 +1,4 @@
-#ifndef __BGCLOUDACTOR_H
-#define __BGCLOUDACTOR_H
+#pragma once
 
 #include "Actor.h"
 
@@ -32,10 +31,3 @@ private:
     bool isDisp;
 
 };
-
-
-
-
-
-
-#endif // __BGCLOUDACTOR_H

@@ -21,7 +21,7 @@ ParticleComponent::ParticleComponent(Actor* a, int drawOrder)
     , totalLife(0.0f)
     , partLifecycle(0.0f)
     , partSize(0.0f)
-    , isGravity(false)
+    , partMode(P_SPARK)
 {
     owner->GetApp()->GetRenderer()->AddParticleComp(this);
 }
@@ -131,11 +131,15 @@ void ParticleComponent::Update(float deltaTime)
         if(parts[i].isVisible)
         {
             // 重力を反映
-            if (isGravity)
+            if (partMode == P_WATER)
             {
                 parts[i].dir.y -= 0.05f;
             }
-            
+            if (partMode == P_SMOKE)
+            {
+                parts[i].dir.y += 0.05f;
+            }
+
             
             parts[i].lifeTime += deltaTime;
             parts[i].pos += parts[i].dir * deltaTime;
@@ -157,7 +161,7 @@ void ParticleComponent::Update(float deltaTime)
 
 // パーティクル初期化
 //（アクターとの相対位置、粒の総数、総表示時間、粒の表示時間、粒の大きさ、重力モード（未実装））
-void ParticleComponent::CreateParticles(Vector3 pos, unsigned int num, float life, float part_life, float size, bool grav)
+void ParticleComponent::CreateParticles(Vector3 pos, unsigned int num, float life, float part_life, float size, ParticleMode mode)
 {
     // すでに表示されていたらキャンセル
     if(!isVisible)
@@ -174,7 +178,7 @@ void ParticleComponent::CreateParticles(Vector3 pos, unsigned int num, float lif
         parts.resize(numParts);
         //GenerateParts();
         
-        isGravity = grav;
+        partMode = mode;
     }
     
 
