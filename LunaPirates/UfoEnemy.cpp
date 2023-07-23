@@ -6,12 +6,15 @@
 #include "ColliderComponent.h"
 #include "ParticleComponent.h"
 
-const int MAX_BULLET = 12;
+const int MAX_BULLET = 30;
 
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
-    , angY(0.0f)
+    , rotY(0.0f)
     , angle(0.0f)
+    , xSpeed(0.0f)
+    , ySpeed(0.0f)
+    , zSpeed(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ufo.lwo"));
@@ -52,66 +55,56 @@ void UfoEnemy::Appear(Vector3 pos, int type)
 {
     StageObjectActor::Appear(pos, type);
     angle = 0.0f;
-    angY = 0.0f;
+    rotY = 0.0f;
 }
 
 void UfoEnemy::UpdateActor(float deltaTime)
 {
+    if (!isDisp) { return; }
+    
+    cntLifetime++;
     if (behaveType >= 0 && behaveType < BehaviorTable.size())
     {
         (this->*BehaviorTable[behaveType])(deltaTime);
     }
-}
-
-
-
-void UfoEnemy::Behavior_0(float deltaTime)
-{
-    if(!isDisp) return;
-
-    angY += 180 * deltaTime;
-    angle += 1.f;
-    
-    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(angY));
-    SetRotation(rot);
-    
+        
+        
     if(state == StateNormal)
     {
         meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
-        
+            
         auto v = GetPosition();
-        SetPosition(Vector3(v.x+sin(angle/50)*6, v.y+sin(angle/20)*3, v.z - 1.5));
+        SetPosition(Vector3(v.x+sin(Math::ToRadians(angle))*xSpeed, v.y+sin(Math::ToRadians(angle/2))*ySpeed, v.z - zSpeed));
+
         if(v.z < 0)
         {
             isDisp = false;
             meshComp->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
         }
-        
-        
+            
+            
         collComp->SetDisp(isDisp);
         if(collComp->GetCollided())
         {
             for(auto col : collComp->GetTargetColliders())
             {
                 if(col->GetColliderType() == C_PLAYER
-                   || col->GetColliderType() == C_LASER)
+                       || col->GetColliderType() == C_LASER)
                 {
                     meshComp->SetVisible(false);
                     collComp->GetBoundingVolume()->SetVisible(false);
                     collComp->SetCollided(false);
-                    
+                        
                     state = StateExploted;
                     explosion->Appear(GetPosition());
                     break;
-                    
+                        
                 }
             }
 
         }
-
-        
     }
     else if(state == StateExploted)
     {
@@ -120,13 +113,84 @@ void UfoEnemy::Behavior_0(float deltaTime)
             isDisp = false;
         }
     }
+}
+
+
+
+void UfoEnemy::Behavior_0(float deltaTime)
+{
+    rotY += 60.f * deltaTime;
+    angle += 240.f * deltaTime;
+    
+    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(rotY));
+    SetRotation(rot);
+    
+    zSpeed = 0.0f;
+    xSpeed = 0.0f;
+    ySpeed = 150.f * deltaTime;
+    
+    if(cntLifetime < 120)
+    {
+        zSpeed = 300 * deltaTime;
+        ySpeed = 0.0f;
+    }
+    else if(cntLifetime < 700)
+    {
+        zSpeed = 0.0f;
+        xSpeed = 0.0f;
+        ySpeed = 100.f * deltaTime;
         
- 
+        int prevCnt = 120;
+        if( (cntLifetime - prevCnt) % 50 == 0)
+        {
+            Shot();
+        }
+    }
+    else
+    {
+        zSpeed = 100 * deltaTime;
+        xSpeed = 150 * deltaTime;
+        ySpeed = 0.0f;
+    }
+    
+
 }
 
 void UfoEnemy::Behavior_1(float deltaTime)
 {
+    rotY += 60.f * deltaTime;
+    angle += 240.f * deltaTime;
     
+    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(rotY));
+    SetRotation(rot);
+    
+    zSpeed = 0.0f;
+    xSpeed = 0.0f;
+    ySpeed = 150.f * deltaTime;
+    
+    if(cntLifetime < 120)
+    {
+        zSpeed = 300 * deltaTime;
+        ySpeed = 0.0f;
+    }
+    else if(cntLifetime < 700)
+    {
+        zSpeed = 0.0f;
+        xSpeed = 0.0f;
+        ySpeed = 100.f * deltaTime;
+        
+        int prevCnt = 120;
+        if( (cntLifetime - prevCnt) % 50 == 0)
+        {
+            Shot();
+        }
+    }
+    else
+    {
+        zSpeed = 100 * deltaTime;
+        xSpeed = 150 * deltaTime;
+        ySpeed = 0.0f;
+    }
 }
 
 void UfoEnemy::Behavior_2(float deltaTime)
@@ -137,4 +201,20 @@ void UfoEnemy::Behavior_2(float deltaTime)
 void UfoEnemy::Behavior_3(float deltaTime)
 {
     
+}
+
+void UfoEnemy::Shot()
+{
+    for(int j = 0;  j < 6; j++)
+    {
+        for(int i = 0; i < MAX_BULLET; i++)
+        {
+            if(!bullets[i]->GetDisp())
+            {
+                bullets[i]->SetAngle((float)j*60);
+                bullets[i]->Appear(GetPosition(), 0);
+                break;
+            }
+        }
+    }
 }

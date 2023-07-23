@@ -2,6 +2,7 @@
 
 #include "StageObjectActor.h"
 #include "BillboardComponent.h"
+#include <vector>
 
 class BulletActor : public StageObjectActor
 {
@@ -13,4 +14,14 @@ public:
 private:
     std::unique_ptr<class BillboardComponent> flare;
     float angle;
+    
+    
+    // 各行動パターン
+    void Behavior_0(float deltaTime);
+    void Behavior_1(float deltaTime);
+    void Behavior_2(float deltaTime);
+    void Behavior_3(float deltaTime);
+    // 関数テーブル
+    typedef void (BulletActor::*Behavior)(float deltaTime);
+    std::vector<Behavior> BehaviorTable;
 };

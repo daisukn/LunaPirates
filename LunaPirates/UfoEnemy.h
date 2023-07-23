@@ -14,8 +14,12 @@ public:
     void UpdateActor(float deltaTime) override;
     void Appear(Vector3 pos, int type) override;
 private:
-    float angY;
+    float rotY;
     float angle;
+    float xSpeed;
+    float ySpeed;
+    float zSpeed;
+    
     std::unique_ptr<class ExplosionActor> explosion;
     std::vector<std::unique_ptr<class BulletActor>> bullets;
 
@@ -29,5 +33,6 @@ private:
     typedef void (UfoEnemy::*Behavior)(float deltaTime);
     std::vector<Behavior> BehaviorTable;
     
+    void Shot();
 };
 

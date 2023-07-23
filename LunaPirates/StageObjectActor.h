@@ -31,6 +31,9 @@ public:
     
     virtual void Appear(Vector3 pos, int type);
     
+    void SetBehaveType(int t) { behaveType = t; }
+    int GetBehaveType() const { return behaveType; }
+    
 protected:
     std::unique_ptr<class MeshComponent> meshComp;
     std::unique_ptr<class ColliderComponent> collComp;
