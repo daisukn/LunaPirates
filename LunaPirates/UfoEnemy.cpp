@@ -6,6 +6,8 @@
 #include "ColliderComponent.h"
 #include "ParticleComponent.h"
 
+const int MAX_BULLET = 12;
+
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
     , angY(0.0f)
@@ -16,9 +18,16 @@ UfoEnemy::UfoEnemy(Application* a)
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
     
-    
     // 爆発
     explosion = std::make_unique<ExplosionActor>(a);
+    
+    
+    // 弾幕
+    for(int i = 0; i < MAX_BULLET; i++)
+    {
+        bullets.push_back(std::make_unique<BulletActor>(a));
+    }
+    
     
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
@@ -32,6 +41,18 @@ UfoEnemy::UfoEnemy(Application* a)
     BehaviorTable.push_back(&UfoEnemy::Behavior_1);
     BehaviorTable.push_back(&UfoEnemy::Behavior_2);
     BehaviorTable.push_back(&UfoEnemy::Behavior_3);
+}
+
+UfoEnemy::~UfoEnemy()
+{
+    bullets.clear();
+}
+
+void UfoEnemy::Appear(Vector3 pos, int type)
+{
+    StageObjectActor::Appear(pos, type);
+    angle = 0.0f;
+    angY = 0.0f;
 }
 
 void UfoEnemy::UpdateActor(float deltaTime)

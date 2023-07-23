@@ -83,7 +83,7 @@ public:
     
 private:
     // ウィンドウタイトル
-    std::string strTitle = "SDL2/OpenGL";
+    std::string strTitle;
     // Windowハンドラ
     SDL_Window* window;
     // GLコンテキスト

@@ -2,17 +2,22 @@
 
 #include "StageObjectActor.h"
 #include "ExplosionActor.h"
+#include "BulletActor.h"
 #include <memory>
+#include <vector>
 
 class UfoEnemy : public StageObjectActor
 {
 public:
     UfoEnemy(class Application* a);
+    ~UfoEnemy();
     void UpdateActor(float deltaTime) override;
+    void Appear(Vector3 pos, int type) override;
 private:
     float angY;
     float angle;
     std::unique_ptr<class ExplosionActor> explosion;
+    std::vector<std::unique_ptr<class BulletActor>> bullets;
 
     
     // 各行動パターン
