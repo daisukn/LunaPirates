@@ -391,22 +391,23 @@ void Renderer::RemoveSprite(SpriteComponent* sprite)
 
 // テクスチャ取り出し
 Texture* Renderer::GetTexture(const std::string &fileName){
+ 
     Texture* tex = nullptr;
     auto iter = textures.find(fileName);
     if (iter != textures.end())
     {
-        tex = iter->second;
+        tex = iter->second.get();
     }
     else
     {
-        tex = new Texture();
-        if(tex->Load(fileName))
+        std::unique_ptr<Texture> t = std::make_unique<Texture>();
+        if(t->Load(fileName))
         {
-            textures.emplace(fileName, tex);
+            tex = t.get();
+            textures.emplace(fileName, std::move(t));
         }
         else
         {
-            delete tex;
             tex = nullptr;
         }
     }
@@ -440,18 +441,19 @@ Mesh* Renderer::GetMesh(const std::string& fileName)
     auto iter = meshes.find(fileName);
     if (iter != meshes.end())
     {
-        m = iter->second;
+        m = iter->second.get();
     }
     else
     {
-        m = new Mesh();
-        if (m->Load(fileName, this))
+        std::unique_ptr<Mesh> mesh = std::make_unique<Mesh>();
+        
+        if (mesh->Load(fileName, this))
         {
-            meshes.emplace(fileName, m);
+            m = mesh.get();
+            meshes.emplace(fileName, std::move(mesh));
         }
         else
         {
-            delete m;
             m = nullptr;
         }
     }
@@ -583,21 +585,9 @@ void Renderer::RemoveDebuggerComp(DebuggerComponent* dbg)
 void Renderer::UnloadData()
 {
     // テクスチャ削除
-    for (auto& i : textures)
-    {
-        i.second->Unload();
-        delete i.second;
-        i.second = nullptr;
-    }
     textures.clear();
     
     // メッシュ削除
-    for (auto& i : meshes)
-    {
-        i.second->Unload();
-        delete i.second;
-        i.second = nullptr;
-    }
     meshes.clear();
     
 }

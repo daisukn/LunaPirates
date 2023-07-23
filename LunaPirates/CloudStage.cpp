@@ -103,8 +103,8 @@ void CloudStage::UpdateStage()
     stageCounter++;
     GenerateCloud();
 
-    AppearLayout();
-    //AppearRandom();
+    //AppearLayout();
+    AppearRandom();
     
 }
 

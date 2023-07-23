@@ -125,8 +125,8 @@ private:
     void SetLightUniforms(class Shader* shader);
     
     // アセット
-    std::unordered_map<std::string, class Texture*> textures;
-    std::unordered_map<std::string, class Mesh*> meshes;
+    std::unordered_map<std::string, std::unique_ptr<class Texture>> textures;
+    std::unordered_map<std::string, std::unique_ptr<class Mesh>> meshes;
 
     // コンポーネント
     std::vector<class SpriteComponent*> spriteComps;
