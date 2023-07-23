@@ -8,7 +8,7 @@ LaserActor::LaserActor(Application* a)
     : StageObjectActor(a)
 {
     meshComp = std::make_unique<MeshComponent>(this, false, true);
-    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/laser.lwo"));
+    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/laser.lwo"));
     meshComp->SetVisible(false);
     //meshComp->SetToonRender(true, 1.04f);
     
@@ -17,7 +17,7 @@ LaserActor::LaserActor(Application* a)
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_LASER);
-    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/laser.lwo")->GetVertexArray());
+    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/laser.lwo")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     

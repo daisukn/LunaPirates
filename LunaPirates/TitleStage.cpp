@@ -24,7 +24,7 @@ void TitleStage::LoadStageData()
     titleActor->SetPosition(Vector3(0, 0, 10));
 
     mesh = std::make_unique<MeshComponent>(titleActor.get());
-    mesh->SetMesh(app->GetRenderer()->GetMesh("Assets/title/title.lwo"));
+    mesh->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/title.lwo"));
     isQuitStage = false;
     
 }

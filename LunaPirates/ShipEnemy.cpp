@@ -13,7 +13,7 @@ ShipEnemy::ShipEnemy(Application* a)
 {
 
     meshComp = std::make_unique<SkeletalMeshComponent>(this);
-    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ship2.fbx"));
+    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/ship2.fbx"));
     meshComp->SetAnimID(0, PLAY_CYCLIC);
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
@@ -27,7 +27,7 @@ ShipEnemy::ShipEnemy(Application* a)
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_ENEMY);
-    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/ship.fbx")->GetVertexArray());
+    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/ship.fbx")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 300, 500), Vector3(1, 0.5, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     

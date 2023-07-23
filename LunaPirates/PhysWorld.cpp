@@ -49,6 +49,29 @@ void PhysWorld::Test()
             }
         }
     }
+    
+    // Player vs Bullet
+    for (auto c1 : collPlayer)
+    {
+        if (c1->GetDisp())
+        {
+            for (auto c2 : collBullet)
+            {
+                if (c2->GetDisp())
+                {
+                    //if (JudgeWithRadius(c1, c2))
+                    {
+                        if (JudgeWithOBB(c1, c2) )
+                        {
+                            c1->Collided(c2);
+                            c2->Collided(c1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     // Laser vs Enemy
     for (auto c1 : collLaser)
     {

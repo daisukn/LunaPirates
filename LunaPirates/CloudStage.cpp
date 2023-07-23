@@ -72,7 +72,7 @@ void CloudStage::LoadStageData()
     skyActor->SetRotation(q);
     skyActor->SetScale(1);
     skyMesh = std::make_unique<MeshComponent>(skyActor.get(), false, true);
-    skyMesh->SetMesh(app->GetRenderer()->GetMesh("Assets/sky.lwo"));
+    skyMesh->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/sky.lwo"));
     
 
     isQuitStage = false;
@@ -82,10 +82,11 @@ void CloudStage::LoadStageData()
     
     
     LoadStageLayout("Setting/Stage1.txt");
-    for(auto l : layout)
+/*    for(auto l : layout)
     {
         std::cout << l.frame << " " << l.x << " " << l.y << " " << l.z << " " << l.objType << " " << l.behaveType << std::endl;
     }
+ */
 }
 
 void CloudStage::UnloadStageData()

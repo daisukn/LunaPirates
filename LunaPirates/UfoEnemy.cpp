@@ -15,9 +15,10 @@ UfoEnemy::UfoEnemy(Application* a)
     , xSpeed(0.0f)
     , ySpeed(0.0f)
     , zSpeed(0.0f)
+    , shotAngle(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
-    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ufo.lwo"));
+    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/ufo.lwo"));
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
     
@@ -35,7 +36,7 @@ UfoEnemy::UfoEnemy(Application* a)
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_ENEMY);
-    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/ufo.lwo")->GetVertexArray());
+    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/ufo.lwo")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     
@@ -138,12 +139,13 @@ void UfoEnemy::Behavior_0(float deltaTime)
     {
         zSpeed = 0.0f;
         xSpeed = 0.0f;
-        ySpeed = 100.f * deltaTime;
+        ySpeed = 0.0f;//100.f * deltaTime;
         
         int prevCnt = 120;
-        if( (cntLifetime - prevCnt) % 50 == 0)
+        if( (cntLifetime - prevCnt) % 3 == 0)
         {
-            Shot();
+            //ShotCircle();
+            ShotLiner();
         }
     }
     else
@@ -182,7 +184,8 @@ void UfoEnemy::Behavior_1(float deltaTime)
         int prevCnt = 120;
         if( (cntLifetime - prevCnt) % 50 == 0)
         {
-            Shot();
+            //ShotLiner();
+            ShotCircle();
         }
     }
     else
@@ -203,7 +206,24 @@ void UfoEnemy::Behavior_3(float deltaTime)
     
 }
 
-void UfoEnemy::Shot()
+void UfoEnemy::ShotLiner()
+{
+    shotAngle += 30;
+    for(int i = 0; i < MAX_BULLET; i++)
+    {
+        if(!bullets[i]->GetDisp())
+        {
+            auto v = GetPosition();
+            auto a = Math::ToRadians(shotAngle);
+            bullets[i]->Appear(Vector3(v.x + cos(a)*10, v.y + sin(a)*10, v.z), 0);
+            break;
+        }
+    }
+
+}
+
+
+void UfoEnemy::ShotCircle()
 {
     for(int j = 0;  j < 6; j++)
     {
@@ -212,9 +232,10 @@ void UfoEnemy::Shot()
             if(!bullets[i]->GetDisp())
             {
                 bullets[i]->SetAngle((float)j*60);
-                bullets[i]->Appear(GetPosition(), 0);
+                bullets[i]->Appear(GetPosition(), 1);
                 break;
             }
         }
     }
 }
+

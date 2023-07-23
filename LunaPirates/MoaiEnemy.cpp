@@ -10,7 +10,7 @@ MoaiEnemy::MoaiEnemy(Application* a)
     : StageObjectActor(a)
 {
     meshComp = std::make_unique<MeshComponent>(this);
-    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/moai.lwo"));
+    meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/moai.lwo"));
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
 
@@ -22,7 +22,7 @@ MoaiEnemy::MoaiEnemy(Application* a)
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_ENEMY);
-    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/moai.lwo")->GetVertexArray());
+    collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/moai.lwo")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     

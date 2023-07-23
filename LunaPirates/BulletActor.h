@@ -11,9 +11,13 @@ public:
     void UpdateActor(float deltaTime) override;
     void SetAngle(float f) { angle = f; }
     float GetAngle() const { return angle; }
+    void Appear(Vector3 pos, int type) override;
 private:
     std::unique_ptr<class BillboardComponent> flare;
     float angle;
+    float xSpeed;
+    float ySpeed;
+    float zSpeed;
     
     
     // 各行動パターン

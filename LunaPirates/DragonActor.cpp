@@ -16,7 +16,7 @@ DragonActor::DragonActor(Application* app)
 {
     // メッシュ初期化
     meshComp = new SkeletalMeshComponent(this);
-    meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Dragon.fbx"));
+    meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/Dragon.fbx"));
     meshComp->SetAnimID(0, PLAY_CYCLIC);
     
     meshComp->SetToonRender(true, 1.003f);

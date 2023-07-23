@@ -22,7 +22,7 @@ PlaneActor::PlaneActor(Application* app)
  {
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
-     meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/plane.fbx"));
+     meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/plane.fbx"));
      meshComp->SetAnimID(animID, PLAY_CYCLIC);
      meshComp->SetToonRender(true);
      
@@ -40,7 +40,7 @@ PlaneActor::PlaneActor(Application* app)
      // コライダー
      collComp = std::make_unique<ColliderComponent>(this);
      collComp->SetColliderType(C_PLAYER);
-     collComp->GetBoundingVolume()->ComputeBoundingVolume(app->GetRenderer()->GetMesh("Assets/plane.fbx")->GetVertexArray());
+     collComp->GetBoundingVolume()->ComputeBoundingVolume(app->GetRenderer()->GetMesh("Assets/Models/plane.fbx")->GetVertexArray());
      collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 0.5, 1));
      collComp->GetBoundingVolume()->CreateVArray();
      collComp->GetBoundingVolume()->SetVisible(true);

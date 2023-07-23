@@ -19,6 +19,7 @@ private:
     float xSpeed;
     float ySpeed;
     float zSpeed;
+    float shotAngle;
     
     std::unique_ptr<class ExplosionActor> explosion;
     std::vector<std::unique_ptr<class BulletActor>> bullets;
@@ -33,6 +34,7 @@ private:
     typedef void (UfoEnemy::*Behavior)(float deltaTime);
     std::vector<Behavior> BehaviorTable;
     
-    void Shot();
+    void ShotCircle();
+    void ShotLiner();
 };
 
