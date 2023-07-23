@@ -98,23 +98,8 @@
 		7EA399082A65582F00856DB1 /* moon_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon_texture.jpg; sourceTree = "<group>"; };
 		7EA399092A65582F00856DB1 /* dragon diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dragon diffuse.png"; sourceTree = "<group>"; };
 		7EA3990A2A65582F00856DB1 /* MoaiHead.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MoaiHead.jpg; sourceTree = "<group>"; };
-		7EA3990B2A65582F00856DB1 /* plane.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = plane.fbx; sourceTree = "<group>"; };
-		7EA3990C2A65582F00856DB1 /* ship.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = ship.fbx; sourceTree = "<group>"; };
-		7EA3990E2A65582F00856DB1 /* title.lwo */ = {isa = PBXFileReference; lastKnownFileType = file; path = title.lwo; sourceTree = "<group>"; };
-		7EA3990F2A65582F00856DB1 /* moon_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon_texture.jpg; sourceTree = "<group>"; };
-		7EA399102A65582F00856DB1 /* ufo.lwo */ = {isa = PBXFileReference; lastKnownFileType = file; path = ufo.lwo; sourceTree = "<group>"; };
-		7EA399112A65582F00856DB1 /* sky.lwo */ = {isa = PBXFileReference; lastKnownFileType = file; path = sky.lwo; sourceTree = "<group>"; };
-		7EA399122A65582F00856DB1 /* 12.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = 12.fbx; sourceTree = "<group>"; };
-		7EA399132A65582F00856DB1 /* ship_1.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = ship_1.fbx; sourceTree = "<group>"; };
 		7EA399142A65582F00856DB1 /* BoundingVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BoundingVolume.png; sourceTree = "<group>"; };
-		7EA399152A65582F00856DB1 /* ship_2.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = ship_2.fbx; sourceTree = "<group>"; };
 		7EA399162A65582F00856DB1 /* black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black.png; sourceTree = "<group>"; };
-		7EA399172A65582F00856DB1 /* sky_dome.lwo */ = {isa = PBXFileReference; lastKnownFileType = file; path = sky_dome.lwo; sourceTree = "<group>"; };
-		7EA399182A65582F00856DB1 /* dragon.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = dragon.fbx; sourceTree = "<group>"; };
-		7EA399192A65582F00856DB1 /* moai.lwo */ = {isa = PBXFileReference; lastKnownFileType = file; path = moai.lwo; sourceTree = "<group>"; };
-		7EA3991A2A65582F00856DB1 /* laser.lwo */ = {isa = PBXFileReference; lastKnownFileType = file; path = laser.lwo; sourceTree = "<group>"; };
-		7EA3991C2A65582F00856DB1 /* plane.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = plane.fbx; sourceTree = "<group>"; };
-		7EA3991D2A65582F00856DB1 /* plane2.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = plane2.fbx; sourceTree = "<group>"; };
 		7EA3991E2A65582F00856DB1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7EA3991F2A65582F00856DB1 /* MeshComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshComponent.cpp; sourceTree = "<group>"; };
 		7EA399202A65582F00856DB1 /* BoundingVolumeComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingVolumeComponent.cpp; sourceTree = "<group>"; };
@@ -277,21 +262,8 @@
 			children = (
 				7EA398F52A65582F00856DB1 /* Textures */,
 				7EA3990A2A65582F00856DB1 /* MoaiHead.jpg */,
-				7EA3990B2A65582F00856DB1 /* plane.fbx */,
-				7EA3990C2A65582F00856DB1 /* ship.fbx */,
-				7EA3990D2A65582F00856DB1 /* title */,
-				7EA399102A65582F00856DB1 /* ufo.lwo */,
-				7EA399112A65582F00856DB1 /* sky.lwo */,
-				7EA399122A65582F00856DB1 /* 12.fbx */,
-				7EA399132A65582F00856DB1 /* ship_1.fbx */,
 				7EA399142A65582F00856DB1 /* BoundingVolume.png */,
-				7EA399152A65582F00856DB1 /* ship_2.fbx */,
 				7EA399162A65582F00856DB1 /* black.png */,
-				7EA399172A65582F00856DB1 /* sky_dome.lwo */,
-				7EA399182A65582F00856DB1 /* dragon.fbx */,
-				7EA399192A65582F00856DB1 /* moai.lwo */,
-				7EA3991A2A65582F00856DB1 /* laser.lwo */,
-				7EA3991B2A65582F00856DB1 /* backup */,
 				7EA3991E2A65582F00856DB1 /* Default.png */,
 			);
 			path = Assets;
@@ -327,24 +299,6 @@
 				7EA399042A65582F00856DB1 /* ufoのコピー.png */,
 				7EA399052A65582F00856DB1 /* dragon diffuseのコピー.png */,
 				7EA399062A65582F00856DB1 /* Material.002_baseColor.png */,
-			);
-			path = backup;
-			sourceTree = "<group>";
-		};
-		7EA3990D2A65582F00856DB1 /* title */ = {
-			isa = PBXGroup;
-			children = (
-				7EA3990E2A65582F00856DB1 /* title.lwo */,
-				7EA3990F2A65582F00856DB1 /* moon_texture.jpg */,
-			);
-			path = title;
-			sourceTree = "<group>";
-		};
-		7EA3991B2A65582F00856DB1 /* backup */ = {
-			isa = PBXGroup;
-			children = (
-				7EA3991C2A65582F00856DB1 /* plane.fbx */,
-				7EA3991D2A65582F00856DB1 /* plane2.fbx */,
 			);
 			path = backup;
 			sourceTree = "<group>";
