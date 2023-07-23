@@ -15,12 +15,10 @@ UfoEnemy::UfoEnemy(Application* a)
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/ufo.lwo"));
     meshComp->SetVisible(false);
     meshComp->SetToonRender(true, 1.04f);
-
+    
     
     // 爆発
     explosion = std::make_unique<ExplosionActor>(a);
-
-
     
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
@@ -29,12 +27,25 @@ UfoEnemy::UfoEnemy(Application* a)
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     
+    // 関数テーブル初期化
+    BehaviorTable.push_back(&UfoEnemy::Behavior_0);
+    BehaviorTable.push_back(&UfoEnemy::Behavior_1);
+    BehaviorTable.push_back(&UfoEnemy::Behavior_2);
+    BehaviorTable.push_back(&UfoEnemy::Behavior_3);
 }
 
 void UfoEnemy::UpdateActor(float deltaTime)
 {
+    if (behaveType >= 0 && behaveType < BehaviorTable.size())
+    {
+        (this->*BehaviorTable[behaveType])(deltaTime);
+    }
+}
 
 
+
+void UfoEnemy::Behavior_0(float deltaTime)
+{
     if(!isDisp) return;
 
     angY += 180 * deltaTime;
@@ -90,4 +101,19 @@ void UfoEnemy::UpdateActor(float deltaTime)
     }
         
  
+}
+
+void UfoEnemy::Behavior_1(float deltaTime)
+{
+    
+}
+
+void UfoEnemy::Behavior_2(float deltaTime)
+{
+    
+}
+
+void UfoEnemy::Behavior_3(float deltaTime)
+{
+    
 }

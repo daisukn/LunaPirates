@@ -33,6 +33,15 @@ MoaiEnemy::MoaiEnemy(Application* a)
         bullet.push_back(std::make_unique<BulletActor>(a));
     }
     
+    
+    // 関数テーブル初期化
+    BehaviorTable.push_back(&MoaiEnemy::Behavior_0);
+    BehaviorTable.push_back(&MoaiEnemy::Behavior_1);
+    BehaviorTable.push_back(&MoaiEnemy::Behavior_2);
+    BehaviorTable.push_back(&MoaiEnemy::Behavior_3);
+
+    
+    
 }
 
 MoaiEnemy::~MoaiEnemy()
@@ -42,7 +51,15 @@ MoaiEnemy::~MoaiEnemy()
 
 void MoaiEnemy::UpdateActor(float deltaTime)
 {
+    if (behaveType >= 0 && behaveType < BehaviorTable.size())
+    {
+        (this->*BehaviorTable[behaveType])(deltaTime);
+    }
+}
 
+
+void MoaiEnemy::Behavior_0(float deltaTime)
+{
     if(!isDisp) return;
  
     if(state == StateNormal)
@@ -110,4 +127,20 @@ void MoaiEnemy::UpdateActor(float deltaTime)
         }
     }
         
+}
+
+
+void MoaiEnemy::Behavior_1(float deltaTime)
+{
+    
+}
+
+void MoaiEnemy::Behavior_2(float deltaTime)
+{
+    
+}
+
+void MoaiEnemy::Behavior_3(float deltaTime)
+{
+    
 }
