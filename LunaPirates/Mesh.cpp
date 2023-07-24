@@ -87,17 +87,17 @@ void Mesh::SetAnimID(int id, PlayMode m)
 }
 
 // アニメーション時間の反映
-void Mesh::BoneTransform(float deltaTime, std::vector<Matrix4> &Transforms)
+void Mesh::BoneTransform(float deltaTime, std::vector<Matrix4> &transforms)
 {
     
     playTime += deltaTime;
-    float TicksPerSecond = (float)(pScene->mAnimations[animID]->mTicksPerSecond != 0 ? pScene->mAnimations[animID]->mTicksPerSecond : 25.0f);
-    float TimeInTicks = playTime * TicksPerSecond;
+    float ticksPerSecond = (float)(pScene->mAnimations[animID]->mTicksPerSecond != 0 ? pScene->mAnimations[animID]->mTicksPerSecond : 25.0f);
+    float timeInTicks = playTime * ticksPerSecond;
 
 
     if (mode == PLAY_ONCE)
     {
-        if (TimeInTicks > durations[animID])
+        if (timeInTicks > durations[animID])
         {
             // 再生が終わっている場合は、最後のポーズに固定
             playTime = durations[animID];
@@ -109,79 +109,79 @@ void Mesh::BoneTransform(float deltaTime, std::vector<Matrix4> &Transforms)
     
 
     
-    float AnimationTime = fmod(TimeInTicks, (float)pScene->mAnimations[animID]->mDuration);
+    float animationTime = fmod(timeInTicks, (float)pScene->mAnimations[animID]->mDuration);
     
-    ReadNodeHeirarchy(AnimationTime, pScene->mRootNode, identity);
+    ReadNodeHeirarchy(animationTime, pScene->mRootNode, identity);
 
-    Transforms.resize(numBones);
+    transforms.resize(numBones);
 
     for (unsigned int i = 0; i < numBones; i++)
     {
-         Transforms[i] = boneInfo[i].FinalTransformation;
+         transforms[i] = boneInfo[i].FinalTransformation;
     }
 }
 
 // 階層を辿ってノードの変換行列を得る
-void Mesh::ReadNodeHeirarchy(float AnimationTime, const aiNode* pNode, const Matrix4& ParentTransform)
+void Mesh::ReadNodeHeirarchy(float animationTime, const aiNode* pNode, const Matrix4& parentTransform)
 {
-    std::string NodeName(pNode->mName.data);
+    std::string nodeName(pNode->mName.data);
 
     
     const aiAnimation* pAnimation = pScene->mAnimations[animID];
     
         
-    Matrix4 NodeTransformation;
-    MatrixAi2Gl(NodeTransformation, pNode->mTransformation);
+    Matrix4 nodeTransformation;
+    MatrixAi2Gl(nodeTransformation, pNode->mTransformation);
      
-    const aiNodeAnim* pNodeAnim = FindNodeAnim(pAnimation, NodeName);
+    const aiNodeAnim* pNodeAnim = FindNodeAnim(pAnimation, nodeName);
     
     if (pNodeAnim)
     {
         // スケーリング
-        Vector3 Scaling;
-        CalcInterpolatedScaling(Scaling, AnimationTime, pNodeAnim);
-        Matrix4 ScalingM = Matrix4::CreateScale(Scaling);
+        Vector3 scaling;
+        CalcInterpolatedScaling(scaling, animationTime, pNodeAnim);
+        Matrix4 scalingM = Matrix4::CreateScale(scaling);
 
         // 回転マトリックス
-        Quaternion RotationQ;
-        CalcInterpolatedRotation(RotationQ, AnimationTime, pNodeAnim);
-        Matrix4 RotationM = Matrix4::CreateFromQuaternion(RotationQ);
+        Quaternion rotationQ;
+        CalcInterpolatedRotation(rotationQ, animationTime, pNodeAnim);
+        Matrix4 rotationM = Matrix4::CreateFromQuaternion(rotationQ);
     
         // 移動マトリックス
-        Vector3 Translation;
-        CalcInterpolatedPosition(Translation, AnimationTime, pNodeAnim);
-        Matrix4 TranslationM = Matrix4::CreateTranslation(Translation);
+        Vector3 translation;
+        CalcInterpolatedPosition(translation, animationTime, pNodeAnim);
+        Matrix4 translationM = Matrix4::CreateTranslation(translation);
 
         // ローカルマトリックスを生成
-        NodeTransformation =  RotationM * TranslationM * ScalingM;
+        nodeTransformation =  rotationM * translationM * scalingM;
 
     }
 
     
     
     // グローバルマトリックスを生成
-    Matrix4 GlobalTransformation = NodeTransformation * ParentTransform * GlobalInverseTransform;
+    Matrix4 globalTransformation = nodeTransformation * parentTransform * globalInverseTransform;
     
-    if (boneMapping.find(NodeName) != boneMapping.end())
+    if (boneMapping.find(nodeName) != boneMapping.end())
     {
-        unsigned int BoneIndex = boneMapping[NodeName];
-        boneInfo[BoneIndex].FinalTransformation =  boneInfo[BoneIndex].BoneOffset * GlobalTransformation;
+        unsigned int boneIndex = boneMapping[nodeName];
+        boneInfo[boneIndex].FinalTransformation =  boneInfo[boneIndex].BoneOffset * globalTransformation;
     }
 
     for (unsigned int i = 0 ; i < pNode->mNumChildren ; i++)
     {
-        ReadNodeHeirarchy(AnimationTime, pNode->mChildren[i], GlobalTransformation);
+        ReadNodeHeirarchy(animationTime, pNode->mChildren[i], globalTransformation);
     }
 }
 
 // アニメーションデータを取得
-const aiNodeAnim* Mesh::FindNodeAnim(const aiAnimation* pAnimation, const std::string NodeName)
+const aiNodeAnim* Mesh::FindNodeAnim(const aiAnimation* pAnimation, const std::string nodeName)
 {
     for (unsigned int i = 0 ; i < pAnimation->mNumChannels ; i++)
     {
         const aiNodeAnim* pNodeAnim = pAnimation->mChannels[i];
         
-        if (std::string(pNodeAnim->mNodeName.data) == NodeName)
+        if (std::string(pNodeAnim->mNodeName.data) == nodeName)
         {
             return pNodeAnim;
         }
@@ -190,36 +190,36 @@ const aiNodeAnim* Mesh::FindNodeAnim(const aiAnimation* pAnimation, const std::s
 }
 
 
-void Mesh::CalcInterpolatedPosition(Vector3& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+void Mesh::CalcInterpolatedPosition(Vector3& outVec, float animationTime, const aiNodeAnim* pNodeAnim)
 {
     if (pNodeAnim->mNumPositionKeys == 1)
     {
-        Out.Set(pNodeAnim->mPositionKeys[0].mValue.x,
+        outVec.Set(pNodeAnim->mPositionKeys[0].mValue.x,
                 pNodeAnim->mPositionKeys[0].mValue.y,
                 pNodeAnim->mPositionKeys[0].mValue.z);
         return;
     }
             
-    unsigned int PositionIndex = FindPosition(AnimationTime, pNodeAnim);
+    unsigned int PositionIndex = FindPosition(animationTime, pNodeAnim);
     unsigned int NextPositionIndex = (PositionIndex + 1);
     assert(NextPositionIndex < pNodeAnim->mNumPositionKeys);
-    float DeltaTime = (float)(pNodeAnim->mPositionKeys[NextPositionIndex].mTime - pNodeAnim->mPositionKeys[PositionIndex].mTime);
-    float Factor = (AnimationTime - (float)pNodeAnim->mPositionKeys[PositionIndex].mTime) / DeltaTime;
-    assert(Factor >= 0.0f && Factor <= 1.0f);
+    float deltaTime = (float)(pNodeAnim->mPositionKeys[NextPositionIndex].mTime - pNodeAnim->mPositionKeys[PositionIndex].mTime);
+    float factor = (animationTime - (float)pNodeAnim->mPositionKeys[PositionIndex].mTime) / deltaTime;
+    assert(factor >= 0.0f && factor <= 1.0f);
 
-    const aiVector3D& Start = pNodeAnim->mPositionKeys[PositionIndex].mValue;
-    const aiVector3D& End = pNodeAnim->mPositionKeys[NextPositionIndex].mValue;
-    aiVector3D Delta = End - Start;
-    aiVector3D tr = Start + Factor * Delta;
-    Out.Set(tr.x, tr.y, tr.z);
+    const aiVector3D& start = pNodeAnim->mPositionKeys[PositionIndex].mValue;
+    const aiVector3D& end = pNodeAnim->mPositionKeys[NextPositionIndex].mValue;
+    aiVector3D delta = end - start;
+    aiVector3D tr = start + factor * delta;
+    outVec.Set(tr.x, tr.y, tr.z);
 }
 
 
-void Mesh::CalcInterpolatedRotation(Quaternion& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+void Mesh::CalcInterpolatedRotation(Quaternion& outVec, float AnimationTime, const aiNodeAnim* pNodeAnim)
 {
     if (pNodeAnim->mNumRotationKeys == 1)
     {
-        Out.Set(pNodeAnim->mRotationKeys[0].mValue.x,
+        outVec.Set(pNodeAnim->mRotationKeys[0].mValue.x,
                 pNodeAnim->mRotationKeys[0].mValue.y,
                 pNodeAnim->mRotationKeys[0].mValue.z,
                 pNodeAnim->mRotationKeys[0].mValue.w);
@@ -242,16 +242,16 @@ void Mesh::CalcInterpolatedRotation(Quaternion& Out, float AnimationTime, const 
     aiQuaternion q;
     aiQuaternion::Interpolate(q, StartRotationQ, EndRotationQ, Factor);
     q = q.Normalize();
-    Out.Set(q.x, q.y, q.z, q.w);
+    outVec.Set(q.x, q.y, q.z, q.w);
 
 }
 
 
-void Mesh::CalcInterpolatedScaling(Vector3& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+void Mesh::CalcInterpolatedScaling(Vector3& outVec, float AnimationTime, const aiNodeAnim* pNodeAnim)
 {
     if (pNodeAnim->mNumScalingKeys == 1)
     {
-        Out.Set(pNodeAnim->mScalingKeys[0].mValue.x,
+        outVec.Set(pNodeAnim->mScalingKeys[0].mValue.x,
                 pNodeAnim->mScalingKeys[0].mValue.y,
                 pNodeAnim->mScalingKeys[0].mValue.z);
         return;
@@ -267,7 +267,7 @@ void Mesh::CalcInterpolatedScaling(Vector3& Out, float AnimationTime, const aiNo
     const aiVector3D& End   = pNodeAnim->mScalingKeys[NextScalingIndex].mValue;
     aiVector3D Delta = End - Start;
     aiVector3D sc = Start + Factor * Delta;
-    Out.Set(sc.x, sc.y, sc.z);
+    outVec.Set(sc.x, sc.y, sc.z);
 }
 
 
@@ -287,13 +287,13 @@ unsigned int Mesh::FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim
 }
 
 
-unsigned int Mesh::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim)
+unsigned int Mesh::FindRotation(float animationTime, const aiNodeAnim* pNodeAnim)
 {
     assert(pNodeAnim->mNumRotationKeys > 0);
 
     for (unsigned int i = 0; i < pNodeAnim->mNumRotationKeys - 1; i++)
     {
-        if (AnimationTime < (float)pNodeAnim->mRotationKeys[i + 1].mTime)
+        if (animationTime < (float)pNodeAnim->mRotationKeys[i + 1].mTime)
         {
             return i;
         }
@@ -305,13 +305,13 @@ unsigned int Mesh::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim
 }
 
 
-unsigned int Mesh::FindScaling(float AnimationTime, const aiNodeAnim* pNodeAnim)
+unsigned int Mesh::FindScaling(float animationTime, const aiNodeAnim* pNodeAnim)
 {
     assert(pNodeAnim->mNumScalingKeys > 0);
     
     for (unsigned int i = 0; i < pNodeAnim->mNumScalingKeys - 1; i++)
     {
-        if (AnimationTime < (float)pNodeAnim->mScalingKeys[i + 1].mTime)
+        if (animationTime < (float)pNodeAnim->mScalingKeys[i + 1].mTime)
         {
             return i;
         }
@@ -518,7 +518,7 @@ bool Mesh::Load(const std::string& fileName, class Renderer* r)
     }
 
 
-    MatrixAi2Gl(GlobalInverseTransform, pScene->mRootNode->mTransformation);
+    MatrixAi2Gl(globalInverseTransform, pScene->mRootNode->mTransformation);
 //    GlobalInverseTransform.Invert();
     
 

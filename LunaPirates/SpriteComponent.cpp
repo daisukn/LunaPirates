@@ -8,10 +8,10 @@
 #include <GL/glew.h>
 
 // コンストラクタ
-SpriteComponent::SpriteComponent(Actor* actor, int drawOrder, bool isBG)
-    : Component(actor)
+SpriteComponent::SpriteComponent(Actor* a, int order, bool isBG)
+    : Component(a)
     , texture(nullptr)
-    , drawOrder(drawOrder)
+    , drawOrder(order)
     , texWidth(0)
     , texHeight(0)
     , isBackGround(isBG)

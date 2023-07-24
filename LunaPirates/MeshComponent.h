@@ -4,11 +4,13 @@
 #include "Animation.h"
 //#include <cstddef>
 
+
+
 // Meshを管理するComponent（Rendererから呼ばれる）
 class MeshComponent : public Component
 {
 public:
-    MeshComponent(class Actor* owner,  bool isSkeletal = false, bool isBG = false);
+    MeshComponent(class Actor* a, bool isSkeletal = false, bool isBG = false);
     virtual ~MeshComponent();
         
     // 描画 override

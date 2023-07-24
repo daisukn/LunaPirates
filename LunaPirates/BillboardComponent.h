@@ -6,7 +6,7 @@
 class BillboardComponent : public Component
 {
 public:
-    BillboardComponent(class Actor* a, int drawOrder = 100);
+    BillboardComponent(class Actor* a, int order = 100);
     ~BillboardComponent();
     
     // Rendererから呼ばれる

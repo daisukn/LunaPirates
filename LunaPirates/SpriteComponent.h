@@ -6,7 +6,7 @@
 class SpriteComponent : public Component
 {
 public:
-    SpriteComponent(class Actor* owner, int drawOrder = 100, bool isBG = false);
+    SpriteComponent(class Actor* a, int order = 100, bool isBG = false);
     ~SpriteComponent();
 
     virtual void Draw(class Shader* shader);

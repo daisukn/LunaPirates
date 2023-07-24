@@ -56,9 +56,9 @@ private:
     // Bone情報読み込み
     void LoadBones(const aiMesh* m, std::vector<struct VertexBoneData>& bones);
     // Bone階層を辿る
-    void ReadNodeHeirarchy(float AnimationTime, const aiNode* pNode, const Matrix4& ParentTransform);
+    void ReadNodeHeirarchy(float animationTime, const aiNode* pNode, const Matrix4& parentTransform);
     // アニメーション情報を取得
-    const aiNodeAnim* FindNodeAnim (const aiAnimation* pAnimation, const std::string NodeName);
+    const aiNodeAnim* FindNodeAnim (const aiAnimation* pAnimation, const std::string nodeName);
 
     // モーションID
     unsigned int animID;
@@ -77,13 +77,13 @@ private:
     
 
     // フレームごとのBone姿勢を計算
-    void CalcInterpolatedScaling (Vector3& Out, float AnimationTime, const aiNodeAnim* pNodeAnim);
-    void CalcInterpolatedRotation (Quaternion& Out, float AnimationTime, const aiNodeAnim* pNodeAnim);
-    void CalcInterpolatedPosition (Vector3& Out, float AnimationTime, const aiNodeAnim* pNodeAnim);
+    void CalcInterpolatedScaling (Vector3& outVec, float animationTime, const aiNodeAnim* pNodeAnim);
+    void CalcInterpolatedRotation (Quaternion& outVec, float animationTime, const aiNodeAnim* pNodeAnim);
+    void CalcInterpolatedPosition (Vector3& outV, float animationTime, const aiNodeAnim* pNodeAnim);
     
-    unsigned int FindScaling(float AnimationTime, const aiNodeAnim* pNodeAnim);
-    unsigned int FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim);
-    unsigned int FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim);
+    unsigned int FindScaling(float animationTime, const aiNodeAnim* pNodeAnim);
+    unsigned int FindRotation(float animationTime, const aiNodeAnim* pNodeAnim);
+    unsigned int FindPosition(float animationTime, const aiNodeAnim* pNodeAnim);
 
 
     // Bone情報格納用
@@ -93,7 +93,7 @@ private:
     // BoneとWeightを格納
     std::vector<struct BoneInfo> boneInfo;
     // 逆行列を記憶
-    Matrix4 GlobalInverseTransform;
+    Matrix4 globalInverseTransform;
 
     
     // TextureのVector
