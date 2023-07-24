@@ -87,7 +87,7 @@ void Mesh::SetAnimID(int id, PlayMode m)
 }
 
 // アニメーション時間の反映
-void Mesh::BoneTransform(float deltaTime, std::vector<Matrix4> &transforms)
+void Mesh::BoneTransform(float deltaTime, std::vector<Matrix4>& transforms)
 {
     
     playTime += deltaTime;
@@ -168,7 +168,7 @@ void Mesh::ReadNodeHeirarchy(float animationTime, const aiNode* pNode, const Mat
         boneInfo[boneIndex].FinalTransformation =  boneInfo[boneIndex].BoneOffset * globalTransformation;
     }
 
-    for (unsigned int i = 0 ; i < pNode->mNumChildren ; i++)
+    for (unsigned int i = 0; i < pNode->mNumChildren; i++)
     {
         ReadNodeHeirarchy(animationTime, pNode->mChildren[i], globalTransformation);
     }
@@ -200,22 +200,23 @@ void Mesh::CalcInterpolatedPosition(Vector3& outVec, float animationTime, const 
         return;
     }
             
-    unsigned int PositionIndex = FindPosition(animationTime, pNodeAnim);
-    unsigned int NextPositionIndex = (PositionIndex + 1);
-    assert(NextPositionIndex < pNodeAnim->mNumPositionKeys);
-    float deltaTime = (float)(pNodeAnim->mPositionKeys[NextPositionIndex].mTime - pNodeAnim->mPositionKeys[PositionIndex].mTime);
-    float factor = (animationTime - (float)pNodeAnim->mPositionKeys[PositionIndex].mTime) / deltaTime;
+    unsigned int positionIndex = FindPosition(animationTime, pNodeAnim);
+    unsigned int nextPositionIndex = (positionIndex + 1);
+    assert(nextPositionIndex < pNodeAnim->mNumPositionKeys);
+    
+    float deltaTime = (float)(pNodeAnim->mPositionKeys[nextPositionIndex].mTime - pNodeAnim->mPositionKeys[positionIndex].mTime);
+    float factor = (animationTime - (float)pNodeAnim->mPositionKeys[positionIndex].mTime) / deltaTime;
     assert(factor >= 0.0f && factor <= 1.0f);
 
-    const aiVector3D& start = pNodeAnim->mPositionKeys[PositionIndex].mValue;
-    const aiVector3D& end = pNodeAnim->mPositionKeys[NextPositionIndex].mValue;
+    const aiVector3D& start = pNodeAnim->mPositionKeys[positionIndex].mValue;
+    const aiVector3D& end = pNodeAnim->mPositionKeys[nextPositionIndex].mValue;
     aiVector3D delta = end - start;
     aiVector3D tr = start + factor * delta;
     outVec.Set(tr.x, tr.y, tr.z);
 }
 
 
-void Mesh::CalcInterpolatedRotation(Quaternion& outVec, float AnimationTime, const aiNodeAnim* pNodeAnim)
+void Mesh::CalcInterpolatedRotation(Quaternion& outVec, float animationTime, const aiNodeAnim* pNodeAnim)
 {
     if (pNodeAnim->mNumRotationKeys == 1)
     {
@@ -226,28 +227,28 @@ void Mesh::CalcInterpolatedRotation(Quaternion& outVec, float AnimationTime, con
         return;
     }
     
-    unsigned int RotationIndex = FindRotation(AnimationTime, pNodeAnim);
-    unsigned int NextRotationIndex = (RotationIndex + 1);
-    assert(NextRotationIndex < pNodeAnim->mNumRotationKeys);
-    float DeltaTime = (float)(pNodeAnim->mRotationKeys[NextRotationIndex].mTime - pNodeAnim->mRotationKeys[RotationIndex].mTime);
-    float Factor = (AnimationTime - (float)pNodeAnim->mRotationKeys[RotationIndex].mTime) / DeltaTime;
-    assert(Factor >= 0.0f && Factor <= 1.0f);
+    unsigned int rotationIndex = FindRotation(animationTime, pNodeAnim);
+    unsigned int nextRotationIndex = (rotationIndex + 1);
+    assert(nextRotationIndex < pNodeAnim->mNumRotationKeys);
     
-    
-    const aiQuaternion& StartRotationQ = pNodeAnim->mRotationKeys[RotationIndex].mValue;
-    const aiQuaternion& EndRotationQ   = pNodeAnim->mRotationKeys[NextRotationIndex].mValue;
+    float deltaTime = (float)(pNodeAnim->mRotationKeys[nextRotationIndex].mTime - pNodeAnim->mRotationKeys[rotationIndex].mTime);
+    float factor = (animationTime - (float)pNodeAnim->mRotationKeys[rotationIndex].mTime) / deltaTime;
+    assert(factor >= 0.0f && factor <= 1.0f);
+
+    const aiQuaternion& startRotationQ = pNodeAnim->mRotationKeys[rotationIndex].mValue;
+    const aiQuaternion& endRotationQ   = pNodeAnim->mRotationKeys[nextRotationIndex].mValue;
 
     
     
     aiQuaternion q;
-    aiQuaternion::Interpolate(q, StartRotationQ, EndRotationQ, Factor);
+    aiQuaternion::Interpolate(q, startRotationQ, endRotationQ, factor);
     q = q.Normalize();
     outVec.Set(q.x, q.y, q.z, q.w);
 
 }
 
 
-void Mesh::CalcInterpolatedScaling(Vector3& outVec, float AnimationTime, const aiNodeAnim* pNodeAnim)
+void Mesh::CalcInterpolatedScaling(Vector3& outVec, float animationTime, const aiNodeAnim* pNodeAnim)
 {
     if (pNodeAnim->mNumScalingKeys == 1)
     {
@@ -257,25 +258,28 @@ void Mesh::CalcInterpolatedScaling(Vector3& outVec, float AnimationTime, const a
         return;
     }
 
-    unsigned int ScalingIndex = FindScaling(AnimationTime, pNodeAnim);
-    unsigned int NextScalingIndex = (ScalingIndex + 1);
-    assert(NextScalingIndex < pNodeAnim->mNumScalingKeys);
-    float DeltaTime = (float)(pNodeAnim->mScalingKeys[NextScalingIndex].mTime - pNodeAnim->mScalingKeys[ScalingIndex].mTime);
-    float Factor = (AnimationTime - (float)pNodeAnim->mScalingKeys[ScalingIndex].mTime) / DeltaTime;
-    assert(Factor >= 0.0f && Factor <= 1.0f);
-    const aiVector3D& Start = pNodeAnim->mScalingKeys[ScalingIndex].mValue;
-    const aiVector3D& End   = pNodeAnim->mScalingKeys[NextScalingIndex].mValue;
-    aiVector3D Delta = End - Start;
-    aiVector3D sc = Start + Factor * Delta;
+    unsigned int scalingIndex = FindScaling(animationTime, pNodeAnim);
+    unsigned int nextScalingIndex = (scalingIndex + 1);
+    
+    assert(nextScalingIndex < pNodeAnim->mNumScalingKeys);
+    float deltaTime = (float)(pNodeAnim->mScalingKeys[nextScalingIndex].mTime - pNodeAnim->mScalingKeys[scalingIndex].mTime);
+    float factor = (animationTime - (float)pNodeAnim->mScalingKeys[scalingIndex].mTime) / deltaTime;
+    assert(factor >= 0.0f && factor <= 1.0f);
+    
+    const aiVector3D& start = pNodeAnim->mScalingKeys[scalingIndex].mValue;
+    const aiVector3D& end   = pNodeAnim->mScalingKeys[nextScalingIndex].mValue;
+    
+    aiVector3D delta = end - start;
+    aiVector3D sc = start + factor * delta;
     outVec.Set(sc.x, sc.y, sc.z);
 }
 
 
-unsigned int Mesh::FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim)
+unsigned int Mesh::FindPosition(float animationTime, const aiNodeAnim* pNodeAnim)
 {
     for (unsigned int i = 0; i < pNodeAnim->mNumPositionKeys - 1; i++)
     {
-        if (AnimationTime < (float)pNodeAnim->mPositionKeys[i + 1].mTime)
+        if (animationTime < (float)pNodeAnim->mPositionKeys[i + 1].mTime)
         {
             return i;
         }
