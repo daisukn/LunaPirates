@@ -21,6 +21,7 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, bool isBG)
     , isToon(false)
     , contourFactor(1.1014f)
     , isBlendAdd(false)
+    , isBackGround(isBG)
 {
     if(isBG)
     {
@@ -38,8 +39,15 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, bool isBG)
 // デストラクタ
 MeshComponent::~MeshComponent()
 {
-    // Rendererから削除
-	owner->GetApp()->GetRenderer()->RemoveMeshComp(this);
+    if(isBackGround)
+    {
+        owner->GetApp()->GetRenderer()->RemoveBackGroudMeshComp(this);
+    }
+    else
+    {
+        // Rendererから削除
+        owner->GetApp()->GetRenderer()->RemoveMeshComp(this);
+    }
 }
 
 // 描画

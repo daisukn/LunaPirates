@@ -40,6 +40,7 @@ protected:
     
     bool isVisible;
     bool isSkeletal;
+    bool isBackGround;
     
     // 輪郭強調
     bool isToon;

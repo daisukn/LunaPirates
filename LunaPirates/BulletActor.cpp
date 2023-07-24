@@ -111,8 +111,3 @@ void BulletActor::Behavior_3(float deltaTime)
 {
 }
 
-void BulletActor::Appear(Vector3 pos, int type)
-{
-    StageObjectActor::Appear(pos, type);
-    behaveType = type;
-}

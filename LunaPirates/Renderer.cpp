@@ -113,15 +113,23 @@ void Renderer::Draw()
 
     
     /* 描画処理 メッシュ、スプライト*/
-        
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    
     // アルファブレンディングを有効化
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     
+    glDisable(GL_DEPTH_TEST);
     
+    // 背景スプライト
+    spriteShader->SetActive();
+    for (auto sprite : bgSpriteComps)
+    {
+        sprite->Draw(spriteShader.get());
+    }
+    
+    
+    
+    glEnable(GL_DEPTH_TEST);
     // 背景描画
     backGroundShader->SetActive();
     backGroundShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
@@ -389,6 +397,37 @@ void Renderer::RemoveSprite(SpriteComponent* sprite)
 
 }
 
+// 背景スプライトコンポーネントの登録
+void Renderer::AddBackGroundSprite(SpriteComponent* sprite)
+{
+    // DrawOrderを探して 自分より優先度の高いものの次を見つける
+    int myDrawOrder = sprite->GetDrawOrder();
+    auto iter = bgSpriteComps.begin();
+    for (;iter != bgSpriteComps.end(); ++iter)
+    {
+        if (myDrawOrder < (*iter)->GetDrawOrder())
+        {
+            break;
+        }
+    }
+
+    // 見つけた箇所に挿入
+    bgSpriteComps.insert(iter, sprite);
+}
+
+// スプライト削除
+void Renderer::RemoveBackGroundSprite(SpriteComponent* sprite)
+{
+    auto iter = std::find(bgSpriteComps.begin(), bgSpriteComps.end(), sprite);
+    if (iter != bgSpriteComps.end())
+    { // 要素が見つかった場合のみ削除
+        bgSpriteComps.erase(iter);
+    }
+
+}
+
+
+
 // テクスチャ取り出し
 Texture* Renderer::GetTexture(const std::string &fileName){
  
@@ -479,12 +518,23 @@ void Renderer::AddMeshComp(MeshComponent* mesh)
 // メッシュコンポーネント削除
 void Renderer::RemoveMeshComp(MeshComponent* mesh)
 {
-    auto iter = std::find(meshComps.begin(), meshComps.end(), mesh);
-    if (iter != meshComps.end())
-    { // 要素が見つかった場合のみ削除
-        meshComps.erase(iter);
+    if (mesh->GetIsSkeletal())
+    {
+        SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(mesh);
+        auto iter = std::find(skeletalMeshes.begin(), skeletalMeshes.end(), sk);
+        if (iter != skeletalMeshes.end())
+        { // 要素が見つかった場合のみ削除
+            skeletalMeshes.erase(iter);
+        }
     }
- 
+    else
+    {
+        auto iter = std::find(meshComps.begin(), meshComps.end(), mesh);
+        if (iter != meshComps.end())
+        { // 要素が見つかった場合のみ削除
+            meshComps.erase(iter);
+        }
+    }
 }
 
 // メッシュコンポーネント登録

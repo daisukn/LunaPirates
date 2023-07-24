@@ -50,6 +50,9 @@ public:
     // スプライトコンポーネント登録・削除
     void AddSprite(class SpriteComponent* sprite);
     void RemoveSprite(class SpriteComponent* sprite);
+    // 背景スプライトコンポーネント登録・削除
+    void AddBackGroundSprite(class SpriteComponent* sprite);
+    void RemoveBackGroundSprite(class SpriteComponent* sprite);
     // メッシュコンポーネント登録・削除
     void AddMeshComp(class MeshComponent* mesh);
     void RemoveMeshComp(class MeshComponent* mesh);
@@ -130,6 +133,7 @@ private:
 
     // コンポーネント
     std::vector<class SpriteComponent*> spriteComps;
+    std::vector<class SpriteComponent*> bgSpriteComps;
     std::vector<class MeshComponent*> meshComps;
     std::vector<class MeshComponent*> backGroudComps;
     std::vector<class SkeletalMeshComponent*> skeletalMeshes;

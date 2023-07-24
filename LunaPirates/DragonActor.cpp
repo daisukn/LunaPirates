@@ -15,7 +15,7 @@ DragonActor::DragonActor(Application* app)
     , prevPos(Vector3::Zero)
 {
     // メッシュ初期化
-    meshComp = new SkeletalMeshComponent(this);
+    meshComp = std::make_unique<SkeletalMeshComponent>(this);
     meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/Dragon.fbx"));
     meshComp->SetAnimID(0, PLAY_CYCLIC);
     
@@ -27,11 +27,6 @@ DragonActor::DragonActor(Application* app)
     SetPosition(Vector3(0.0f, 0.0f, 0.0f));
     SetScale(0.10f);
     
-    
-    // 移動コンポーネント
-    moveComp = new MoveComponent(this);
-    
-
 }
     
 

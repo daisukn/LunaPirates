@@ -44,7 +44,7 @@ void CloudStage::LoadStageData()
 
     dragonActor = std::make_unique<DragonActor>(app);
     dragonActor->SetPosition(Vector3(0, 0, 100));
-    dragonActor->SetVisible(false);
+    dragonActor->SetVisible(true);
 
     
     for(int i = 0; i < MAX_CLOUD; i++)

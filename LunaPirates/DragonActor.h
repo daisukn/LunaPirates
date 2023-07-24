@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include <memory>
 
 
 // 飛行機
@@ -20,9 +21,7 @@ private:
     // モーションID
     int animID;
     
-    class SkeletalMeshComponent* meshComp;
-    class MoveComponent* moveComp;
-    
+    std::unique_ptr<class SkeletalMeshComponent> meshComp;
     
     // モーションを適用
     void ApplyMotion();

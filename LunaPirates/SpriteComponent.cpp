@@ -8,21 +8,36 @@
 #include <GL/glew.h>
 
 // コンストラクタ
-SpriteComponent::SpriteComponent(Actor* actor, int drawOrder)
+SpriteComponent::SpriteComponent(Actor* actor, int drawOrder, bool isBG)
     : Component(actor)
     , texture(nullptr)
     , drawOrder(drawOrder)
     , texWidth(0)
     , texHeight(0)
+    , isBackGround(isBG)
 {
-    owner->GetApp()->GetRenderer()->AddSprite(this);
+    if(isBG)
+    {
+        owner->GetApp()->GetRenderer()->AddBackGroundSprite(this);
+    }
+    else
+    {
+        owner->GetApp()->GetRenderer()->AddSprite(this);
+    }
 }
 
 // デストラクタ
 SpriteComponent::~SpriteComponent()
 {
-    // Rendererから削除
-    owner->GetApp()->GetRenderer()->RemoveSprite(this);
+    
+    if(isBackGround)
+    {
+        owner->GetApp()->GetRenderer()->RemoveBackGroundSprite(this);
+    }
+    else
+    {
+        owner->GetApp()->GetRenderer()->RemoveSprite(this);
+    }
 }
 
 // 描画

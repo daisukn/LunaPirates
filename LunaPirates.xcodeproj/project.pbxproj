@@ -78,29 +78,6 @@
 		7EA398F12A65582E00856DB1 /* UfoEnemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UfoEnemy.h; sourceTree = "<group>"; };
 		7EA398F22A65582E00856DB1 /* TitleStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleStage.h; sourceTree = "<group>"; };
 		7EA398F32A65582E00856DB1 /* Stage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stage.h; sourceTree = "<group>"; };
-		7EA398F62A65582F00856DB1 /* MoaiHead.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MoaiHead.jpg; sourceTree = "<group>"; };
-		7EA398F72A65582F00856DB1 /* dragon diffuseのコピー2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dragon diffuseのコピー2.png"; sourceTree = "<group>"; };
-		7EA398F82A65582F00856DB1 /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
-		7EA398F92A65582F00856DB1 /* laser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laser.png; sourceTree = "<group>"; };
-		7EA398FA2A65582F00856DB1 /* cloud_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud_1.png; sourceTree = "<group>"; };
-		7EA398FB2A65582F00856DB1 /* dragon eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dragon eye.png"; sourceTree = "<group>"; };
-		7EA398FC2A65582F00856DB1 /* Scene_-_Root_baseColor.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Scene_-_Root_baseColor.jpeg"; sourceTree = "<group>"; };
-		7EA398FD2A65582F00856DB1 /* blue_sky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blue_sky.jpg; sourceTree = "<group>"; };
-		7EA398FE2A65582F00856DB1 /* ufo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ufo.png; sourceTree = "<group>"; };
-		7EA399002A65582F00856DB1 /* MoaiHead.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MoaiHead.jpg; sourceTree = "<group>"; };
-		7EA399012A65582F00856DB1 /* Scene_-_Root_baseColor.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Scene_-_Root_baseColor.jpeg"; sourceTree = "<group>"; };
-		7EA399022A65582F00856DB1 /* Scene_-_Root_baseColorのコピー.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Scene_-_Root_baseColorのコピー.jpeg"; sourceTree = "<group>"; };
-		7EA399032A65582F00856DB1 /* blue_sky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blue_sky.jpg; sourceTree = "<group>"; };
-		7EA399042A65582F00856DB1 /* ufoのコピー.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ufoのコピー.png"; sourceTree = "<group>"; };
-		7EA399052A65582F00856DB1 /* dragon diffuseのコピー.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dragon diffuseのコピー.png"; sourceTree = "<group>"; };
-		7EA399062A65582F00856DB1 /* Material.002_baseColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Material.002_baseColor.png; sourceTree = "<group>"; };
-		7EA399072A65582F00856DB1 /* Material.002_baseColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Material.002_baseColor.png; sourceTree = "<group>"; };
-		7EA399082A65582F00856DB1 /* moon_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon_texture.jpg; sourceTree = "<group>"; };
-		7EA399092A65582F00856DB1 /* dragon diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dragon diffuse.png"; sourceTree = "<group>"; };
-		7EA3990A2A65582F00856DB1 /* MoaiHead.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MoaiHead.jpg; sourceTree = "<group>"; };
-		7EA399142A65582F00856DB1 /* BoundingVolume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BoundingVolume.png; sourceTree = "<group>"; };
-		7EA399162A65582F00856DB1 /* black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black.png; sourceTree = "<group>"; };
-		7EA3991E2A65582F00856DB1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7EA3991F2A65582F00856DB1 /* MeshComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshComponent.cpp; sourceTree = "<group>"; };
 		7EA399202A65582F00856DB1 /* BoundingVolumeComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingVolumeComponent.cpp; sourceTree = "<group>"; };
 		7EA399212A65582F00856DB1 /* ShipEnemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipEnemy.cpp; sourceTree = "<group>"; };
@@ -251,56 +228,9 @@
 				7EA3998F2A655F1F00856DB1 /* Sys */,
 				7EA399922A655F6A00856DB1 /* Components */,
 				7EA399912A655F4100856DB1 /* Library */,
-				7EA398F42A65582F00856DB1 /* Assets */,
 				7EA399372A65583100856DB1 /* Shaders */,
 			);
 			path = LunaPirates;
-			sourceTree = "<group>";
-		};
-		7EA398F42A65582F00856DB1 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				7EA398F52A65582F00856DB1 /* Textures */,
-				7EA3990A2A65582F00856DB1 /* MoaiHead.jpg */,
-				7EA399142A65582F00856DB1 /* BoundingVolume.png */,
-				7EA399162A65582F00856DB1 /* black.png */,
-				7EA3991E2A65582F00856DB1 /* Default.png */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		7EA398F52A65582F00856DB1 /* Textures */ = {
-			isa = PBXGroup;
-			children = (
-				7EA398F62A65582F00856DB1 /* MoaiHead.jpg */,
-				7EA398F72A65582F00856DB1 /* dragon diffuseのコピー2.png */,
-				7EA398F82A65582F00856DB1 /* ship.png */,
-				7EA398F92A65582F00856DB1 /* laser.png */,
-				7EA398FA2A65582F00856DB1 /* cloud_1.png */,
-				7EA398FB2A65582F00856DB1 /* dragon eye.png */,
-				7EA398FC2A65582F00856DB1 /* Scene_-_Root_baseColor.jpeg */,
-				7EA398FD2A65582F00856DB1 /* blue_sky.jpg */,
-				7EA398FE2A65582F00856DB1 /* ufo.png */,
-				7EA398FF2A65582F00856DB1 /* backup */,
-				7EA399072A65582F00856DB1 /* Material.002_baseColor.png */,
-				7EA399082A65582F00856DB1 /* moon_texture.jpg */,
-				7EA399092A65582F00856DB1 /* dragon diffuse.png */,
-			);
-			path = Textures;
-			sourceTree = "<group>";
-		};
-		7EA398FF2A65582F00856DB1 /* backup */ = {
-			isa = PBXGroup;
-			children = (
-				7EA399002A65582F00856DB1 /* MoaiHead.jpg */,
-				7EA399012A65582F00856DB1 /* Scene_-_Root_baseColor.jpeg */,
-				7EA399022A65582F00856DB1 /* Scene_-_Root_baseColorのコピー.jpeg */,
-				7EA399032A65582F00856DB1 /* blue_sky.jpg */,
-				7EA399042A65582F00856DB1 /* ufoのコピー.png */,
-				7EA399052A65582F00856DB1 /* dragon diffuseのコピー.png */,
-				7EA399062A65582F00856DB1 /* Material.002_baseColor.png */,
-			);
-			path = backup;
 			sourceTree = "<group>";
 		};
 		7EA399372A65583100856DB1 /* Shaders */ = {

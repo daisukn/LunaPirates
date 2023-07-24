@@ -6,7 +6,7 @@
 class SpriteComponent : public Component
 {
 public:
-    SpriteComponent(class Actor* owner, int drawOrder = 100);
+    SpriteComponent(class Actor* owner, int drawOrder = 100, bool isBG = false);
     ~SpriteComponent();
 
     virtual void Draw(class Shader* shader);
@@ -23,6 +23,8 @@ protected:
     int drawOrder;
     int texWidth;
     int texHeight;
+    
+    bool isBackGround;
 
 
 };
