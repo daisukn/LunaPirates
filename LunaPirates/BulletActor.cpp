@@ -15,6 +15,7 @@ BulletActor::BulletActor(Application* a)
     meshComp = std::make_unique<MeshComponent>(this, false, true);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/bullet.lwo"));
     meshComp->SetVisible(false);
+    meshComp->SetBlendAdd(true);
     //meshComp->SetToonRender(true, 1.04f);
     
     SetScale(0.15f);

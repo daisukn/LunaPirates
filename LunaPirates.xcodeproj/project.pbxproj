@@ -236,16 +236,16 @@
 		7EA399372A65583100856DB1 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				7EA399382A65583100856DB1 /* Phong.frag */,
 				7EA399392A65583100856DB1 /* BasicMesh.vert */,
-				7EA3993A2A65583100856DB1 /* Billboard.frag */,
-				7EA3993B2A65583100856DB1 /* Particle.frag */,
-				7EA3993C2A65583100856DB1 /* Sprite.vert */,
-				7EA3993D2A65583100856DB1 /* Billboard.vert */,
 				7EA3993E2A65583100856DB1 /* BasicMesh.frag */,
-				7EA3993F2A65583100856DB1 /* Toon.frag */,
 				7EA399402A65583100856DB1 /* Phong.vert */,
+				7EA399382A65583100856DB1 /* Phong.frag */,
+				7EA3993F2A65583100856DB1 /* Toon.frag */,
 				7EA399412A65583100856DB1 /* Skinned.vert */,
+				7EA3993B2A65583100856DB1 /* Particle.frag */,
+				7EA3993D2A65583100856DB1 /* Billboard.vert */,
+				7EA3993A2A65583100856DB1 /* Billboard.frag */,
+				7EA3993C2A65583100856DB1 /* Sprite.vert */,
 				7EA399422A65583100856DB1 /* Sprite.frag */,
 			);
 			path = Shaders;
