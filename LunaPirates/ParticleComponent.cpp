@@ -24,6 +24,7 @@ ParticleComponent::ParticleComponent(Actor* a, int drawOrder)
     , partSize(0.0f)
     , partMode(P_SPARK)
     , partSpeed(2.0f)
+    , isBlendAdd(false)
 {
     owner->GetApp()->GetRenderer()->AddParticleComp(this);
 }
@@ -42,6 +43,13 @@ void ParticleComponent::Draw(Shader *shader)
     
     if (texture)
     {
+        
+        if (isBlendAdd)
+        {
+            glBlendFunc(GL_ONE, GL_ONE);
+        }
+        
+        
         // Ownerのマトリックスを取得（Positionでも良いかもしれない。）
         Matrix4 mat = owner->GetWorldTransform();
         
@@ -69,6 +77,12 @@ void ParticleComponent::Draw(Shader *shader)
                 glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
             }
         }
+        
+        if (isBlendAdd)
+        {
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
+        
     }
     
 }
@@ -95,9 +109,18 @@ void ParticleComponent::GenerateParts()
             {
                 // スピードの調整がちょっと強引なので再考する
 
-                float x  = (float)(rnd() % (int)partSpeed);//5) / 10;
-                float y  = (float)(rnd() % (int)partSpeed);//5) / 10;
-                float z  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                
+                float x, y ,z;
+                if (!Math::NearZero(partSpeed))
+                {
+                    x  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                    y  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                    z  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                }
+                else
+                {
+                    x = y = z = 0.0f;
+                }
                 
                 if(rand()%2) x *= -1;
                 if(rand()%2) y *= -1;

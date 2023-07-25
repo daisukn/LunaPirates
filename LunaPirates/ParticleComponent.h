@@ -61,6 +61,9 @@ public:
     void SetParticleSpeed(float f) { partSpeed = f; }
     float GetParticleSpeed() const { return partSpeed; }
 
+    
+    void SetBlendAdd(bool b) { isBlendAdd = b; }
+    bool GetBlendAdd() const { return isBlendAdd; }
 private:
     // 所有アクターとの相対位置
     Vector3 position;
@@ -82,6 +85,9 @@ private:
     std::vector<ParticleParts> parts;
     
     class Texture* texture;
+    
+    // 加算合成するか
+    bool isBlendAdd;
     
 
 }; 

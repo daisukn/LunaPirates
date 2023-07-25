@@ -15,6 +15,13 @@ LaserActor::LaserActor(Application* a)
     SetScale(0.05f);
     
     
+    efectMesh = std::make_unique<MeshComponent>(this, false, true);
+    efectMesh->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/stripe.lwo"));
+    efectMesh->SetVisible(false);
+    efectMesh->SetScale(1.05f);
+    efectMesh->SetBlendAdd(true);
+    
+    
     particle = std::make_unique<ParticleComponent>(this);
     particle->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/laser_part.png"));
 
@@ -35,6 +42,7 @@ void LaserActor::UpdateActor(float deltaTime)
     if(isDisp)
     {
         meshComp->SetVisible(true);
+        efectMesh->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
         auto v = GetPosition();
         SetPosition(Vector3(v.x, v.y, v.z+20));
@@ -42,6 +50,7 @@ void LaserActor::UpdateActor(float deltaTime)
         {
             isDisp = false;
             meshComp->SetVisible(false);
+            efectMesh->SetVisible(false);
             collComp->GetBoundingVolume()->SetVisible(false);
 
         }
@@ -51,7 +60,7 @@ void LaserActor::UpdateActor(float deltaTime)
 void LaserActor::Appear(Vector3 pos, int type)
 {
     StageObjectActor::Appear(pos, type);
-    particle->CreateParticles(Vector3(0,0,4), 30, 5.f, 0.5f, 30.0f);
+    particle->CreateParticles(Vector3(0,0,-100), 10, 5.f, 0.2f, 60.0f);
     particle->SetParticleSpeed(5);
 }
 

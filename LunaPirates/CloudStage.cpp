@@ -171,6 +171,10 @@ void CloudStage::AppearLayout()
                 break;
         }
         cntLayout++;
+        if (cntLayout >= layout.size())
+        {
+            break;
+        }
     }
 
 }

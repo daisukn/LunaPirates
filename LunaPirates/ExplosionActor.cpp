@@ -17,9 +17,10 @@ ExplosionActor::ExplosionActor(Application* a)
     smokePart->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/smoke.png"));
 
     
-    flashPart = std::make_unique<ParticleComponent>(this);
+    flashPart = std::make_unique<ParticleComponent>(this, 110);
     flashPart->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/flash.png"));
-    flashPart->SetParticleSpeed(0.0f);
+    flashPart->SetParticleSpeed(4.0f);
+//    flashPart->SetBlendAdd(true);
 
 }
 
@@ -31,13 +32,13 @@ void ExplosionActor::UpdateActor(float deltaTime)
     
     if (cntLifetime == 1)
     {
-        flashPart->CreateParticles(Vector3(0,0,0), 5, 0.4f, 0.2f, 20.0f);
+        flashPart->CreateParticles(Vector3(0,0,0), 5, 0.4f, 0.1f, 25.0f);
     }
     if (cntLifetime == 5)
     {
         explosionPart->CreateParticles(Vector3(0,0,0), 10, 0.6f, 0.5f, 15.0f);
     }
-    if (cntLifetime == 15)
+    if (cntLifetime == 20)
     {
         smokePart->CreateParticles(Vector3(0,0.1,0), 5, 0.6f, 0.4f, 20.0f);
     }

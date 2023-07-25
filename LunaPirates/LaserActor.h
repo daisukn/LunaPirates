@@ -11,6 +11,7 @@ public:
     virtual void Appear(Vector3 pos, int type) override;
 private:
     std::unique_ptr<class ParticleComponent> particle;
+    std::unique_ptr<class MeshComponent> efectMesh;
 };
 
 
