@@ -46,8 +46,8 @@
             filePath = "LunaPirates/ParticleComponent.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "ParticleComponent::GenerateParts()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "LunaPirates/ParticleComponent.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "ParticleComponent::Draw(shader)"
             landmarkType = "7">
             <Locations>
@@ -142,8 +142,8 @@
             filePath = "LunaPirates/BulletActor.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "BulletActor::Behavior_1(deltaTime)"
             landmarkType = "7">
          </BreakpointContent>

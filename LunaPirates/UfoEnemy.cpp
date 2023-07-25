@@ -109,6 +109,7 @@ void UfoEnemy::UpdateActor(float deltaTime)
     }
     else if(state == StateExploted)
     {
+        
         if(!explosion->GetDisp())
         {
             isDisp = false;

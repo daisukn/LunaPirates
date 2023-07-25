@@ -5,6 +5,7 @@
 #include "Application.h"
 #include "Renderer.h"
 #include "VertexArray.h"
+#include "Math.h"
 
 #include <vector>
 #include <random>
@@ -22,6 +23,7 @@ ParticleComponent::ParticleComponent(Actor* a, int drawOrder)
     , partLifecycle(0.0f)
     , partSize(0.0f)
     , partMode(P_SPARK)
+    , partSpeed(2.0f)
 {
     owner->GetApp()->GetRenderer()->AddParticleComp(this);
 }
@@ -83,7 +85,7 @@ void ParticleComponent::GenerateParts()
     
     // 乱数初期化
     std::random_device rnd;
-    
+
     if (isVisible)
     {
     
@@ -92,12 +94,14 @@ void ParticleComponent::GenerateParts()
             if (!parts[i].isVisible)
             {
                 // スピードの調整がちょっと強引なので再考する
-                //float x  = (float)(rand10(mt) - 5) / 10;
-                //float y  = (float)(rand10(mt) - 5) / 10;
-                //float z  = (float)(rand10(mt) - 5) / 10;
-                float x  = (float)(rnd()%5) / 10;
-                float y  = (float)(rnd()%5) / 10;
-                float z  = (float)(rnd()%5) / 10;
+
+                float x  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                float y  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                float z  = (float)(rnd() % (int)partSpeed);//5) / 10;
+                
+                if(rand()%2) x *= -1;
+                if(rand()%2) y *= -1;
+                if(rand()%2) z *= -1;
 
                 // パーツのパラメータをセット
                 parts[i].pos = position;

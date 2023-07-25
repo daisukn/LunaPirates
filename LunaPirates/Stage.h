@@ -5,6 +5,13 @@
 #include <vector>
 #include <string>
 
+struct GameStatus
+{
+    int playerLife;
+    int score;
+    Vector3 playerPosition;
+};
+
 
 struct StageLayout
 {

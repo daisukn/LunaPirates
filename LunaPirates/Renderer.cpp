@@ -118,9 +118,9 @@ void Renderer::Draw()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     
-    glDisable(GL_DEPTH_TEST);
     
     // 背景スプライト
+    glDisable(GL_DEPTH_TEST);
     spriteShader->SetActive();
     for (auto sprite : bgSpriteComps)
     {
@@ -129,8 +129,8 @@ void Renderer::Draw()
     
     
     
+    // 背景用メッシュ描画
     glEnable(GL_DEPTH_TEST);
-    // 背景描画
     backGroundShader->SetActive();
     backGroundShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
     // Update lighting uniforms
@@ -146,7 +146,7 @@ void Renderer::Draw()
     
     
     // メッシュ描画
-    //meshShader->SetActive();
+    meshShader->SetActive();
     for (auto mc : meshComps)
     {
         if (mc->GetVisible())
@@ -194,6 +194,8 @@ void Renderer::Draw()
     }
 #endif // __GAME_DEBUG
     
+    
+    
     // パーティクルの処理
     // Zバッファに書き込まない
     glDepthMask(GL_FALSE);
@@ -217,7 +219,7 @@ void Renderer::Draw()
     
     // ビルボード
     // Zバッファに書き込まない
-    //glDepthMask(GL_FALSE);
+    glDepthMask(GL_FALSE);
 
     spriteVerts->SetActive();
     billboardShader->SetActive();
@@ -239,7 +241,6 @@ void Renderer::Draw()
     //glDisable(GL_DEPTH_TEST);
     // アルファブレンディング
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
     spriteShader->SetActive();    
     for (auto sprite : spriteComps)

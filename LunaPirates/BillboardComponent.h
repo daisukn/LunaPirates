@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "Math.h"
 
 // ビルボードコンポーネント
 class BillboardComponent : public Component
@@ -25,7 +26,7 @@ public:
     void SetScale(float f){ scale = f;}
 
     int GetDrawOrder() const { return drawOrder; }
-
+    
 private:
     int drawOrder;
     bool isVisible;

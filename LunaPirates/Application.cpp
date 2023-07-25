@@ -221,7 +221,6 @@ void Application::UpdateGame()
         deltaTime = 0.05f;
     }
     ticksCount = SDL_GetTicks();
-    //std::cout << 1.0f / deltaTime << std::endl;
 
     // 物理計算系
     //physWorld->ComputeGroundHeight();
@@ -269,8 +268,6 @@ void Application::UpdateGame()
 void Application::TransitionStage()
 {
 
-    //activeStage->UnloadStageData();
-    //delete activeStage;
     activeStage.reset();
 
         switch (stageTransition)

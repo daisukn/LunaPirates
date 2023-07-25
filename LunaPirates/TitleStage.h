@@ -4,6 +4,7 @@
 #include "SpriteComponent.h"
 #include <memory>
 
+
 class TitleStage : public Stage
 {
     std::unique_ptr<class Actor> moonActor;

@@ -12,11 +12,21 @@ BulletActor::BulletActor(Application* a)
     , ySpeed(0.0f)
     , zSpeed(0.0f)
 {
-    meshComp = std::make_unique<MeshComponent>(this, false, true);
+    
+    
+    meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/bullet.lwo"));
     meshComp->SetVisible(false);
-    meshComp->SetBlendAdd(true);
+    //meshComp->SetBlendAdd(true);
     //meshComp->SetToonRender(true, 1.04f);
+
+    /*
+    blackMesh = std::make_unique<MeshComponent>(this);
+    blackMesh->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/black_ball.lwo"));
+    blackMesh->SetVisible(false);
+    blackMesh->SetScale(0.8f);
+*/
+
     
     SetScale(0.15f);
 
@@ -52,6 +62,7 @@ void BulletActor::UpdateActor(float deltaTime)
     
     collComp->SetDisp(true);
     meshComp->SetVisible(true);
+    //blackMesh->SetVisible(true);
     flare->SetVisible(true);
     collComp->GetBoundingVolume()->SetVisible(true);
     auto v = GetPosition();
@@ -61,6 +72,7 @@ void BulletActor::UpdateActor(float deltaTime)
     {
         isDisp = false;
         meshComp->SetVisible(false);
+        //blackMesh->SetVisible(false);
         flare->SetVisible(false);
         collComp->GetBoundingVolume()->SetVisible(false);
         collComp->SetDisp(false);
@@ -74,6 +86,7 @@ void BulletActor::UpdateActor(float deltaTime)
             {
                 isDisp = false;
                 meshComp->SetVisible(false);
+                //blackMesh->SetVisible(false);
                 flare->SetVisible(false);
                 collComp->GetBoundingVolume()->SetVisible(false);
                 collComp->SetDisp(false);

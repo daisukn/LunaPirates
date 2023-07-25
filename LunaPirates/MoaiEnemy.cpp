@@ -102,6 +102,8 @@ void MoaiEnemy::Behavior_0(float deltaTime)
     }
     else if(state == StateExploted)
     {
+        
+        
         if(!explosion->GetDisp())
         {
             isDisp = false;

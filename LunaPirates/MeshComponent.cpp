@@ -61,7 +61,9 @@ void MeshComponent::Draw(Shader* s)
         }
         
         // WorldマトリックスをShaderに送る
-		s->SetMatrixUniform("uWorldTransform", owner->GetWorldTransform());
+        Matrix4 m = Matrix4::CreateScale(scale);
+        s->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
+        s->SetMatrixUniform("uWorldTransform", owner->GetWorldTransform());
 
 		// SpecPowerを送る
         s->SetFloatUniform("uSpecPower", mesh->GetSpecPower());
@@ -84,7 +86,7 @@ void MeshComponent::Draw(Shader* s)
         if (isToon)
         {
             glFrontFace(GL_CW);
-            Matrix4 m = Matrix4::CreateScale(contourFactor);
+            Matrix4 m = Matrix4::CreateScale(contourFactor*scale);
             s->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
             for (auto v : va)
             {

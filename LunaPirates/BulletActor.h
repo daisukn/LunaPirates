@@ -14,6 +14,7 @@ public:
 
 private:
     std::unique_ptr<class BillboardComponent> flare;
+    std::unique_ptr<class MeshComponent> blackMesh;
     float angle;
     float xSpeed;
     float ySpeed;

@@ -57,6 +57,9 @@ public:
     
     bool GetVisible() const { return isVisible; }
     int GetDrawOrder() const { return drawOrder; }
+    
+    void SetParticleSpeed(float f) { partSpeed = f; }
+    float GetParticleSpeed() const { return partSpeed; }
 
 private:
     // 所有アクターとの相対位置
@@ -67,6 +70,8 @@ private:
     float totalLife;
     float partLifecycle;
     float partSize;
+
+    float partSpeed;
 
     ParticleMode partMode;
     //bool isGravity;

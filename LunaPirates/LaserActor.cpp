@@ -13,6 +13,10 @@ LaserActor::LaserActor(Application* a)
     //meshComp->SetToonRender(true, 1.04f);
     
     SetScale(0.05f);
+    
+    
+    particle = std::make_unique<ParticleComponent>(this);
+    particle->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/laser_part.png"));
 
     // コライダー
     collComp = std::make_unique<ColliderComponent>(this);
@@ -43,4 +47,12 @@ void LaserActor::UpdateActor(float deltaTime)
         }
     }
 }
+
+void LaserActor::Appear(Vector3 pos, int type)
+{
+    StageObjectActor::Appear(pos, type);
+    particle->CreateParticles(Vector3(0,0,4), 30, 5.f, 0.5f, 30.0f);
+    particle->SetParticleSpeed(5);
+}
+
 

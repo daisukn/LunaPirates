@@ -33,12 +33,17 @@ public:
     bool GetBlendAdd() const { return isBlendAdd; }
     
     
+    void SetScale(float f) { scale = f; }
+    float GetScale() const { return scale; }
+    
     // 再生するモーションのID（SkerltalMeshでオーバーライドする。インターフェース確保のため）
     virtual void SetAnimID(const unsigned int animID, const PlayMode mode){}
     
 protected:
     class Mesh* mesh;      // メッシュ
     unsigned int textureIndex;    // TextureID
+    
+    float scale;
     
     bool isVisible;
     bool isSkeletal;
