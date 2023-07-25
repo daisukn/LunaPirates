@@ -364,6 +364,7 @@ void Renderer::SetLightUniforms(Shader* shader)
     shader->SetFloatUniform("uFoginfo.minDist", 500.0f);
     
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.75f, 0.96f, 0.99f) );
+//    shader->SetVectorUniform("uFoginfo.color", Vector3(0.69f, 0.859f, 0.894f) );
     shader->SetVectorUniform("uFoginfo.color", Vector3(0.69f, 0.859f, 0.894f) );
 
 

@@ -14,11 +14,13 @@ ExplosionActor::ExplosionActor(Application* a)
 
     
     smokePart = std::make_unique<ParticleComponent>(this, 90);
+    //smokePart->SetBlendAdd(true);
     smokePart->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/smoke.png"));
 
     
     flashPart = std::make_unique<ParticleComponent>(this, 110);
     flashPart->SetTexture(GetApp()->GetRenderer()->GetTexture("Assets/Textures/flash.png"));
+    //flashPart->SetBlendAdd(true);
     flashPart->SetParticleSpeed(4.0f);
 //    flashPart->SetBlendAdd(true);
 
