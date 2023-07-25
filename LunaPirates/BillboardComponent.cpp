@@ -9,6 +9,7 @@ BillboardComponent::BillboardComponent(class Actor* a, int order)
     : Component(a)
     , drawOrder(order)
     , scale(1.0f)
+    , isBlendAdd(false)
 {
     owner->GetApp()->GetRenderer()->AddBillboardComp(this);
 }
@@ -25,6 +26,11 @@ void BillboardComponent::Draw(Shader* shader)
     
     if (texture)
     {
+        if (isBlendAdd)
+        {
+            glBlendFunc(GL_ONE, GL_ONE);
+        }
+        
         // Ownerのマトリックスを取得（Positionでも良いかもしれない。）
         Matrix4 mat = owner->GetWorldTransform();
         
@@ -47,6 +53,11 @@ void BillboardComponent::Draw(Shader* shader)
 
         shader->SetVectorUniform("uPosition", Vector3(0,0,0));
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+        if (isBlendAdd)
+        {
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
     }
 }
 

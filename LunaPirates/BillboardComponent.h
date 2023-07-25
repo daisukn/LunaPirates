@@ -27,11 +27,18 @@ public:
 
     int GetDrawOrder() const { return drawOrder; }
     
+    
+    void SetBlendAdd(bool b) { isBlendAdd = b; }
+    bool GetBlendAdd() const { return isBlendAdd; }
+    
 private:
     int drawOrder;
     bool isVisible;
     float scale;
     class Texture* texture;
+    
+    // 加算合成するか
+    bool isBlendAdd;
 
 };
 
