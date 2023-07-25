@@ -31,6 +31,7 @@ private:
     //std::unique_ptr<class SkeletalMeshComponent> skeltalMeshComp;
     std::unique_ptr<class MoveComponent> moveComp;
     std::unique_ptr<class FollowCamera> cameraComp;
+    std::unique_ptr<class MeshComponent> lightning;
     
     std::unique_ptr<class TargetScopeActor> scopeActor;
 
@@ -43,6 +44,8 @@ private:
     
     void ShotLaser();
     std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
+    
+    int barrierCnt;
 
 };
 

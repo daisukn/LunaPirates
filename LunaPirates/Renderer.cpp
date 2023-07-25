@@ -135,7 +135,7 @@ void Renderer::Draw()
     backGroundShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
     // Update lighting uniforms
     SetLightUniforms(backGroundShader.get());
-    for (auto bg : backGroudComps)
+    for (auto bg : bgMesh)
     {
         if (bg->GetVisible())
         {
@@ -235,6 +235,18 @@ void Renderer::Draw()
     glDepthMask(GL_TRUE);
     
     
+    // エフェクトメッシュ描画
+    meshShader->SetActive();
+    meshShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    // Update lighting uniforms
+    SetLightUniforms(meshShader.get());
+    for (auto mesh : effectMesh)
+    {
+        if (mesh->GetVisible())
+        {
+            mesh->Draw(meshShader.get());
+        }
+    }
     
     
     // スプライト処理
@@ -539,20 +551,38 @@ void Renderer::RemoveMeshComp(MeshComponent* mesh)
     }
 }
 
-// メッシュコンポーネント登録
+// BGメッシュコンポーネント登録
 void Renderer::AddBackGroudMeshComp(MeshComponent* mesh)
 {
-    backGroudComps.emplace_back(mesh);
+    bgMesh.emplace_back(mesh);
 }
 
 
-// メッシュコンポーネント削除
+// BGメッシュコンポーネント削除
 void Renderer::RemoveBackGroudMeshComp(MeshComponent* mesh)
 {
-    auto iter = std::find(backGroudComps.begin(), backGroudComps.end(), mesh);
-    if (iter != backGroudComps.end())
+    auto iter = std::find(bgMesh.begin(), bgMesh.end(), mesh);
+    if (iter != bgMesh.end())
     { // 要素が見つかった場合のみ削除
-        backGroudComps.erase(iter);
+        bgMesh.erase(iter);
+    }
+ 
+}
+
+// エフェクトメッシュコンポーネント登録
+void Renderer::AddEffectMeshComp(MeshComponent* mesh)
+{
+    effectMesh.emplace_back(mesh);
+}
+
+
+// BGメッシュコンポーネント削除
+void Renderer::RemoveEffectMeshComp(MeshComponent* mesh)
+{
+    auto iter = std::find(effectMesh.begin(), effectMesh.end(), mesh);
+    if (iter != effectMesh.end())
+    { // 要素が見つかった場合のみ削除
+        effectMesh.erase(iter);
     }
  
 }

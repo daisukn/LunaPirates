@@ -19,7 +19,13 @@ PlaneActor::PlaneActor(Application* app)
     : StageObjectActor(app)
     , animID(0)
     , isMovable(true)
+    , barrierCnt(0)
  {
+
+
+
+
+     
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
      meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/plane.fbx"));
@@ -57,6 +63,14 @@ PlaneActor::PlaneActor(Application* app)
      scopeActor = std::make_unique<TargetScopeActor>(app);
      scopeActor->SetOwnerStage(ownerStage);
      scopeActor->SetDisp(true);
+     
+
+     // 稲妻
+     lightning = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
+     lightning->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/lightning.lwo"));
+     lightning->SetScale(0.01f);
+     //lightning->SetBlendAdd(true);
+     lightning->SetVisible(false);
     
 }
 
@@ -112,6 +126,25 @@ void PlaneActor::UpdateActor(float deltaTime)
     collComp->SetDisp(true);
     auto v = GetPosition();
     scopeActor->SetPosition(Vector3(v.x, v.y, v.z+30));
+    
+    if(collComp->GetCollided())
+    {
+        for(auto col : collComp->GetTargetColliders())
+        {
+            if(col->GetColliderType() == C_BULLET)
+            {
+                barrierCnt = 0;
+                lightning->SetVisible(true);
+                break;
+            }
+        }
+    }
+    barrierCnt++;
+    if(barrierCnt > 15)
+    {
+        lightning->SetVisible(false);
+    }
+    
 }
 
 

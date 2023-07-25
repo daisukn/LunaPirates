@@ -7,7 +7,7 @@
 LaserActor::LaserActor(Application* a)
     : StageObjectActor(a)
 {
-    meshComp = std::make_unique<MeshComponent>(this, false, true);
+    meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/laser.lwo"));
     meshComp->SetVisible(false);
     //meshComp->SetToonRender(true, 1.04f);
@@ -15,7 +15,7 @@ LaserActor::LaserActor(Application* a)
     SetScale(0.05f);
     
     
-    efectMesh = std::make_unique<MeshComponent>(this, false, true);
+    efectMesh = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
     efectMesh->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/stripe.lwo"));
     efectMesh->SetVisible(false);
     efectMesh->SetScale(1.05f);

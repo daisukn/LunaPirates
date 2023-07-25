@@ -12,7 +12,7 @@
 #include <vector>
 
 // コンストラクタ
-MeshComponent::MeshComponent(Actor* a, bool isSkeletal, bool isBG)
+MeshComponent::MeshComponent(Actor* a, bool isSkeletal, MeshType type)
     : Component(a)
     , mesh(nullptr)
     , textureIndex(0)
@@ -21,32 +21,44 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, bool isBG)
     , isToon(false)
     , contourFactor(1.1014f)
     , isBlendAdd(false)
-    , isBackGround(isBG)
+    , meshType(type)
 {
-    if(isBG)
-    {
-        // Rendererに追加
+    if(meshType == MeshType::MESH_EFFECT)
+        owner->GetApp()->GetRenderer()->AddEffectMeshComp(this);
+    if(meshType == MeshType::MESH_BG)
         owner->GetApp()->GetRenderer()->AddBackGroudMeshComp(this);
-
-    }
-    else
-    {
-        // Rendererに追加
+    if(meshType == MeshType::MESH_NORMAL)
         owner->GetApp()->GetRenderer()->AddMeshComp(this);
+/*
+    switch(meshType)
+    {
+    case MESH_EFFECT:
+        owner->GetApp()->GetRenderer()->AddEffectMeshComp(this);
+        break;
+    case MESH_BG:
+        owner->GetApp()->GetRenderer()->AddBackGroudMeshComp(this);
+        break;
+    case MESH_NORMAL:
+        owner->GetApp()->GetRenderer()->AddMeshComp(this);
+        break;
     }
+ */
 }
 
 // デストラクタ
 MeshComponent::~MeshComponent()
 {
-    if(isBackGround)
+    switch(meshType)
     {
+    case MESH_EFFECT:
+        owner->GetApp()->GetRenderer()->RemoveEffectMeshComp(this);
+        break;
+    case MESH_BG:
         owner->GetApp()->GetRenderer()->RemoveBackGroudMeshComp(this);
-    }
-    else
-    {
-        // Rendererから削除
+        break;
+    case MESH_NORMAL:
         owner->GetApp()->GetRenderer()->RemoveMeshComp(this);
+        break;
     }
 }
 

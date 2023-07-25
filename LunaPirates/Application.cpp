@@ -222,7 +222,7 @@ void Application::UpdateGame()
     }
     ticksCount = SDL_GetTicks();
     
-    std::cout << deltaTime << std::endl;
+    //std::cout << deltaTime << std::endl;
 
     // 物理計算系
     //physWorld->ComputeGroundHeight();

@@ -38,9 +38,7 @@ CloudStage::~CloudStage()
 void CloudStage::LoadStageData()
 {
     
-    planeActor = std::make_unique<PlaneActor>(app);
-    planeActor->SetPosition(Vector3(0, 0, 30));
-    planeActor->SetOwnerStage(this);
+
 
     dragonActor = std::make_unique<DragonActor>(app);
     dragonActor->SetPosition(Vector3(0, 0, 100));
@@ -71,7 +69,7 @@ void CloudStage::LoadStageData()
     Quaternion q(Vector3::UnitY, Math::ToRadians(180));
     skyActor->SetRotation(q);
     skyActor->SetScale(1);
-    skyMesh = std::make_unique<MeshComponent>(skyActor.get(), false, true);
+    skyMesh = std::make_unique<MeshComponent>(skyActor.get(), false, MESH_BG);
     skyMesh->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/sky.lwo"));
     
 
@@ -80,6 +78,13 @@ void CloudStage::LoadStageData()
     app->GetRenderer()->SetClearColor(0.596f, 0.733f, 0.858f);
     //app->GetRenderer()->SetClearColor(0.05f, 0.01f, 0.258f);
     
+    
+    
+    // 飛行機
+    
+    planeActor = std::make_unique<PlaneActor>(app);
+    planeActor->SetPosition(Vector3(0, 0, 30));
+    planeActor->SetOwnerStage(this);
     
     LoadStageLayout("Setting/Stage1.txt");
 /*    for(auto l : layout)

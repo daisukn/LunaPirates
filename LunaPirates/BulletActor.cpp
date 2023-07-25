@@ -20,12 +20,12 @@ BulletActor::BulletActor(Application* a)
     meshComp->SetBlendAdd(true);
     //meshComp->SetToonRender(true, 1.04f);
 
-    /*
+    
     blackMesh = std::make_unique<MeshComponent>(this);
     blackMesh->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/black_ball.lwo"));
     blackMesh->SetVisible(false);
     blackMesh->SetScale(0.8f);
-*/
+
 
     
     SetScale(0.15f);

@@ -4,13 +4,18 @@
 #include "Animation.h"
 //#include <cstddef>
 
-
+enum MeshType
+{
+    MESH_NORMAL,
+    MESH_BG,
+    MESH_EFFECT
+};
 
 // Meshを管理するComponent（Rendererから呼ばれる）
 class MeshComponent : public Component
 {
 public:
-    MeshComponent(class Actor* a, bool isSkeletal = false, bool isBG = false);
+    MeshComponent(class Actor* a, bool isSkeletal = false, MeshType type = MESH_NORMAL);
     virtual ~MeshComponent();
         
     // 描画 override
@@ -47,7 +52,9 @@ protected:
     
     bool isVisible;
     bool isSkeletal;
-    bool isBackGround;
+    
+    MeshType meshType;
+    
     
     // 輪郭強調
     bool isToon;
