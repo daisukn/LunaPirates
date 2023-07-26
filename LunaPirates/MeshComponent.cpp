@@ -23,13 +23,7 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, MeshType type)
     , isBlendAdd(false)
     , meshType(type)
 {
-    if(meshType == MeshType::MESH_EFFECT)
-        owner->GetApp()->GetRenderer()->AddEffectMeshComp(this);
-    if(meshType == MeshType::MESH_BG)
-        owner->GetApp()->GetRenderer()->AddBackGroudMeshComp(this);
-    if(meshType == MeshType::MESH_NORMAL)
-        owner->GetApp()->GetRenderer()->AddMeshComp(this);
-/*
+
     switch(meshType)
     {
     case MESH_EFFECT:
@@ -42,7 +36,6 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, MeshType type)
         owner->GetApp()->GetRenderer()->AddMeshComp(this);
         break;
     }
- */
 }
 
 // デストラクタ
