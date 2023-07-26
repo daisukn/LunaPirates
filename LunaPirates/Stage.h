@@ -8,7 +8,7 @@
 struct GameStatus
 {
     int playerLife;
-    int score;
+    int playerScore;
     Vector3 playerPosition;
 };
 
