@@ -12,6 +12,8 @@ const int MAX_BULLET = 30;
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
     , shotAngle(0.0f)
+    , forwardSpeed(0.0f)
+    , anglerSpeed(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/ufo.lwo"));
@@ -134,25 +136,35 @@ void UfoEnemy::UpdateActor(float deltaTime)
 void UfoEnemy::Behavior_0(float deltaTime)
 {
 
-    float speed = 0.0f;
-    float anglerSpeed = 0.0f;
+
     
     if (cntLifetime < 150)
     {
-        speed = 200.f;
+        forwardSpeed = 200.f;
         std::cout << GetPosition().z << std::endl;
     }
-    else if(cntLifetime < 240)
+    if (cntLifetime == 240)
     {
-        anglerSpeed = -75;
-        speed = 200.f;
+        forwardSpeed = 200.f;
+        if (GetPosition().x > 0)
+        {
+            anglerSpeed = -75;
+        }
+        else
+        {
+            anglerSpeed = 75;
+        }
     }
-    else
+    if (cntLifetime == 400)
     {
-        anglerSpeed = 0;
-        speed = 200.f;
+        anglerSpeed = 0.0f;
     }
-    moveComp->SetForwardSpeed(speed);
+    
+    if (cntLifetime == 240 || cntLifetime == 290 || cntLifetime == 320 || cntLifetime == 350 )
+    {
+        ShotCircle();
+    }
+    moveComp->SetForwardSpeed(forwardSpeed);
     moveComp->SetAngularSpeed(anglerSpeed);
 
 
@@ -161,29 +173,6 @@ void UfoEnemy::Behavior_0(float deltaTime)
 void UfoEnemy::Behavior_1(float deltaTime)
 {
 
-    float speed = 0.0f;
-    float anglerSpeed = 0.0f;
-    
-    if (cntLifetime < 120)
-    {
-        speed = 200.f;
-        std::cout << GetPosition().z << std::endl;
-    }
-    else if(cntLifetime < 240)
-    {
-        anglerSpeed = 75;
-        speed = 200.f;
-    }
-    else
-    {
-        anglerSpeed = 0;
-        speed = 200.f;
-    }
-    moveComp->SetForwardSpeed(speed);
-    moveComp->SetAngularSpeed(anglerSpeed);
-
-    
-    
 }
 
 void UfoEnemy::Behavior_2(float deltaTime)

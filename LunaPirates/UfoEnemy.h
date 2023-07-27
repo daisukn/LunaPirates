@@ -36,6 +36,10 @@ private:
     void ShotCircle();
     void ShotLiner();
     
+    
+    float forwardSpeed;
+    float anglerSpeed;
+    
     float shotAngle;
 };
 

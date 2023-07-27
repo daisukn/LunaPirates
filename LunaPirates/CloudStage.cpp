@@ -130,7 +130,7 @@ void CloudStage::GenerateCloud()
 void CloudStage::AppearLayout()
 {
 
-    if(numLayout > stageCounter || cntLayout > numLayout)
+    if(numLayout <= cntLayout)
     {
         return;
     }
