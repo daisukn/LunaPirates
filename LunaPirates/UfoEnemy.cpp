@@ -5,16 +5,12 @@
 #include "Mesh.h"
 #include "ColliderComponent.h"
 #include "ParticleComponent.h"
+#include "MoveComponent.h"
 
 const int MAX_BULLET = 30;
 
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
-    , rotY(0.0f)
-    , angle(0.0f)
-    , xSpeed(0.0f)
-    , ySpeed(0.0f)
-    , zSpeed(0.0f)
     , shotAngle(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
@@ -24,7 +20,6 @@ UfoEnemy::UfoEnemy(Application* a)
     
     // 爆発
     explosion = std::make_unique<ExplosionActor>(a);
-    
     
     // 弾幕
     for(int i = 0; i < MAX_BULLET; i++)
@@ -39,6 +34,11 @@ UfoEnemy::UfoEnemy(Application* a)
     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/ufo.lwo")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
+    
+    
+    // 移動用コンポーネント
+    moveComp = std::make_unique<MoveComponent>(this);
+    
     
     // 関数テーブル初期化
     BehaviorTable.push_back(&UfoEnemy::Behavior_0);
@@ -55,15 +55,49 @@ UfoEnemy::~UfoEnemy()
 void UfoEnemy::Appear(Vector3 pos, int type)
 {
     StageObjectActor::Appear(pos, type);
-    angle = 0.0f;
-    rotY = 0.0f;
+}
+
+void UfoEnemy::Disappear()
+{
+    StageObjectActor::Disappear();
+    
+    meshComp->SetVisible(false);
+    collComp->GetBoundingVolume()->SetVisible(false);
+}
+
+
+void UfoEnemy::CheckCllider()
+{
+
+    collComp->SetDisp(isDisp);
+    if(collComp->GetCollided())
+    {
+        for(auto col : collComp->GetTargetColliders())
+        {
+            if(col->GetColliderType() == C_PLAYER
+                   || col->GetColliderType() == C_LASER)
+            {
+                meshComp->SetVisible(false);
+                collComp->GetBoundingVolume()->SetVisible(false);
+                collComp->SetCollided(false);
+                    
+                state = StateExploted;
+                explosion->Appear(GetPosition());
+                break;
+                    
+            }
+        }
+
+    }
 }
 
 void UfoEnemy::UpdateActor(float deltaTime)
 {
     if (!isDisp) { return; }
-    
     cntLifetime++;
+    
+
+    // 行動を反映
     if (behaveType >= 0 && behaveType < BehaviorTable.size())
     {
         (this->*BehaviorTable[behaveType])(deltaTime);
@@ -74,38 +108,16 @@ void UfoEnemy::UpdateActor(float deltaTime)
     {
         meshComp->SetVisible(true);
         collComp->GetBoundingVolume()->SetVisible(true);
-            
-        auto v = GetPosition();
-        SetPosition(Vector3(v.x+sin(Math::ToRadians(angle))*xSpeed, v.y+sin(Math::ToRadians(angle/2))*ySpeed, v.z - zSpeed));
-
-        if(v.z < 0)
+        
+        
+        
+        if(cntLifetime > 1000)
         {
-            isDisp = false;
-            meshComp->SetVisible(false);
-            collComp->GetBoundingVolume()->SetVisible(false);
+            Disappear();
         }
-            
-            
-        collComp->SetDisp(isDisp);
-        if(collComp->GetCollided())
-        {
-            for(auto col : collComp->GetTargetColliders())
-            {
-                if(col->GetColliderType() == C_PLAYER
-                       || col->GetColliderType() == C_LASER)
-                {
-                    meshComp->SetVisible(false);
-                    collComp->GetBoundingVolume()->SetVisible(false);
-                    collComp->SetCollided(false);
-                        
-                    state = StateExploted;
-                    explosion->Appear(GetPosition());
-                    break;
-                        
-                }
-            }
-
-        }
+        CheckCllider();
+        
+        
     }
     else if(state == StateExploted)
     {
@@ -121,91 +133,72 @@ void UfoEnemy::UpdateActor(float deltaTime)
 
 void UfoEnemy::Behavior_0(float deltaTime)
 {
-    rotY += 60.f * deltaTime;
-    angle += 240.f * deltaTime;
+
+    float speed = 0.0f;
+    float anglerSpeed = 0.0f;
     
-    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(rotY));
-    SetRotation(rot);
-    
-    zSpeed = 0.0f;
-    xSpeed = 0.0f;
-    ySpeed = 150.f * deltaTime;
-    
-    if(cntLifetime < 120)
+    if (cntLifetime < 150)
     {
-        zSpeed = 300 * deltaTime;
-        ySpeed = 0.0f;
+        speed = 200.f;
+        std::cout << GetPosition().z << std::endl;
     }
-    else if(cntLifetime < 700)
+    else if(cntLifetime < 240)
     {
-        zSpeed = 0.0f;
-        xSpeed = 0.0f;
-        ySpeed = 0.0f;//100.f * deltaTime;
-        
-        int prevCnt = 120;
-        if( (cntLifetime - prevCnt) % 3 == 0)
-        {
-            //ShotCircle();
-            ShotLiner();
-        }
+        anglerSpeed = -75;
+        speed = 200.f;
     }
     else
     {
-        zSpeed = 100 * deltaTime;
-        xSpeed = 150 * deltaTime;
-        ySpeed = 0.0f;
+        anglerSpeed = 0;
+        speed = 200.f;
     }
-    
+    moveComp->SetForwardSpeed(speed);
+    moveComp->SetAngularSpeed(anglerSpeed);
+
 
 }
 
 void UfoEnemy::Behavior_1(float deltaTime)
 {
-    rotY += 60.f * deltaTime;
-    angle += 240.f * deltaTime;
+
+    float speed = 0.0f;
+    float anglerSpeed = 0.0f;
     
-    Quaternion rot = Quaternion(Vector3(0,1,0), Math::ToRadians(rotY));
-    SetRotation(rot);
-    
-    zSpeed = 0.0f;
-    xSpeed = 0.0f;
-    ySpeed = 150.f * deltaTime;
-    
-    if(cntLifetime < 120)
+    if (cntLifetime < 120)
     {
-        zSpeed = 300 * deltaTime;
-        ySpeed = 0.0f;
+        speed = 200.f;
+        std::cout << GetPosition().z << std::endl;
     }
-    else if(cntLifetime < 700)
+    else if(cntLifetime < 240)
     {
-        zSpeed = 0.0f;
-        xSpeed = 0.0f;
-        ySpeed = 100.f * deltaTime;
-        
-        int prevCnt = 120;
-        if( (cntLifetime - prevCnt) % 50 == 0)
-        {
-            //ShotLiner();
-            ShotCircle();
-        }
+        anglerSpeed = 75;
+        speed = 200.f;
     }
     else
     {
-        zSpeed = 100 * deltaTime;
-        xSpeed = 150 * deltaTime;
-        ySpeed = 0.0f;
+        anglerSpeed = 0;
+        speed = 200.f;
     }
+    moveComp->SetForwardSpeed(speed);
+    moveComp->SetAngularSpeed(anglerSpeed);
+
+    
+    
 }
 
 void UfoEnemy::Behavior_2(float deltaTime)
 {
-    
+
 }
 
 void UfoEnemy::Behavior_3(float deltaTime)
 {
     
 }
+
+
+
+
 
 void UfoEnemy::ShotLiner()
 {

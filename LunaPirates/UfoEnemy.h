@@ -13,17 +13,16 @@ public:
     ~UfoEnemy();
     void UpdateActor(float deltaTime) override;
     void Appear(Vector3 pos, int type) override;
+    void Disappear() override;
 private:
-    float rotY;
-    float angle;
-    float xSpeed;
-    float ySpeed;
-    float zSpeed;
-    float shotAngle;
-    
+
     std::unique_ptr<class ExplosionActor> explosion;
     std::vector<std::unique_ptr<class BulletActor>> bullets;
+    std::unique_ptr<class MoveComponent> moveComp;
 
+
+    void CheckCllider();
+    
     
     // 各行動パターン
     void Behavior_0(float deltaTime);
@@ -36,5 +35,7 @@ private:
     
     void ShotCircle();
     void ShotLiner();
+    
+    float shotAngle;
 };
 

@@ -19,6 +19,11 @@ void StageObjectActor::Appear(Vector3 pos, int type)
     cntLifetime = 0;
     behaveType = type;
     state = StateNormal;
-    SetDisp(true);
+    isDisp = true;
     SetPosition(pos);
+}
+
+void StageObjectActor::Disappear()
+{
+    isDisp = false;
 }

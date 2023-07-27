@@ -30,6 +30,7 @@ public:
     void SetOwnerStage(class Stage* s) { ownerStage = s; }
     
     virtual void Appear(Vector3 pos, int type);
+    virtual void Disappear();
     
     void SetBehaveType(int t) { behaveType = t; }
     int GetBehaveType() const { return behaveType; }

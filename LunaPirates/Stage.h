@@ -52,6 +52,8 @@ protected:
     int cntLayout;
     int numLayout;
     
+    GameStatus gameStatus;
+    
 
 private:
 };

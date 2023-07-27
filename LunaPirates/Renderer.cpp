@@ -19,7 +19,7 @@
 const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL;
 //const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
 
-//#define __GAME_DEBUG
+#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()

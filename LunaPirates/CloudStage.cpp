@@ -87,11 +87,7 @@ void CloudStage::LoadStageData()
     planeActor->SetOwnerStage(this);
     
     LoadStageLayout("Setting/Stage1.txt");
-/*    for(auto l : layout)
-    {
-        std::cout << l.frame << " " << l.x << " " << l.y << " " << l.z << " " << l.objType << " " << l.behaveType << std::endl;
-    }
- */
+
 }
 
 void CloudStage::UnloadStageData()
@@ -109,8 +105,8 @@ void CloudStage::UpdateStage()
     stageCounter++;
     GenerateCloud();
 
-    //AppearLayout();
-    AppearRandom();
+    AppearLayout();
+    //AppearRandom();
     
 }
 
