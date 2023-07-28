@@ -14,7 +14,7 @@ CloudBGActor::CloudBGActor(Application* a)
 
 void CloudBGActor::UpdateActor(float deltaTime)
 {
-    if(isDisp)
+    if (isDisp)
     {
         cloudBillboard->SetVisible(true);
         auto v = GetPosition();

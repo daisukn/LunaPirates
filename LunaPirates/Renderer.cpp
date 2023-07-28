@@ -16,8 +16,8 @@
 
 
 
-const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL;
-//const Uint32 WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
+const auto WINDOW_FLAGS = SDL_WINDOW_OPENGL;
+//const auto WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
 
 #define __GAME_DEBUG
 
@@ -345,7 +345,7 @@ bool Renderer::LoadShaders()
     
     // ビューマトリックス、プロジェクションマトリックス（デフォルト値）
     viewMatrix = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitZ, Vector3::UnitY);
-    projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(30.0f), screenWidth, screenHeight, 1.0f, 10000.0f);
+    projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(30.0f), screenWidth, screenHeight, 1.0f, 2000.0f);
     
     // シェーダーに送る
     meshShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);

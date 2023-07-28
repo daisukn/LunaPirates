@@ -80,7 +80,6 @@ void main()
     vec3 c = mix(uFoginfo.color, col.xyz, fogFactor);
     outColor = vec4(c, col.a);
 
-    // フォグをキャンセル
-    //outColor = col;//vec4(col, 1.0f);
+
     
 }

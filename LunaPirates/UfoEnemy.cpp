@@ -57,12 +57,13 @@ UfoEnemy::~UfoEnemy()
 void UfoEnemy::Appear(Vector3 pos, int type)
 {
     StageObjectActor::Appear(pos, type);
+    anglerSpeed = 0.0f;
+    forwardSpeed = 0.0f;
 }
 
 void UfoEnemy::Disappear()
 {
     StageObjectActor::Disappear();
-    
     meshComp->SetVisible(false);
     collComp->GetBoundingVolume()->SetVisible(false);
 }

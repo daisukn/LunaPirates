@@ -14,11 +14,15 @@
 #include <ctime>
 
 const int MAX_CLOUD = 50;
-const int MAX_UFO = 20;
+const int MAX_UFO = 500;
 const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
 
 const float APEAR_POINT = 1000.f;
+const std::string stageFileName = "Setting/stage_test.csv";
+
+
+//#define RANDOM_DEBUG
 
 CloudStage::CloudStage(class Application* a)
     : Stage(a)
@@ -86,7 +90,7 @@ void CloudStage::LoadStageData()
     planeActor->SetPosition(Vector3(0, 0, 30));
     planeActor->SetOwnerStage(this);
     
-    LoadStageLayout("Setting/Stage1.txt");
+    LoadStageLayout(stageFileName);
 
 }
 
@@ -105,8 +109,11 @@ void CloudStage::UpdateStage()
     stageCounter++;
     GenerateCloud();
 
-    AppearLayout();
+#ifdef RANDOM_DEBUG
     AppearRandom();
+#else
+    AppearLayout();
+#endif // RANDOM_DEBUG
     
 }
 
@@ -189,7 +196,7 @@ void CloudStage::AppearRandom()
         {
             if(!ufoEnemy[i]->GetDisp())
             {
-                ufoEnemy[i]->Appear(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT), 0);
+                ufoEnemy[i]->Appear(Vector3(std::rand() % 120 - 60, std::rand() % 90 - 45 , 0), 0);
                 break;
             }
         }
@@ -201,7 +208,7 @@ void CloudStage::AppearRandom()
         {
             if(!moaiEnemy[i]->GetDisp())
             {
-                moaiEnemy[i]->Appear(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT), 0);
+                moaiEnemy[i]->Appear(Vector3(std::rand() % 120 - 60, std::rand() % 90 - 45 , APEAR_POINT), 0);
                 break;
             }
         }
@@ -213,7 +220,7 @@ void CloudStage::AppearRandom()
         {
             if(!shipEnemy[i]->GetDisp())
             {
-                shipEnemy[i]->Appear(Vector3(std::rand() % 180 - 90, std::rand() % 90 - 45 , APEAR_POINT), 0);
+                shipEnemy[i]->Appear(Vector3(std::rand() % 120 - 60, std::rand() % 90 - 45 , APEAR_POINT), 0);
                 break;
             }
         }

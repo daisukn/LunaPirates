@@ -82,19 +82,19 @@ void PlaneActor::FieldMove(const InputState &state)
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_UP) == EHeld)
     {
-        if(GetPosition().y < 50) upSpeed += speed;
+        if(GetPosition().y < 45) upSpeed += speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_DOWN) == EHeld)
     {
-        if(GetPosition().y > -50) upSpeed -= speed;
+        if(GetPosition().y > -45) upSpeed -= speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT) == EHeld)
     {
-        if(GetPosition().x > -100) rightSpeed -= speed;
+        if(GetPosition().x > -70) rightSpeed -= speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT) == EHeld)
     {
-        if(GetPosition().x < 100) rightSpeed += speed;
+        if(GetPosition().x < 70) rightSpeed += speed;
     }
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)
@@ -135,7 +135,7 @@ void PlaneActor::UpdateActor(float deltaTime)
         }
     }
     barrierCnt++;
-    if(barrierCnt > 15)
+    if (barrierCnt > 15)
     {
         DamageEffect(false);
     }
@@ -151,7 +151,7 @@ void PlaneActor::SetMeshVisible(bool visible)
 
 void PlaneActor::ShotLaser()
 {
-    for(int i = 0; i < MAX_LASER; i++)
+    for (int i = 0; i < MAX_LASER; i++)
     {
         if(!laserActor[i]->GetDisp())
         {

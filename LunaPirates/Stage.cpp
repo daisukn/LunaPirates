@@ -38,11 +38,11 @@ void Stage::LoadStageLayout(std::string filename)
     while (std::getline(file, line))
     {
         // 空白行と、#で始まる行は読み飛ばす
-        if(line.empty())
+        if (line.empty())
         {
             continue;
         }
-        if(line[0] == '#')
+        if (line[0] == '#' || line[0] == ',')
         {
             continue;
         }

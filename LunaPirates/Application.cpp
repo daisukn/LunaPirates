@@ -9,15 +9,15 @@
 #include <algorithm>
 
 
-#define __HIREZO__
+#define __high_resolution__
 
-#ifdef __HIREZO__
+#ifdef __high_resolution__
 const float SCREEN_W = 1600.f;
 const float SCREEN_H = 900.f;
 #else
 const float SCREEN_W = 1280.f;
 const float SCREEN_H = 720.f;
-#endif // __HIREZO__
+#endif // __high_resolution__
 
 // コンストラクタ
 Application::Application()
