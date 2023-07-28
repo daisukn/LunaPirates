@@ -73,6 +73,28 @@ void SkeletalMeshComponent::Draw(Shader* shader)
             }
             glFrontFace(GL_CCW);
         }
+        
+        if (isGlory)
+        {
+            glBlendFunc(GL_ONE, GL_ONE);
+            glFrontFace(GL_CW);
+            Matrix4 m = Matrix4::CreateScale(contourFactor*1.05);
+            shader->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
+            for (auto v : va)
+            {
+                Texture* t = owner->GetApp()->GetRenderer()->GetTexture("Assets/glory.png");
+                if (t)
+                {
+                    t->SetActive();
+                }
+                v->SetActive();
+                glDrawElements(GL_TRIANGLES, v->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+            }
+            glFrontFace(GL_CCW);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
+        
+        
     }
 }
 

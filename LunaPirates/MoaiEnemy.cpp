@@ -30,7 +30,7 @@ MoaiEnemy::MoaiEnemy(Application* a)
     // 弾幕
     for(int i = 0; i < MAX_MAIBULLET; i++)
     {
-        bullet.push_back(std::make_unique<BulletActor>(a));
+        bullet.emplace_back(std::make_unique<BulletActor>(a));
     }
     
     

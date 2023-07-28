@@ -71,7 +71,7 @@ void Stage::LoadStageLayout(std::string filename)
         sl.y = std::stof(y);
         sl.z = std::stof(z);
         
-        layout.push_back(sl);
+        layout.emplace_back(sl);
         
     }
     

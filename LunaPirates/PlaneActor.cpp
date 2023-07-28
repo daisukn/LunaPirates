@@ -55,7 +55,7 @@ PlaneActor::PlaneActor(Application* app)
      // レーザー
      for(int i = 0; i < MAX_LASER; i++)
      {
-         laserActor.push_back( std::make_unique<LaserActor>(app));
+         laserActor.emplace_back( std::make_unique<LaserActor>(app));
      }
      
 
@@ -134,7 +134,7 @@ void PlaneActor::UpdateActor(float deltaTime)
             if(col->GetColliderType() == C_BULLET)
             {
                 barrierCnt = 0;
-                lightning->SetVisible(true);
+                DamageEffect(true);
                 break;
             }
         }
@@ -142,7 +142,7 @@ void PlaneActor::UpdateActor(float deltaTime)
     barrierCnt++;
     if(barrierCnt > 15)
     {
-        lightning->SetVisible(false);
+        DamageEffect(false);
     }
     
 }
@@ -166,3 +166,18 @@ void PlaneActor::ShotLaser()
     }
 }
 
+void PlaneActor::DamageEffect(bool b)
+{
+    if (b)
+    {
+        lightning->SetVisible(true);
+        meshComp->SetGlory(true);
+
+    }
+    else
+    {
+        lightning->SetVisible(false);
+        meshComp->SetGlory(false);
+
+    }
+}

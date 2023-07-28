@@ -47,19 +47,19 @@ void CloudStage::LoadStageData()
     
     for(int i = 0; i < MAX_CLOUD; i++)
     {
-        cloudActor.push_back( std::make_unique<CloudBGActor>(app) );
+        cloudActor.emplace_back( std::make_unique<CloudBGActor>(app) );
     }
     for(int i = 0;  i < MAX_UFO; i++)
     {
-        ufoEnemy.push_back( std::make_unique<UfoEnemy>(app));
+        ufoEnemy.emplace_back( std::make_unique<UfoEnemy>(app));
     }
     for(int i = 0;  i < MAX_MOAI; i++)
     {
-        moaiEnemy.push_back( std::make_unique<MoaiEnemy>(app));
+        moaiEnemy.emplace_back( std::make_unique<MoaiEnemy>(app));
     }
     for(int i = 0;  i < MAX_SHIP; i++)
     {
-        shipEnemy.push_back( std::make_unique<ShipEnemy>(app));
+        shipEnemy.emplace_back( std::make_unique<ShipEnemy>(app));
     }
     
     
@@ -106,7 +106,7 @@ void CloudStage::UpdateStage()
     GenerateCloud();
 
     AppearLayout();
-    //AppearRandom();
+    AppearRandom();
     
 }
 

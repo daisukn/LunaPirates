@@ -21,6 +21,7 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, MeshType type)
     , isToon(false)
     , contourFactor(1.1014f)
     , isBlendAdd(false)
+    , isGlory(false)
     , meshType(type)
 {
 
@@ -105,6 +106,27 @@ void MeshComponent::Draw(Shader* s)
             }
             glFrontFace(GL_CCW);
         }
+        
+        if (isGlory)
+        {
+            glBlendFunc(GL_ONE, GL_ONE);
+            glFrontFace(GL_CW);
+            Matrix4 m = Matrix4::CreateScale(contourFactor*scale);
+            s->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
+            for (auto v : va)
+            {
+                Texture* t = mesh->GetTexture(v->GetTextureID());
+                if (t)
+                {
+                    t->SetActive();
+                }
+                v->SetActive();
+                glDrawElements(GL_TRIANGLES, v->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
+            }
+            glFrontFace(GL_CCW);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
+        
         
         if (isBlendAdd)
         {

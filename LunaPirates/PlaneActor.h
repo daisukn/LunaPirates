@@ -46,6 +46,7 @@ private:
     std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
     
     int barrierCnt;
+    void DamageEffect(bool b);
 
 };
 

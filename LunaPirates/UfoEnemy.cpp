@@ -26,7 +26,7 @@ UfoEnemy::UfoEnemy(Application* a)
     // 弾幕
     for(int i = 0; i < MAX_BULLET; i++)
     {
-        bullets.push_back(std::make_unique<BulletActor>(a));
+        bullets.emplace_back(std::make_unique<BulletActor>(a));
     }
     
     

@@ -37,6 +37,8 @@ public:
     void SetBlendAdd(bool b) { isBlendAdd = b; }
     bool GetBlendAdd() const { return isBlendAdd; }
     
+    void SetGlory(bool b) { isGlory = b; }
+    bool GetGlory() const { return isGlory; }
     
     void SetScale(float f) { scale = f; }
     float GetScale() const { return scale; }
@@ -59,6 +61,9 @@ protected:
     // 輪郭強調
     bool isToon;
     float contourFactor;
+    
+    // 後光
+    bool isGlory;
     
     // 加算合成するか
     bool isBlendAdd;
