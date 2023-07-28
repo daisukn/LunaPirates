@@ -131,7 +131,7 @@ void PlaneActor::UpdateActor(float deltaTime)
     {
         for(auto col : collComp->GetTargetColliders())
         {
-            if(col->GetColliderType() == C_BULLET)
+            if(col->GetColliderType() == C_BULLET || col->GetColliderType() == C_ENEMY)
             {
                 barrierCnt = 0;
                 DamageEffect(true);
