@@ -21,11 +21,6 @@ PlaneActor::PlaneActor(Application* app)
     , isMovable(true)
     , barrierCnt(0)
  {
-
-
-
-
-     
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
      meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/plane.fbx"));
