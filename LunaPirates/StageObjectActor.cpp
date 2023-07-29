@@ -20,6 +20,7 @@ void StageObjectActor::Appear(Vector3 pos, int type)
     behaveType = type;
     state = StateNormal;
     isDisp = true;
+    SetRotation(Quaternion::Identity);
     SetPosition(pos);
 }
 

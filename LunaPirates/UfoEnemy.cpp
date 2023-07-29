@@ -7,7 +7,7 @@
 #include "ParticleComponent.h"
 #include "MoveComponent.h"
 
-const int MAX_BULLET = 30;
+const int MAX_BULLET = 50;
 
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
@@ -141,12 +141,13 @@ void UfoEnemy::Behavior_0(float deltaTime)
 {
 
 
-    float speed = 100.f;
+    float speed = 150.f;
     
-    if (cntLifetime < 120)
+    if (cntLifetime < 100)
     {
         forwardSpeed = speed;
 //        std::cout << GetPosition().z << std::endl;
+
     }
     if (cntLifetime == 220)
     {
@@ -188,6 +189,11 @@ void UfoEnemy::Behavior_1(float deltaTime)
     {
         forwardSpeed = -speed;
 //        std::cout << GetPosition().z << std::endl;
+        
+        if (cntLifetime % 5 == 0)
+        {
+            ShotCircle();
+        }
     }
     if (cntLifetime > 240)
     {
@@ -196,12 +202,16 @@ void UfoEnemy::Behavior_1(float deltaTime)
     }
 
     
-    if (cntLifetime > 240 && cntLifetime < 400)
+    if (cntLifetime > 240)
     {
         if (cntLifetime % 5 == 0)
         {
             ShotLiner();
         }
+    }
+    if (cntLifetime > 500)
+    {
+        forwardSpeed = -speed;
     }
     moveComp->SetForwardSpeed(forwardSpeed);
     moveComp->SetUpSpeed(upSpeed);
@@ -229,7 +239,11 @@ void UfoEnemy::Behavior_3(float deltaTime)
 
 void UfoEnemy::ShotLiner()
 {
-    for(int i = 0; i < MAX_BULLET; i++)
+    if (state != StateNormal)
+    {
+        return;
+    }
+    for (int i = 0; i < MAX_BULLET; i++)
     {
         if(!bullets[i]->GetDisp())
         {
@@ -244,6 +258,12 @@ void UfoEnemy::ShotLiner()
 
 void UfoEnemy::ShotCircle()
 {
+    if (state != StateNormal)
+    {
+        return;
+    }
+
+    
     for(int j = 0;  j < 6; j++)
     {
         for(int i = 0; i < MAX_BULLET; i++)
@@ -254,6 +274,14 @@ void UfoEnemy::ShotCircle()
                 bullets[i]->Appear(GetPosition(), 1);
                 break;
             }
+        }
+    }
+    for(int i = 0; i < MAX_BULLET; i++)
+    {
+        if(!bullets[i]->GetDisp())
+        {
+            bullets[i]->Appear(GetPosition(), 0);
+            break;
         }
     }
 }

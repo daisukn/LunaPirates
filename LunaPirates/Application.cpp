@@ -51,7 +51,7 @@ bool Application::Initialize()
     }
     
     // Renderer初期化
-    renderer->Initialize("Project Luna", SCREEN_W, SCREEN_H);
+    renderer->Initialize("Project Luna", SCREEN_W, SCREEN_H, false);
 
     // 入力システム初期化
     inputSys->Initialize();

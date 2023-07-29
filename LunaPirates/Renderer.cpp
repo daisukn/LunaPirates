@@ -16,8 +16,6 @@
 
 
 
-const auto WINDOW_FLAGS = SDL_WINDOW_OPENGL;
-//const auto WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
 
 //#define __GAME_DEBUG
 
@@ -33,7 +31,7 @@ Renderer::~Renderer()
 
 
 // ウィンドウ生成とGL初期化
-bool Renderer::Initialize(std::string title, float scWidth, float scHeight)
+bool Renderer::Initialize(std::string title, float scWidth, float scHeight, bool isFullScreen)
 {
     strTitle        = title;    // ウィンドウタイトル
     screenWidth     = scWidth;  // スクリーン幅
@@ -56,8 +54,16 @@ bool Renderer::Initialize(std::string title, float scWidth, float scHeight)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     
     
+    unsigned int WINDOW_FLAGS = SDL_WINDOW_OPENGL;
+    
+    if (isFullScreen)
+    {
+        WINDOW_FLAGS = SDL_WINDOW_OPENGL || SDL_WINDOW_FULLSCREEN;
+    }
+    
     //ウインドウ生成
     window = SDL_CreateWindow(strTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(screenWidth), static_cast<int>(screenHeight), WINDOW_FLAGS);
+    
     if (!window )
     {
         std::cout << "Unable to create window" << std::endl;
