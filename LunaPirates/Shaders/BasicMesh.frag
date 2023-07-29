@@ -52,10 +52,11 @@ void main()
     
     // 反射光を計算
     vec3 Phong = uAmbientLight;
+    // テクスチャから色を計算
     vec4 col = texture(uTexture, fragTexCoord);
 
-    // テクスチャから色を計算
-    outColor = texture(uTexture, fragTexCoord) * vec4(Phong, col.a);
+    //outColor = texture(uTexture, fragTexCoord) * vec4(Phong, col.a);
+    outColor = col * vec4(Phong, col.a);
     
 
 }

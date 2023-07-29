@@ -14,15 +14,16 @@
 #include <ctime>
 
 const int MAX_CLOUD = 50;
-const int MAX_UFO = 500;
+const int MAX_UFO = 50;
 const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
 
-const float APEAR_POINT = 1000.f;
+const float APEAR_POINT = 600.f;
 const std::string stageFileName = "Setting/stage_test.csv";
 
 
 //#define RANDOM_DEBUG
+//#define STAGE_DEBUG
 
 CloudStage::CloudStage(class Application* a)
     : Stage(a)
@@ -80,7 +81,6 @@ void CloudStage::LoadStageData()
     isQuitStage = false;
     
     app->GetRenderer()->SetClearColor(0.596f, 0.733f, 0.858f);
-    //app->GetRenderer()->SetClearColor(0.05f, 0.01f, 0.258f);
     
     
     
@@ -114,7 +114,10 @@ void CloudStage::UpdateStage()
 #else
     AppearLayout();
 #endif // RANDOM_DEBUG
-    
+
+#ifdef STAGE_DEBUG
+    DebugAppear();
+#endif //STAGE_DEBUG
 }
 
 void CloudStage::GenerateCloud()
@@ -227,3 +230,28 @@ void CloudStage::AppearRandom()
     }
 }
 
+void CloudStage::DebugAppear()
+{
+    if(stageCounter % 500 == 0)
+    {
+        for(int i = 0; i < MAX_MOAI; i++)
+        {
+            if(!moaiEnemy[i]->GetDisp())
+            {
+                moaiEnemy[i]->Appear(Vector3(-50, 0 , APEAR_POINT), 0);
+                break;
+            }
+        }
+    }
+    if(stageCounter % 500 == 250)
+    {
+        for(int i = 0; i < MAX_MOAI; i++)
+        {
+            if(!moaiEnemy[i]->GetDisp())
+            {
+                moaiEnemy[i]->Appear(Vector3(50, 0 , APEAR_POINT), 0);
+                break;
+            }
+        }
+    }
+}

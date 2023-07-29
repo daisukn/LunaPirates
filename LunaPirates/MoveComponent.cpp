@@ -71,3 +71,12 @@ void MoveComponent::Update(float deltaTime)
         owner->SetPosition(pos);
     }
 }
+
+void MoveComponent::Reset()
+{
+    angularSpeed = 0.0f;
+    forwardSpeed = 0.0f;
+    rightSpeed = 0.0f;
+    dropSpeed = 0.0f;
+    upSpeed = 0.0f;
+}

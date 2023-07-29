@@ -30,6 +30,7 @@ private:
     void GenerateCloud();
     void AppearLayout() override;
     void AppearRandom();
+    void DebugAppear();
 
 public:
     CloudStage(class Application* a);

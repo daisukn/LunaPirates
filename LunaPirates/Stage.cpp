@@ -43,6 +43,7 @@ void Stage::LoadStageLayout(std::string filename)
             continue;
         }
         if (line[0] == '#' || line[0] == ',')
+        //if (!std::isdigit(line[0]))
         {
             continue;
         }

@@ -64,8 +64,8 @@ Vector3 FollowCamera::ComputeCameraPos() const
 	// カメラの位置を所有アクターの上のほうにセット
 	Vector3 cameraPos = owner->GetPosition();
     {
-        cameraPos.x = cameraPos.x /3 *2;
-        cameraPos.y = cameraPos.y /3 *2;
+        cameraPos.x = cameraPos.x / 2;
+        cameraPos.y = cameraPos.y / 2;
     }
     cameraPos -= owner->GetForward() * horzDist;
     //cameraPos += Vector3::UnitY * vertDist;

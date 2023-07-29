@@ -11,9 +11,10 @@ const int MAX_BULLET = 30;
 
 UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
-    , shotAngle(0.0f)
     , forwardSpeed(0.0f)
     , anglerSpeed(0.0f)
+    , upSpeed(0.0)
+    , angle(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/ufo.lwo"));
@@ -59,6 +60,8 @@ void UfoEnemy::Appear(Vector3 pos, int type)
     StageObjectActor::Appear(pos, type);
     anglerSpeed = 0.0f;
     forwardSpeed = 0.0f;
+    angle = 0.0f;
+    moveComp->Reset();
 }
 
 void UfoEnemy::Disappear()
@@ -138,15 +141,16 @@ void UfoEnemy::Behavior_0(float deltaTime)
 {
 
 
+    float speed = 100.f;
     
-    if (cntLifetime < 150)
+    if (cntLifetime < 120)
     {
-        forwardSpeed = 200.f;
-        std::cout << GetPosition().z << std::endl;
+        forwardSpeed = speed;
+//        std::cout << GetPosition().z << std::endl;
     }
-    if (cntLifetime == 240)
+    if (cntLifetime == 220)
     {
-        forwardSpeed = 200.f;
+        forwardSpeed = speed;
         if (GetPosition().x > 0)
         {
             anglerSpeed = -75;
@@ -156,14 +160,17 @@ void UfoEnemy::Behavior_0(float deltaTime)
             anglerSpeed = 75;
         }
     }
-    if (cntLifetime == 400)
+    if (cntLifetime == 440)
     {
         anglerSpeed = 0.0f;
     }
     
-    if (cntLifetime == 240 || cntLifetime == 290 || cntLifetime == 320 || cntLifetime == 350 )
+    if (cntLifetime > 220 && cntLifetime < 440)
     {
-        ShotCircle();
+        if (cntLifetime % 10 == 0)
+        {
+            ShotLiner();
+        }
     }
     moveComp->SetForwardSpeed(forwardSpeed);
     moveComp->SetAngularSpeed(anglerSpeed);
@@ -174,6 +181,36 @@ void UfoEnemy::Behavior_0(float deltaTime)
 void UfoEnemy::Behavior_1(float deltaTime)
 {
 
+    float speed = 100.f;
+    angle += 5.f;
+    
+    if (cntLifetime < 100)
+    {
+        forwardSpeed = -speed;
+//        std::cout << GetPosition().z << std::endl;
+    }
+    if (cntLifetime > 240)
+    {
+        forwardSpeed = 0;
+        upSpeed = 100 * sin(Math::ToRadians(angle));
+    }
+
+    
+    if (cntLifetime > 240 && cntLifetime < 400)
+    {
+        if (cntLifetime % 5 == 0)
+        {
+            ShotLiner();
+        }
+    }
+    moveComp->SetForwardSpeed(forwardSpeed);
+    moveComp->SetUpSpeed(upSpeed);
+
+/*
+    auto v = GetPosition();
+    v += Vector3::UnitY * upSpeed;
+    SetPosition(v);
+ */
 }
 
 void UfoEnemy::Behavior_2(float deltaTime)
@@ -192,14 +229,12 @@ void UfoEnemy::Behavior_3(float deltaTime)
 
 void UfoEnemy::ShotLiner()
 {
-    shotAngle += 30;
     for(int i = 0; i < MAX_BULLET; i++)
     {
         if(!bullets[i]->GetDisp())
         {
             auto v = GetPosition();
-            auto a = Math::ToRadians(shotAngle);
-            bullets[i]->Appear(Vector3(v.x + cos(a)*10, v.y + sin(a)*10, v.z), 0);
+            bullets[i]->Appear(Vector3(v.x, v.y, v.z), 0);
             break;
         }
     }

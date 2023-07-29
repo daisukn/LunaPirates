@@ -249,7 +249,7 @@ void BoundingVolumeComponent::CreateVArray()
     //vArray = new VertexArray(BBverts, 8, (unsigned int*)BBindex, (unsigned int)36);
     vArray = std::make_unique<VertexArray>(BBverts, 8, (unsigned int*)BBindex, (unsigned int)36);
     // マテリアル非対応なのでTextureで代用
-    texture = owner->GetApp()->GetRenderer()->GetTexture("Assets/BoundingVolume.png");
+    //texture = owner->GetApp()->GetRenderer()->GetTexture("Assets/BoundingVolume.png");
     
     //isVisible = true;
 }
@@ -267,7 +267,7 @@ void BoundingVolumeComponent::Draw(Shader* shader)
         shader->SetFloatUniform("uSpecPower", 1);
 
 
-        texture->SetActive();
+        //texture->SetActive();
             
         vArray->SetActive();
         glDrawElements(GL_LINE_STRIP, 36, GL_UNSIGNED_INT, nullptr);

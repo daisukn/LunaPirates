@@ -85,7 +85,7 @@ private:
     void CreatePolygons();
 
     std::unique_ptr<class VertexArray> vArray;
-    class Texture* texture;
+    //class Texture* texture;
     
 
     std::unique_ptr<struct Cube> boundingBox;

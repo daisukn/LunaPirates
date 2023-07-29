@@ -93,7 +93,7 @@ private:
     // Windowハンドラ
     SDL_Window* window;
     // GLコンテキスト
-    SDL_GLContext lpGL;
+    SDL_GLContext glContext;
 
     // ビューマトリックス
     Matrix4 viewMatrix;
@@ -119,6 +119,8 @@ private:
     std::unique_ptr<class Shader> billboardShader;
     // パーティクル用シェーダー
     std::unique_ptr<class Shader> particleShader;
+    // ワイヤーフレーム用　単色シェーダー
+    std::unique_ptr<class Shader> solidShader;
     // シェーダー一括ロード
     bool LoadShaders();
 

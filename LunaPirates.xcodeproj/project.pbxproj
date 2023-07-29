@@ -67,6 +67,7 @@
 		7E1812952A6BA531001C84A4 /* Stage1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Stage1.txt; sourceTree = "<group>"; };
 		7E66F5AA2A74814A00147C1D /* stage.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = stage.csv; sourceTree = "<group>"; };
 		7E66F5AB2A74814A00147C1D /* Stage_test.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = Stage_test.csv; sourceTree = "<group>"; };
+		7E66F5AC2A749FB800147C1D /* SolidColor.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = SolidColor.frag; sourceTree = "<group>"; };
 		7EA398DE2A65581C00856DB1 /* LunaPirates */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LunaPirates; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA398E82A65582D00856DB1 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		7EA398E92A65582D00856DB1 /* MoveComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MoveComponent.cpp; sourceTree = "<group>"; };
@@ -251,6 +252,7 @@
 				7EA3993A2A65583100856DB1 /* Billboard.frag */,
 				7EA3993C2A65583100856DB1 /* Sprite.vert */,
 				7EA399422A65583100856DB1 /* Sprite.frag */,
+				7E66F5AC2A749FB800147C1D /* SolidColor.frag */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

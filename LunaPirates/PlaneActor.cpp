@@ -15,6 +15,9 @@
 
 const int MAX_LASER = 20;
 
+const float AREA_LIMIT_H = 45.f;
+const float AREA_LIMIT_W = 75.f;
+
 PlaneActor::PlaneActor(Application* app)
     : StageObjectActor(app)
     , animID(0)
@@ -82,19 +85,19 @@ void PlaneActor::FieldMove(const InputState &state)
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_UP) == EHeld)
     {
-        if(GetPosition().y < 45) upSpeed += speed;
+        if(GetPosition().y < AREA_LIMIT_H) upSpeed += speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_DOWN) == EHeld)
     {
-        if(GetPosition().y > -45) upSpeed -= speed;
+        if(GetPosition().y > -AREA_LIMIT_H) upSpeed -= speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT) == EHeld)
     {
-        if(GetPosition().x > -70) rightSpeed -= speed;
+        if(GetPosition().x > -AREA_LIMIT_W) rightSpeed -= speed;
     }
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT) == EHeld)
     {
-        if(GetPosition().x < 70) rightSpeed += speed;
+        if(GetPosition().x < AREA_LIMIT_W) rightSpeed += speed;
     }
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)

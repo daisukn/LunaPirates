@@ -19,6 +19,8 @@ public:
     void SetRightSpeed(float speed) { rightSpeed = speed;}
     void SetDropSpeed(float speed) { dropSpeed = speed; }
     void SetUpSpeed(float speed) {upSpeed = speed; }
+    
+    void Reset();
 
 
 private:

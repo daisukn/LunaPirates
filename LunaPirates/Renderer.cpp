@@ -19,7 +19,7 @@
 const auto WINDOW_FLAGS = SDL_WINDOW_OPENGL;
 //const auto WINDOW_FLAGS = SDL_WINDOW_OPENGL||SDL_WINDOW_FULLSCREEN;
 
-#define __GAME_DEBUG
+//#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()
@@ -66,7 +66,7 @@ bool Renderer::Initialize(std::string title, float scWidth, float scHeight)
     
     
     // OpenGL コンテキスト生成
-    lpGL = SDL_GL_CreateContext(window);
+    glContext = SDL_GL_CreateContext(window);
     
     // GLEW初期化
     glewExperimental = GL_TRUE;
@@ -91,7 +91,7 @@ bool Renderer::Initialize(std::string title, float scWidth, float scHeight)
 // リリース処理
 void Renderer::Shutdown()
 {
-    SDL_GL_DeleteContext(lpGL);
+    SDL_GL_DeleteContext(glContext);
     SDL_DestroyWindow(window);
 
 }
@@ -183,13 +183,14 @@ void Renderer::Draw()
 
 #ifdef __GAME_DEBUG
     // デバッガー用の描画
-    backGroundShader->SetActive();
-    backGroundShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    solidShader->SetActive();
+    solidShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    solidShader->SetVectorUniform("uSolColor", Vector3(0.2f, 0.2f, 1.0f));
     // Update lighting uniforms
-    SetLightUniforms(backGroundShader.get());
+    SetLightUniforms(solidShader.get());
     for (auto dg : dbgComps)
     {
-        dg->Draw(backGroundShader.get());
+        dg->Draw(solidShader.get());
 
     }
 #endif // __GAME_DEBUG
@@ -276,6 +277,7 @@ bool Renderer::LoadShaders()
         return false;
     }
     spriteShader->SetActive();
+    
     // ビューマトリックス、プロジェクションマトリックス
     Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
     spriteShader->SetMatrixUniform("uViewProj", viewProj);
@@ -334,6 +336,7 @@ bool Renderer::LoadShaders()
         return false;
     }
     skinnedShader->SetActive();
+    
     // スキンメッシュ用シェーダー(Toon)
     skinnedShaderToon = std::make_unique<Shader>();
     if (!skinnedShaderToon->Load("Shaders/Skinned.vert", "Shaders/Toon.frag"))
@@ -341,6 +344,16 @@ bool Renderer::LoadShaders()
         return false;
     }
     skinnedShaderToon->SetActive();
+    
+    
+    // ワイヤフレーム用　単色シェーダー生成
+    solidShader = std::make_unique<Shader>();
+    if (!solidShader->Load("Shaders/BasicMesh.vert", "Shaders/SolidColor.frag"))
+    {
+        return false;
+    }
+    solidShader->SetActive();
+    
 
     
     // ビューマトリックス、プロジェクションマトリックス（デフォルト値）
@@ -348,9 +361,9 @@ bool Renderer::LoadShaders()
     projectionMatrix = Matrix4::CreatePerspectiveFOV(Math::ToRadians(30.0f), screenWidth, screenHeight, 1.0f, 2000.0f);
     
     // シェーダーに送る
-    meshShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
-    skinnedShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
-    billboardShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    //meshShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    //skinnedShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
+    //billboardShader->SetMatrixUniform("uViewProj", viewMatrix * projectionMatrix);
     
     return true;
 
@@ -372,8 +385,8 @@ void Renderer::SetLightUniforms(Shader* shader)
     
     
     // フォグ
-    shader->SetFloatUniform("uFoginfo.maxDist", 990.0f);
-    shader->SetFloatUniform("uFoginfo.minDist", 500.0f);
+    shader->SetFloatUniform("uFoginfo.maxDist", 600.0f);
+    shader->SetFloatUniform("uFoginfo.minDist", 400.0f);
     
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.75f, 0.96f, 0.99f) );
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.69f, 0.859f, 0.894f) );
@@ -386,11 +399,11 @@ void Renderer::SetLightUniforms(Shader* shader)
 void Renderer::AddSprite(SpriteComponent* sprite)
 {
     // DrawOrderを探して 自分より優先度の高いものの次を見つける
-    int myDrawOrder = sprite->GetDrawOrder();
+    int drawOrder = sprite->GetDrawOrder();
     auto iter = spriteComps.begin();
     for (;iter != spriteComps.end(); ++iter)
     {
-        if (myDrawOrder < (*iter)->GetDrawOrder())
+        if (drawOrder < (*iter)->GetDrawOrder())
         {
             break;
         }
@@ -415,11 +428,11 @@ void Renderer::RemoveSprite(SpriteComponent* sprite)
 void Renderer::AddBackGroundSprite(SpriteComponent* sprite)
 {
     // DrawOrderを探して 自分より優先度の高いものの次を見つける
-    int myDrawOrder = sprite->GetDrawOrder();
+    int drawOrder = sprite->GetDrawOrder();
     auto iter = bgSpriteComps.begin();
     for (;iter != bgSpriteComps.end(); ++iter)
     {
-        if (myDrawOrder < (*iter)->GetDrawOrder())
+        if (drawOrder < (*iter)->GetDrawOrder())
         {
             break;
         }
@@ -618,11 +631,11 @@ void Renderer::RemoveParticleComp(ParticleComponent* part)
 void Renderer::AddBillboardComp(BillboardComponent* billboard)
 {
     // DrawOrderを探して 自分より優先度の高いものの次を見つける
-    int myDrawOrder = billboard->GetDrawOrder();
+    int drawOrder = billboard->GetDrawOrder();
     auto iter = billboardComps.begin();
     for (;iter != billboardComps.end(); ++iter)
     {
-        if (myDrawOrder < (*iter)->GetDrawOrder())
+        if (drawOrder < (*iter)->GetDrawOrder())
         {
             break;
         }
@@ -638,7 +651,8 @@ void Renderer::AddBillboardComp(BillboardComponent* billboard)
 void Renderer::RemoveBillboardComp(BillboardComponent* billboard)
 {
     auto iter = std::find(billboardComps.begin(), billboardComps.end(), billboard);
-    if (iter != billboardComps.end()) { // 要素が見つかった場合のみ削除
+    if (iter != billboardComps.end())
+    { // 要素が見つかった場合のみ削除
         billboardComps.erase(iter);
     }
 }
@@ -656,7 +670,8 @@ void Renderer::AddDebuggerComp(DebuggerComponent* dbg)
 void Renderer::RemoveDebuggerComp(DebuggerComponent* dbg)
 {
     auto iter = std::find(dbgComps.begin(), dbgComps.end(), dbg);
-    if (iter != dbgComps.end()) { // 要素が見つかった場合のみ削除
+    if (iter != dbgComps.end())
+    { // 要素が見つかった場合のみ削除
         dbgComps.erase(iter);
     }
 }

@@ -39,7 +39,9 @@ private:
     
     float forwardSpeed;
     float anglerSpeed;
+    float upSpeed;
     
-    float shotAngle;
+    float angle;
+    
 };
 
