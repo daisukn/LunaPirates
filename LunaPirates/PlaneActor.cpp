@@ -12,6 +12,7 @@
 #include "BoundingVolumeComponent.h"
 #include "CloudStage.h"
 #include "TargetScopeActor.h"
+#include "SpriteComponent.h"
 
 const int MAX_LASER = 20;
 
@@ -69,6 +70,11 @@ PlaneActor::PlaneActor(Application* app)
      lightning->SetScale(0.01f);
      //lightning->SetBlendAdd(true);
      lightning->SetVisible(false);
+     
+     // フラッシュ
+     flash = std::make_unique<SpriteComponent>(this);
+     flash->SetTexture(app->GetRenderer()->GetTexture("Assets/Textures/screnn_flash.png"));
+
     
 }
 

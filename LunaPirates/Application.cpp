@@ -9,15 +9,15 @@
 #include <algorithm>
 
 
-#define __high_resolution__
+#define __HIGH_RESOLUTION__
 
-#ifdef __high_resolution__
+#ifdef __HIGH_RESOLUTION__
 const float SCREEN_W = 1600.f;
 const float SCREEN_H = 900.f;
 #else
 const float SCREEN_W = 1280.f;
 const float SCREEN_H = 720.f;
-#endif // __high_resolution__
+#endif // __HIGH_RESOLUTION__
 
 // コンストラクタ
 Application::Application()

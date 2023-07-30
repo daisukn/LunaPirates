@@ -71,7 +71,7 @@ void ParticleComponent::Draw(Shader *shader)
         
         for (int i = 0; i < numParts; i++)
         {
-            if(parts[i].isVisible)
+            if (parts[i].isVisible)
             {
                 shader->SetVectorUniform("uPosition", parts[i].pos);
                 glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
