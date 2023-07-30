@@ -52,7 +52,7 @@ PlaneActor::PlaneActor(Application* app)
 
     
      // レーザー
-     for(int i = 0; i < MAX_LASER; i++)
+     for (int i = 0; i < MAX_LASER; i++)
      {
          laserActor.emplace_back( std::make_unique<LaserActor>(app));
      }
@@ -83,11 +83,8 @@ void PlaneActor::FieldMove(const InputState &state)
     float rightSpeed = 0.0f;
     float upSpeed = 0.0f;
     
-    
-
     float speed = 80;
 
-    
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_UP) == EHeld)
     {
@@ -131,11 +128,11 @@ void PlaneActor::UpdateActor(float deltaTime)
     auto v = GetPosition();
     scopeActor->SetPosition(Vector3(v.x, v.y, v.z+30));
     
-    if(collComp->GetCollided())
+    if (collComp->GetCollided())
     {
-        for(auto col : collComp->GetTargetColliders())
+        for (auto col : collComp->GetTargetColliders())
         {
-            if(col->GetColliderType() == C_BULLET || col->GetColliderType() == C_ENEMY)
+            if (col->GetColliderType() == C_BULLET || col->GetColliderType() == C_ENEMY)
             {
                 barrierCnt = 0;
                 DamageEffect(true);
@@ -162,7 +159,7 @@ void PlaneActor::ShotLaser()
 {
     for (int i = 0; i < MAX_LASER; i++)
     {
-        if(!laserActor[i]->GetDisp())
+        if (!laserActor[i]->GetDisp())
         {
             laserActor[i]->Appear(GetPosition(), 0);
             break;

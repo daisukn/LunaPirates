@@ -21,6 +21,11 @@
 
 // コンストラクタ
 Renderer::Renderer()
+    : strTitle("")
+    , screenWidth(0.0f)
+    , screenHeight(0.0f)
+    , window(nullptr)
+    , glContext(nullptr)
 {
 }
 
