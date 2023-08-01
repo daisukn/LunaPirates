@@ -38,21 +38,28 @@ LaserActor::LaserActor(Application* a)
 
 void LaserActor::UpdateActor(float deltaTime)
 {
-    collComp->SetDisp(isDisp);
-    if(isDisp)
+    if(!isDisp) return;
+    
+    meshComp->SetVisible(true);
+    efectMesh->SetVisible(true);
+    collComp->GetBoundingVolume()->SetVisible(true);
+    auto v = GetPosition();
+    float speed = 1000.0f * deltaTime;
+    SetPosition(Vector3(v.x, v.y, v.z+speed));
+    if(v.z > 600)
     {
-        meshComp->SetVisible(true);
-        efectMesh->SetVisible(true);
-        collComp->GetBoundingVolume()->SetVisible(true);
-        auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z+20));
-        if(v.z > 1000)
+        Disappear();
+    }
+    collComp->SetDisp(isDisp);
+    if (collComp->GetCollided())
+    {
+        for(auto col : collComp->GetTargetColliders())
         {
-            isDisp = false;
-            meshComp->SetVisible(false);
-            efectMesh->SetVisible(false);
-            collComp->GetBoundingVolume()->SetVisible(false);
-
+            if(col->GetColliderType() == C_ENEMY)
+            {
+                Disappear();
+                break;
+            }
         }
     }
 }
@@ -64,4 +71,11 @@ void LaserActor::Appear(Vector3 pos, int type)
     particle->SetParticleSpeed(5);
 }
 
+void LaserActor::Disappear()
+{
+    isDisp = false;
+    meshComp->SetVisible(false);
+    efectMesh->SetVisible(false);
+    collComp->GetBoundingVolume()->SetVisible(false);
+}
 

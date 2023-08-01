@@ -126,8 +126,8 @@
             filePath = "LunaPirates/Renderer.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "Renderer::Draw()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,9 +174,25 @@
             filePath = "LunaPirates/Renderer.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "Renderer::LoadShaders()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C76D3B4-FC4D-423A-9199-A646E9D27F38"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LunaPirates/Renderer.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "Renderer::Draw()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

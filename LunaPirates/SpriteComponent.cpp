@@ -15,6 +15,7 @@ SpriteComponent::SpriteComponent(Actor* a, int order, bool isBG)
     , texWidth(0)
     , texHeight(0)
     , isBackGround(isBG)
+    , isVisible(true)
 {
     if(isBG)
     {
@@ -43,6 +44,11 @@ SpriteComponent::~SpriteComponent()
 // 描画
 void SpriteComponent::Draw(Shader* shader)
 {
+    if (!isVisible)
+    {
+        return;
+    }
+    
 	if (texture)
     {
 		// Textureサイズからスケールマトリックスを作成

@@ -28,7 +28,7 @@ public:
     virtual ~Renderer();
       
     // 初期化
-    bool Initialize(std::string title, float scWidth, float scHeight, bool isFullScreen);
+    bool Initialize(std::string title, float scWidth, float scHeight, bool isFullScreen = false);
     // 描画（Applicationから呼ばれる）
     void Draw();
     // 終了

@@ -15,9 +15,7 @@
 #include <algorithm>
 
 
-
-
-//#define __GAME_DEBUG
+#define __GAME_DEBUG
 
 // コンストラクタ
 Renderer::Renderer()
@@ -262,7 +260,7 @@ void Renderer::Draw()
     
     
     // スプライト処理
-    //glDisable(GL_DEPTH_TEST);
+    glDisable(GL_DEPTH_TEST);
     // アルファブレンディング
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -396,7 +394,7 @@ void Renderer::SetLightUniforms(Shader* shader)
     
     
     // フォグ
-    shader->SetFloatUniform("uFoginfo.maxDist", 600.0f);
+    shader->SetFloatUniform("uFoginfo.maxDist", 800.0f);
     shader->SetFloatUniform("uFoginfo.minDist", 400.0f);
     
 //    shader->SetVectorUniform("uFoginfo.color", Vector3(0.75f, 0.96f, 0.99f) );

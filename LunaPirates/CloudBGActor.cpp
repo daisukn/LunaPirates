@@ -16,9 +16,10 @@ void CloudBGActor::UpdateActor(float deltaTime)
 {
     if (isDisp)
     {
+        float speed = 250.0f * deltaTime;
         cloudBillboard->SetVisible(true);
         auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z-3.5));
+        SetPosition(Vector3(v.x, v.y, v.z-speed));
         if(v.z < 0)
         {
             isDisp = false;

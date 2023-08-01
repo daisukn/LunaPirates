@@ -8,6 +8,7 @@
 #include "TargetScopeActor.h"
 #include "LaserActor.h"
 #include "SpriteComponent.h"
+#include "Actor.h"
 
 #include <memory>
 
@@ -33,9 +34,9 @@ private:
     std::unique_ptr<class MoveComponent> moveComp;
     std::unique_ptr<class FollowCamera> cameraComp;
     std::unique_ptr<class MeshComponent> lightning;
-    std::unique_ptr<class SpriteComponent> flash;
     
     std::unique_ptr<class TargetScopeActor> scopeActor;
+    
 
     // フィールド移動用
     void FieldMove(const struct InputState& state);
@@ -48,6 +49,7 @@ private:
     std::vector<std::unique_ptr<class StageObjectActor>> laserActor;
     
     int barrierCnt;
+    int flashCnt;
     void DamageEffect(bool b);
 
 };

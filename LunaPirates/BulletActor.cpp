@@ -111,14 +111,14 @@ void BulletActor::UpdateActor(float deltaTime)
 
 void BulletActor::Behavior_0(float deltaTime)
 {
-    float speed = 10.0f;
+    float speed = 600.0f * deltaTime;
 
     zSpeed = -speed;
 }
 
 void BulletActor::Behavior_1(float deltaTime)
 {
-    float speed = 30.0f;
+    float speed = 1000.0f * deltaTime;
     
     xSpeed = cos(Math::ToRadians(angle)) * speed * deltaTime;
     ySpeed = sin(Math::ToRadians(angle)) * speed * deltaTime;

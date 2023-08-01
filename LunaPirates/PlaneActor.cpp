@@ -24,6 +24,7 @@ PlaneActor::PlaneActor(Application* app)
     , animID(0)
     , isMovable(true)
     , barrierCnt(0)
+    , flashCnt(0)
  {
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
@@ -66,14 +67,9 @@ PlaneActor::PlaneActor(Application* app)
 
      // 稲妻
      lightning = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
-     lightning->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/lightning.lwo"));
-     lightning->SetScale(0.01f);
-     //lightning->SetBlendAdd(true);
+     lightning->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/lightning2.lwo"));
+     lightning->SetBlendAdd(true);
      lightning->SetVisible(false);
-     
-     // フラッシュ
-     flash = std::make_unique<SpriteComponent>(this);
-     flash->SetTexture(app->GetRenderer()->GetTexture("Assets/Textures/screnn_flash.png"));
 
     
 }
@@ -102,12 +98,7 @@ void PlaneActor::FieldMove(const InputState &state)
     {
         if(GetPosition().x < AREA_LIMIT_W) rightSpeed += speed;
     }
-    
-    if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)
-    {
-        ShotLaser();
-    }
-    
+        
     
     moveComp->SetRightSpeed(rightSpeed);
     moveComp->SetUpSpeed(upSpeed);
@@ -119,7 +110,11 @@ void PlaneActor::FieldMove(const InputState &state)
 void PlaneActor::ActorInput(const InputState &state)
 {
     FieldMove(state);
-
+    
+    if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)
+    {
+        ShotLaser();
+    }
 }
 
 void PlaneActor::UpdateActor(float deltaTime)
@@ -134,7 +129,6 @@ void PlaneActor::UpdateActor(float deltaTime)
         {
             if (col->GetColliderType() == C_BULLET || col->GetColliderType() == C_ENEMY)
             {
-                barrierCnt = 0;
                 DamageEffect(true);
                 break;
             }
@@ -146,6 +140,7 @@ void PlaneActor::UpdateActor(float deltaTime)
         DamageEffect(false);
     }
     
+
 }
 
 
@@ -173,6 +168,9 @@ void PlaneActor::DamageEffect(bool b)
     {
         lightning->SetVisible(true);
         meshComp->SetGlory(true);
+
+        barrierCnt = 0;
+        flashCnt = 0;
 
     }
     else

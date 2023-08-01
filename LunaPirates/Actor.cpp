@@ -104,16 +104,16 @@ void Actor::ComputeWorldTransform()
 // コンポーネントを追加
 void Actor::AddComponent(Component* component)
 {
-    // 自分より優先度の高いものを探しす
-	int myOrder = component->GetUpdateOrder();
+    // 優先度の高いものを探しす
+	int order = component->GetUpdateOrder();
 	auto iter = components.begin();
 	for (;iter != components.end(); ++iter) {
-		if (myOrder < (*iter)->GetUpdateOrder()){
+		if (order < (*iter)->GetUpdateOrder()){
 			break;
 		}
 	}
 
-	// その次に自分を挿入
+	// その次に挿入
 	components.insert(iter, component);
 }
 

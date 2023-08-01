@@ -16,6 +16,8 @@ public:
     int GetTexHeight() const { return texHeight; }
     int GetTexWidth() const { return texWidth; }
 
+    void SetVisible(bool visible) { isVisible = visible; }
+    bool GetVisible() const { return isVisible; }
     
 protected:
     // スプライト用のテクスチャ
@@ -25,6 +27,7 @@ protected:
     int texHeight;
     
     bool isBackGround;
+    bool isVisible;
 
 
 };
