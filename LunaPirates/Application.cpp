@@ -9,7 +9,7 @@
 #include <algorithm>
 
 
-#define __HIGH_RESOLUTION__
+//#define __HIGH_RESOLUTION__
 
 #ifdef __HIGH_RESOLUTION__
 const float SCREEN_W = 1600.f;

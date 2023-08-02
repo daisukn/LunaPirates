@@ -13,7 +13,7 @@ UfoEnemy::UfoEnemy(Application* a)
     : StageObjectActor(a)
     , forwardSpeed(0.0f)
     , anglerSpeed(0.0f)
-    , upSpeed(0.0)
+    , upSpeed(0.0f)
     , angle(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);

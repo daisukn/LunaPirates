@@ -21,6 +21,7 @@ public:
 private:
     std::unique_ptr<class ExplosionActor> explosion;
     std::vector<std::unique_ptr<class BulletActor>> bullet;
+    std::unique_ptr<class MoveComponent> moveComp;
     
     void CheckCllider();
     
@@ -32,6 +33,11 @@ private:
     // 関数テーブル
     typedef void (MoaiEnemy::*Behavior)(float deltaTime);
     std::vector<Behavior> BehaviorTable;
+    
+    float forwardSpeed;
+    float anglerSpeed;
+    float upSpeed;
+    float angle;
 };
 
 

@@ -20,10 +20,8 @@ private:
     std::vector<std::unique_ptr<class BulletActor>> bullets;
     std::unique_ptr<class MoveComponent> moveComp;
 
-
     void CheckCllider();
-    
-    
+        
     // 各行動パターン
     void Behavior_0(float deltaTime);
     void Behavior_1(float deltaTime);

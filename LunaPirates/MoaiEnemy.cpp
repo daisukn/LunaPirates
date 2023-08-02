@@ -4,10 +4,14 @@
 #include "BoundingVolumeComponent.h"
 #include "Mesh.h"
 
-const int MAX_MAIBULLET = 12;
+const int MAX_MOAIBULLET = 50;
 
 MoaiEnemy::MoaiEnemy(Application* a)
     : StageObjectActor(a)
+    , forwardSpeed(0.0f)
+    , anglerSpeed(0.0f)
+    , upSpeed(0.0f)
+    , angle(0.0f)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/moai.lwo"));
@@ -28,11 +32,14 @@ MoaiEnemy::MoaiEnemy(Application* a)
     
     
     // 弾幕
-    for(int i = 0; i < MAX_MAIBULLET; i++)
+    for(int i = 0; i < MAX_MOAIBULLET; i++)
     {
         bullet.emplace_back(std::make_unique<BulletActor>(a));
     }
     
+    
+    // 移動用コンポーネント
+    moveComp = std::make_unique<MoveComponent>(this);
     
     // 関数テーブル初期化
     BehaviorTable.push_back(&MoaiEnemy::Behavior_0);
@@ -90,74 +97,16 @@ void MoaiEnemy::UpdateActor(float deltaTime)
 
 void MoaiEnemy::Behavior_0(float deltaTime)
 {
-    if(!isDisp) return;
- 
-    if(state == StateNormal)
-    {
-        meshComp->SetVisible(true);
-        collComp->GetBoundingVolume()->SetVisible(true);
-        
-        auto v = GetPosition();
-        SetPosition(Vector3(v.x, v.y, v.z - 1.5));
-        if(v.z < 0)
-        {
-            isDisp = false;
-            meshComp->SetVisible(false);
-            collComp->GetBoundingVolume()->SetVisible(false);
-        }
-        
-        
-        collComp->SetDisp(isDisp);
-        if(collComp->GetCollided())
-        {
-            for(auto col : collComp->GetTargetColliders())
-            {
-                if(col->GetColliderType() == C_PLAYER
-                   || col->GetColliderType() == C_LASER)
-                {
-                    meshComp->SetVisible(false);
-                    collComp->GetBoundingVolume()->SetVisible(false);
-                    collComp->SetCollided(false);
-                    
-                    state = StateExploted;
-                    explosion->Appear(GetPosition());
-                    break;
-                    
-                }
-            }
 
-        }
-
-        
-    }
-    else if(state == StateExploted)
+    float speed = 150.f;
+    
+    if (cntLifetime < 100)
     {
-        
-        
-        if(!explosion->GetDisp())
-        {
-            isDisp = false;
-        }
+        forwardSpeed = -speed;
     }
-    
-    
-    cntLifetime++;
-    
-    if(cntLifetime == 300)
-    {
-        for(int j = 0;  j < 6; j++)
-        {
-            for(int i = 0; i < MAX_MAIBULLET; i++)
-            {
-                if(!bullet[i]->GetDisp())
-                {
-                    bullet[i]->SetAngle((float)j*60);
-                    bullet[i]->Appear(GetPosition(), 0);
-                    break;
-                }
-            }
-        }
-    }
+    else forwardSpeed = 0.f;
+    moveComp->SetForwardSpeed(forwardSpeed);
+    moveComp->SetAngularSpeed(anglerSpeed);
         
 }
 
