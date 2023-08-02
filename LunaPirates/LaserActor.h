@@ -12,7 +12,7 @@ public:
     virtual void Disappear() override;
 private:
     std::unique_ptr<class ParticleComponent> particle;
-    std::unique_ptr<class MeshComponent> efectMesh;
+    std::unique_ptr<class MeshComponent> effectMesh;
 };
 
 

@@ -51,9 +51,39 @@ MoaiEnemy::~MoaiEnemy()
 
 void MoaiEnemy::UpdateActor(float deltaTime)
 {
+    if (!isDisp) { return; }
+    cntLifetime++;
+    
+
+    // 行動を反映
     if (behaveType >= 0 && behaveType < BehaviorTable.size())
     {
         (this->*BehaviorTable[behaveType])(deltaTime);
+    }
+        
+        
+    if(state == StateNormal)
+    {
+        meshComp->SetVisible(true);
+        collComp->GetBoundingVolume()->SetVisible(true);
+        
+        
+        
+        if(cntLifetime > 1000)
+        {
+            Disappear();
+        }
+        CheckCllider();
+        
+        
+    }
+    else if(state == StateExploted)
+    {
+        
+        if(!explosion->GetDisp())
+        {
+            isDisp = false;
+        }
     }
 }
 
@@ -143,6 +173,42 @@ void MoaiEnemy::Behavior_2(float deltaTime)
 }
 
 void MoaiEnemy::Behavior_3(float deltaTime)
+{
+    
+}
+
+void MoaiEnemy::CheckCllider()
+{
+
+    collComp->SetDisp(isDisp);
+    if(collComp->GetCollided())
+    {
+        for(auto col : collComp->GetTargetColliders())
+        {
+            if(col->GetColliderType() == C_PLAYER
+                   || col->GetColliderType() == C_LASER)
+            {
+                meshComp->SetVisible(false);
+                collComp->GetBoundingVolume()->SetVisible(false);
+                collComp->SetCollided(false);
+                    
+                state = StateExploted;
+                explosion->Appear(GetPosition());
+                break;
+                    
+            }
+        }
+
+    }
+}
+
+
+void MoaiEnemy::Appear(Vector3 pos, int type)
+{
+    StageObjectActor::Appear(pos, type);
+}
+
+void MoaiEnemy::Disappear()
 {
     
 }

@@ -24,7 +24,6 @@ PlaneActor::PlaneActor(Application* app)
     , animID(0)
     , isMovable(true)
     , barrierCnt(0)
-    , flashCnt(0)
  {
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
@@ -70,8 +69,6 @@ PlaneActor::PlaneActor(Application* app)
      lightning->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/lightning2.lwo"));
      lightning->SetBlendAdd(true);
      lightning->SetVisible(false);
-
-    
 }
 
 void PlaneActor::FieldMove(const InputState &state)
@@ -134,13 +131,11 @@ void PlaneActor::UpdateActor(float deltaTime)
             }
         }
     }
-    barrierCnt++;
-    if (barrierCnt > 15)
+    barrierCnt--;
+    if (barrierCnt == 0)
     {
         DamageEffect(false);
     }
-    
-
 }
 
 
@@ -168,9 +163,7 @@ void PlaneActor::DamageEffect(bool b)
     {
         lightning->SetVisible(true);
         meshComp->SetGlory(true);
-
-        barrierCnt = 0;
-        flashCnt = 0;
+        barrierCnt = 15;
 
     }
     else

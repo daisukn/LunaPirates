@@ -56,6 +56,7 @@ public:
     
     
     bool GetVisible() const { return isVisible; }
+    void SetVisible(bool b) { isVisible = b; }
     int GetDrawOrder() const { return drawOrder; }
     
     void SetParticleSpeed(float f) { partSpeed = f; }

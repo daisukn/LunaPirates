@@ -13,6 +13,8 @@ public:
     MoaiEnemy(class Application* a);
     ~MoaiEnemy();
     void UpdateActor(float deltaTime) override;
+    void Appear(Vector3 pos, int type) override;
+    void Disappear() override;
     
 
 
@@ -20,6 +22,7 @@ private:
     std::unique_ptr<class ExplosionActor> explosion;
     std::vector<std::unique_ptr<class BulletActor>> bullet;
     
+    void CheckCllider();
     
     // 各行動パターン
     void Behavior_0(float deltaTime);

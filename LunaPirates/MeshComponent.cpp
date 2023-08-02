@@ -23,6 +23,7 @@ MeshComponent::MeshComponent(Actor* a, bool isSkeletal, MeshType type)
     , isBlendAdd(false)
     , isGlory(false)
     , meshType(type)
+    , scale(1.0f)
 {
 
     switch(meshType)
@@ -68,8 +69,7 @@ void MeshComponent::Draw(Shader* s)
         
         // WorldマトリックスをShaderに送る
         Matrix4 m = Matrix4::CreateScale(scale);
-        s->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
-        s->SetMatrixUniform("uWorldTransform", owner->GetWorldTransform());
+        s->SetMatrixUniform("uWorldTransform", m * owner->GetWorldTransform());
 
 		// SpecPowerを送る
         s->SetFloatUniform("uSpecPower", mesh->GetSpecPower());
@@ -92,8 +92,8 @@ void MeshComponent::Draw(Shader* s)
         if (isToon)
         {
             glFrontFace(GL_CW);
-            Matrix4 m = Matrix4::CreateScale(contourFactor*scale);
-            s->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
+            Matrix4 m = Matrix4::CreateScale(contourFactor * scale);
+            s->SetMatrixUniform("uWorldTransform", m * owner->GetWorldTransform());
             for (auto v : va)
             {
                 Texture* t = owner->GetApp()->GetRenderer()->GetTexture("Assets/black.png");

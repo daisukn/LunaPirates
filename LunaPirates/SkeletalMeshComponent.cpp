@@ -31,7 +31,8 @@ void SkeletalMeshComponent::Draw(Shader* shader)
         //glDisable( GL_CULL_FACE );
 
         // ワールドマトリックスを送る
-        shader->SetMatrixUniform("uWorldTransform", owner->GetWorldTransform());
+        Matrix4 m = Matrix4::CreateScale(scale);
+        shader->SetMatrixUniform("uWorldTransform", m * owner->GetWorldTransform());
 
         std::vector<Matrix4> transform;
         mesh->BoneTransform(animTime, transform);
@@ -59,8 +60,8 @@ void SkeletalMeshComponent::Draw(Shader* shader)
         if (isToon)
         {
             glFrontFace(GL_CW);
-            Matrix4 m = Matrix4::CreateScale(contourFactor);
-            shader->SetMatrixUniform("uWorldTransform", m*owner->GetWorldTransform());
+            Matrix4 m = Matrix4::CreateScale(contourFactor * scale);
+            shader->SetMatrixUniform("uWorldTransform", m * owner->GetWorldTransform());
             for (auto v : va)
             {
                 Texture* t = owner->GetApp()->GetRenderer()->GetTexture("Assets/black.png");

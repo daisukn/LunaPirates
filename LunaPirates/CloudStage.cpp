@@ -19,7 +19,7 @@ const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
 
 const float APEAR_POINT = 600.f;
-const std::string stageFileName = "Setting/stage_test.csv";
+const std::string stageFileName = "Setting/stage.csv";
 
 
 //#define RANDOM_DEBUG

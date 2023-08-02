@@ -207,6 +207,5 @@ void ParticleComponent::CreateParticles(Vector3 pos, unsigned int num, float lif
         
         partMode = mode;
     }
-    
 
 }
