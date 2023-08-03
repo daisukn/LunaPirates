@@ -11,9 +11,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 
-#ifndef ASSIMP_LOAD_FLAGS
-#define ASSIMP_LOAD_FLAGS (aiProcess_Triangulate  | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_OptimizeMeshes | aiProcess_MakeLeftHanded)
-#endif //ASSIMP_LOAD_FLAGS
+const unsigned int ASSIMP_LOAD_FLAGS = aiProcess_Triangulate  | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_OptimizeMeshes | aiProcess_MakeLeftHanded;
 
 
 #include <vector>
@@ -52,7 +50,7 @@ static void MatrixAi2Gl(Matrix4& mat, const aiMatrix4x4 aim)
 Mesh::Mesh()
     : pScene(nullptr)
     , numBones(0)
-    , specPower(1.1f)
+    , specPower(1.0f)
     , animID(0)
     , prevAnimID(0)
     , numAnimations(0)

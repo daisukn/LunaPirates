@@ -49,7 +49,7 @@ public:
     // デストラクタ
     ~BoundingVolumeComponent();
     // VertexArrayからBaoundingボリューム生成
-    void ComputeBoundingVolume(std::vector<class VertexArray*> va);
+    void ComputeBoundingVolume(const std::vector<class VertexArray*> va);
     // Min Maxを直接設定
     void ComputeBoundingVolume(const Vector3 min, const Vector3 max);
     
