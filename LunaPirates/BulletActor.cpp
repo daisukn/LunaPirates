@@ -17,27 +17,18 @@ BulletActor::BulletActor(Application* a)
     meshComp = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/bullet.lwo"));
     meshComp->SetVisible(false);
-    //meshComp->SetBlendAdd(true);
-    //meshComp->SetToonRender(true, 1.04f);
-
-    
-    /*blackMesh = std::make_unique<MeshComponent>(this);
-    blackMesh->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/black_ball.lwo"));
-    blackMesh->SetVisible(false);
-    blackMesh->SetScale(0.8f);
-*/
-
-    
     SetScale(0.15f);
 
     flare = std::make_unique<BillboardComponent>(this);
     flare->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/flare.png"));
     flare->SetScale(0.1f);
+    flare->SetVisible(false);
 
     smoke = std::make_unique<BillboardComponent>(this);
     smoke->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/smoke_add.png"));
     smoke->SetScale(0.2);
     smoke->SetBlendAdd(true);
+    smoke->SetVisible(false);
 
     
     // コライダー
