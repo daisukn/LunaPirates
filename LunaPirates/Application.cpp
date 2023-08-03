@@ -7,6 +7,7 @@
 #include "TitleStage.h"
 #include "CloudStage.h"
 #include <algorithm>
+#include <string>
 
 
 //#define __HIGH_RESOLUTION__
@@ -19,6 +20,8 @@ const float SCREEN_W = 1280.f;
 const float SCREEN_H = 720.f;
 #endif // __HIGH_RESOLUTION__
 
+const std::string WINDOW_TITLE = "Luna";
+
 // コンストラクタ
 Application::Application()
     : isActive(false)
@@ -29,7 +32,6 @@ Application::Application()
     renderer = std::make_unique<class Renderer>();
     inputSys = std::make_unique<class InputSystem>();
     physWorld = std::make_unique<class PhysWorld>();
-
 }
 
 // デストラクタ
@@ -44,14 +46,14 @@ bool Application::Initialize()
 {
     
     // SDL初期化
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
         std::cout << "Failed to init SDL\n";
         return false;
     }
     
     // Renderer初期化
-    renderer->Initialize("Project Luna", SCREEN_W, SCREEN_H, false);
+    renderer->Initialize(WINDOW_TITLE, SCREEN_W, SCREEN_H);
 
     // 入力システム初期化
     inputSys->Initialize();
@@ -221,8 +223,6 @@ void Application::UpdateGame()
         deltaTime = 0.05f;
     }
     ticksCount = SDL_GetTicks();
-    
-    //std::cout << deltaTime << std::endl;
 
     // 物理計算系
     //physWorld->ComputeGroundHeight();

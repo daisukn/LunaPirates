@@ -16,6 +16,7 @@
 
 
 #define __GAME_DEBUG
+//#define __FULLSCREEN__
 
 // コンストラクタ
 Renderer::Renderer()
@@ -34,7 +35,7 @@ Renderer::~Renderer()
 
 
 // ウィンドウ生成とGL初期化
-bool Renderer::Initialize(std::string title, float scWidth, float scHeight, bool isFullScreen)
+bool Renderer::Initialize(std::string title, float scWidth, float scHeight)
 {
     strTitle        = title;    // ウィンドウタイトル
     screenWidth     = scWidth;  // スクリーン幅
@@ -56,13 +57,13 @@ bool Renderer::Initialize(std::string title, float scWidth, float scHeight, bool
     // ハードウェアアクセラレーション有効化
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     
-    
+
+#ifdef __FULLSCREEN__
+    unsigned int WINDOW_FLAGS = SDL_WINDOW_OPENGL || SDL_WINDOW_FULLSCREEN;
+#else
     unsigned int WINDOW_FLAGS = SDL_WINDOW_OPENGL;
-    
-    if (isFullScreen)
-    {
-        WINDOW_FLAGS = SDL_WINDOW_OPENGL || SDL_WINDOW_FULLSCREEN;
-    }
+#endif // __FULLSCREEN__
+
     
     //ウインドウ生成
     window = SDL_CreateWindow(strTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(screenWidth), static_cast<int>(screenHeight), WINDOW_FLAGS);

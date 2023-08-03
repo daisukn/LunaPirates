@@ -98,7 +98,7 @@ void MoaiEnemy::UpdateActor(float deltaTime)
 void MoaiEnemy::Behavior_0(float deltaTime)
 {
 
-    float speed = 150.f;
+    float speed = 300.f;
     
     if (cntLifetime < 100)
     {
