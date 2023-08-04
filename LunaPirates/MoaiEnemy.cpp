@@ -27,7 +27,7 @@ MoaiEnemy::MoaiEnemy(Application* a)
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_ENEMY);
     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/moai.lwo")->GetVertexArray());
-    collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
+    //collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     
     

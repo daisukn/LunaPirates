@@ -73,7 +73,7 @@ public:
     void SetVisible(bool b) { isVisible = b; }
     bool GetVisibile() const { return isVisible; }
     
-    bool GetRadius() const { return radius; }
+    float GetRadius() const { return radius; }
     void SetRadius(float f) { radius = f; }
 
 private:

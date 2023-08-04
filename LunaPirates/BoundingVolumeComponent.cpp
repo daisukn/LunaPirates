@@ -56,9 +56,12 @@ void BoundingVolumeComponent::OnUpdateWorldTransform()
                         (fabsf(obb->max.z) + fabsf(obb->min.z)) / 2);
     
 
-    
       // 角度、AXIS、ちょっと怪しいかも。。。
     obb->rot = Vector3(obb->axisX.x, obb->axisY.y, obb->axisZ.z);
+    
+    
+    // バウンディングスフィア
+    radius = obb->radius.Length();
     
     
 }

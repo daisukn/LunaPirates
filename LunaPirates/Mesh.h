@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <memory>
 
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp>

@@ -37,7 +37,7 @@ void PhysWorld::Test()
             {
                 if (c2->GetDisp())
                 {
-                    //if (JudgeWithRadius(c1, c2))
+                    if (JudgeWithRadius(c1, c2))
                     {
                         if (JudgeWithOBB(c1, c2) )
                         {
@@ -59,7 +59,7 @@ void PhysWorld::Test()
             {
                 if (c2->GetDisp())
                 {
-                    //if (JudgeWithRadius(c1, c2))
+                    if (JudgeWithRadius(c1, c2))
                     {
                         if (JudgeWithOBB(c1, c2) )
                         {
@@ -81,7 +81,7 @@ void PhysWorld::Test()
             {
                 if (c2->GetDisp())
                 {
-                    //if (JudgeWithRadius(c1, c2) )
+                    if (JudgeWithRadius(c1, c2) )
                     {
                         if (JudgeWithOBB(c1, c2))
                         {
@@ -190,7 +190,10 @@ bool PhysWorld::JudgeWithRadius(class ColliderComponent* col1, class ColliderCom
     float len = ditance.Length();
     float thleshold = col1->GetBoundingVolume()->GetRadius() + col2->GetBoundingVolume()->GetRadius();
     
-    if(thleshold*2 > len)
+    std::cout << col1->GetBoundingVolume()->GetRadius() << "  " << col2->GetBoundingVolume()->GetRadius() << std::endl;
+    
+    
+    if(thleshold > len)
     {
         return true;
     }
