@@ -26,7 +26,7 @@ public:
     void Unload();
 
     // VertexArrayを取得
-    std::vector<class VertexArray*> GetVertexArray() { return vArray; }
+    std::vector<class VertexArray*> GetVertexArray() { return vArrayPtr; }
     // Textureを取得
     class Texture* GetTexture(size_t index);
     // シェーダー名取得
@@ -99,7 +99,8 @@ private:
     // TextureのVector
     std::vector<class Texture*> textures;
     // VertexArrayのVector
-    std::vector<class VertexArray*> vArray;
+    std::vector<class VertexArray*> vArrayPtr;
+    std::vector<std::unique_ptr<class VertexArray>> vArray;
 
     // シェーダー名
     std::string shaderName;

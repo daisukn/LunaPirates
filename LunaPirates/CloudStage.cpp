@@ -22,7 +22,7 @@ const float APEAR_POINT = 600.f;
 const std::string stageFileName = "Setting/stage.csv";
 
 
-//#define RANDOM_DEBUG
+#define RANDOM_DEBUG
 //#define STAGE_DEBUG
 
 CloudStage::CloudStage(class Application* a)
@@ -47,7 +47,7 @@ void CloudStage::LoadStageData()
 
     dragonActor = std::make_unique<DragonActor>(app);
     dragonActor->SetPosition(Vector3(0, 0, 100));
-    dragonActor->SetVisible(false);
+//    dragonActor->SetVisible(false);
 
     
     for(int i = 0; i < MAX_CLOUD; i++)

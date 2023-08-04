@@ -63,11 +63,7 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
-    while (!vArray.empty())
-    {
-        delete vArray.back();
-        vArray.pop_back();
-    }
+    vArray.clear();
 }
 
 
@@ -435,18 +431,18 @@ void Mesh::CreateMeshBone(const aiMesh* m)
     }
     
     
-    VertexArray* va = new VertexArray(static_cast<unsigned int>(vertexBuffer.size()) / 3,
-                                  vertexBuffer.data(),
-                                  normalBuffer.data(),
-                                  uvBuffer.data(),
-                                  boneIDs.data(),
-                                  boneWeights.data(),
-                                  static_cast<unsigned int>(indexBuffer.size()),
-                                  indexBuffer.data());
+    vArray.push_back(std::make_unique<VertexArray>(
+            static_cast<unsigned int>(vertexBuffer.size()) / 3,
+            vertexBuffer.data(),
+            normalBuffer.data(),
+            uvBuffer.data(),
+            boneIDs.data(),
+            boneWeights.data(),
+            static_cast<unsigned int>(indexBuffer.size()),
+            indexBuffer.data()) );
     
-    va->SetTextureID(m->mMaterialIndex);
-    
-    vArray.push_back(va);
+    vArray[vArray.size()-1]->SetTextureID(m->mMaterialIndex);
+    vArrayPtr.push_back(vArray[vArray.size()-1].get());
     
     LoadAnimation();
     
@@ -496,15 +492,17 @@ void Mesh::CreateMesh(const aiMesh* m)
         indexBuffer.push_back(Face.mIndices[2]);
     }
 
-    VertexArray* va = new VertexArray(static_cast<unsigned int>(vertexBuffer.size()) / 3,
-                                      vertexBuffer.data(),
-                                      normalBuffer.data(),
-                                      uvBuffer.data(),
-                                      static_cast<unsigned int>(indexBuffer.size()),
-                                      indexBuffer.data());
+    vArray.push_back(std::make_unique<VertexArray>(
+            static_cast<unsigned int>(vertexBuffer.size()) / 3,
+            vertexBuffer.data(),
+            normalBuffer.data(),
+            uvBuffer.data(),
+            static_cast<unsigned int>(indexBuffer.size()),
+            indexBuffer.data()) );
     
-    va->SetTextureID(m->mMaterialIndex);
-    vArray.push_back(va);
+    vArray[vArray.size()-1]->SetTextureID(m->mMaterialIndex);
+    vArrayPtr.push_back(vArray[vArray.size()-1].get());
+    
     
 }
 
