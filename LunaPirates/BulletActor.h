@@ -11,6 +11,9 @@ public:
     void UpdateActor(float deltaTime) override;
     void SetAngle(float f) { angle = f; }
     float GetAngle() const { return angle; }
+    
+    virtual void Appear(Vector3 pos, int type) override;
+    virtual void Disappear() override;
 
 private:
     std::unique_ptr<class BillboardComponent> flare;
@@ -21,6 +24,7 @@ private:
     float ySpeed;
     float zSpeed;
     
+    void CheckCllider();
     
     // 各行動パターン
     void Behavior_0(float deltaTime);

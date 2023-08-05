@@ -126,8 +126,8 @@
             filePath = "LunaPirates/CloudStage.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "CloudStage::AppearLayout()"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "LunaPirates/CloudStage.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "CloudStage::AppearLayout()"
             landmarkType = "7">
          </BreakpointContent>
@@ -193,22 +193,6 @@
             startingLineNumber = "71"
             endingLineNumber = "71"
             landmarkName = "MeshComponent::Draw(s)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1E7EDFA-3560-43EE-8779-2A10D0A3E056"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LunaPirates/MoaiEnemy.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "MoaiEnemy::Behavior_0(deltaTime)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

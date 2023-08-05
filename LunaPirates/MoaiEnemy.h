@@ -41,6 +41,8 @@ private:
     float anglerSpeed;
     float upSpeed;
     float angle;
+    
+    void ShotDonuts();
 };
 
 

@@ -56,46 +56,16 @@ void BulletActor::UpdateActor(float deltaTime)
     }
     
     
-    collComp->SetDisp(true);
-    meshComp->SetVisible(true);
-    //blackMesh->SetVisible(true);
-    flare->SetVisible(true);
-    smoke->SetVisible(true);
-    collComp->GetBoundingVolume()->SetVisible(true);
+
     auto v = GetPosition();
     SetPosition(Vector3(v.x + xSpeed, v.y + ySpeed, v.z + zSpeed));
 
     if(v.z < 0)
     {
-        isDisp = false;
-        meshComp->SetVisible(false);
-        //blackMesh->SetVisible(false);
-        flare->SetVisible(false);
-        smoke->SetVisible(false);
-        collComp->GetBoundingVolume()->SetVisible(false);
-        collComp->SetDisp(false);
+        Disappear();
     }
     
-    if(collComp->GetCollided())
-    {
-        for(auto col : collComp->GetTargetColliders())
-        {
-            if(col->GetColliderType() == C_PLAYER)
-            {
-                isDisp = false;
-                meshComp->SetVisible(false);
-                //blackMesh->SetVisible(false);
-                flare->SetVisible(false);
-                smoke->SetVisible(false);
-                collComp->GetBoundingVolume()->SetVisible(false);
-                collComp->SetDisp(false);
-                break;
-                
-            }
-        }
-
-    }
-    
+    CheckCllider();
 }
 
 
@@ -124,3 +94,43 @@ void BulletActor::Behavior_3(float deltaTime)
 {
 }
 
+void BulletActor::Appear(Vector3 pos, int type)
+{
+    StageObjectActor::Appear(pos, type);
+    collComp->SetDisp(true);
+    meshComp->SetVisible(true);
+    //blackMesh->SetVisible(true);
+    flare->SetVisible(true);
+    smoke->SetVisible(true);
+    collComp->GetBoundingVolume()->SetVisible(true);
+}
+
+void BulletActor::Disappear()
+{
+    isDisp = false;
+    meshComp->SetVisible(false);
+    //blackMesh->SetVisible(false);
+    flare->SetVisible(false);
+    smoke->SetVisible(false);
+    collComp->GetBoundingVolume()->SetVisible(false);
+    collComp->SetDisp(false);
+}
+
+void BulletActor::CheckCllider()
+{
+    if(collComp->GetCollided())
+    {
+        for(auto col : collComp->GetTargetColliders())
+        {
+            if(col->GetColliderType() == C_PLAYER)
+            {
+                Disappear();
+
+                break;
+                
+            }
+        }
+
+    }
+    
+}

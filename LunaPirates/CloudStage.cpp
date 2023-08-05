@@ -18,8 +18,9 @@ const int MAX_UFO = 50;
 const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
 
-const float APEAR_POINT = 600.f;
-const std::string stageFileName = "Setting/stage.csv";
+const float APEAR_POINT = 800.f;
+//const std::string stageFileName = "Setting/stage.csv";
+const std::string stageFileName = "Setting/stage1.txt";
 
 
 //#define RANDOM_DEBUG
@@ -42,12 +43,9 @@ CloudStage::~CloudStage()
 
 void CloudStage::LoadStageData()
 {
-    
-
-
     dragonActor = std::make_unique<DragonActor>(app);
     dragonActor->SetPosition(Vector3(0, 0, 100));
-//    dragonActor->SetVisible(false);
+    dragonActor->SetVisible(false);
 
     
     for(int i = 0; i < MAX_CLOUD; i++)

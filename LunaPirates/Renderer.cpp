@@ -15,7 +15,7 @@
 #include <algorithm>
 
 
-#define __GAME_DEBUG
+//#define __GAME_DEBUG
 //#define __FULLSCREEN__
 
 // コンストラクタ

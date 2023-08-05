@@ -33,6 +33,7 @@ private:
     
     void ShotCircle();
     void ShotLiner();
+
     
     
     float forwardSpeed;

@@ -62,6 +62,11 @@ void UfoEnemy::Appear(Vector3 pos, int type)
     forwardSpeed = 0.0f;
     angle = 0.0f;
     moveComp->Reset();
+    
+    meshComp->SetVisible(true);
+    collComp->GetBoundingVolume()->SetVisible(true);
+    collComp->SetDisp(isDisp);
+
 }
 
 void UfoEnemy::Disappear()
@@ -75,7 +80,6 @@ void UfoEnemy::Disappear()
 void UfoEnemy::CheckCllider()
 {
 
-    collComp->SetDisp(isDisp);
     if(collComp->GetCollided())
     {
         for(auto col : collComp->GetTargetColliders())
@@ -112,10 +116,7 @@ void UfoEnemy::UpdateActor(float deltaTime)
         
     if(state == StateNormal)
     {
-        meshComp->SetVisible(true);
-        collComp->GetBoundingVolume()->SetVisible(true);
-        
-        
+    
         
         if(cntLifetime > 1000)
         {
@@ -216,11 +217,7 @@ void UfoEnemy::Behavior_1(float deltaTime)
     moveComp->SetForwardSpeed(forwardSpeed);
     moveComp->SetUpSpeed(upSpeed);
 
-/*
-    auto v = GetPosition();
-    v += Vector3::UnitY * upSpeed;
-    SetPosition(v);
- */
+
 }
 
 void UfoEnemy::Behavior_2(float deltaTime)
@@ -232,9 +229,6 @@ void UfoEnemy::Behavior_3(float deltaTime)
 {
     
 }
-
-
-
 
 
 void UfoEnemy::ShotLiner()

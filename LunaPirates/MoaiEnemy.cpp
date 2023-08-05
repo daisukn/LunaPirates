@@ -5,7 +5,7 @@
 #include "Mesh.h"
 
 const int MAX_MOAIBULLET = 50;
-const int MAX_DONUTS = 5;
+const int MAX_DONUTS = 8;
 
 MoaiEnemy::MoaiEnemy(Application* a)
     : StageObjectActor(a)
@@ -71,14 +71,9 @@ void MoaiEnemy::UpdateActor(float deltaTime)
     }
         
         
-    if(state == StateNormal)
+    if (state == StateNormal)
     {
-        meshComp->SetVisible(true);
-        collComp->GetBoundingVolume()->SetVisible(true);
-        
-        
-        
-        if(cntLifetime > 1000)
+        if (GetPosition().z < 0)
         {
             Disappear();
         }
@@ -86,10 +81,10 @@ void MoaiEnemy::UpdateActor(float deltaTime)
         
         
     }
-    else if(state == StateExploted)
+    else if (state == StateExploted)
     {
         
-        if(!explosion->GetDisp())
+        if (!explosion->GetDisp())
         {
             isDisp = false;
         }
@@ -99,25 +94,24 @@ void MoaiEnemy::UpdateActor(float deltaTime)
 
 void MoaiEnemy::Behavior_0(float deltaTime)
 {
-
-    float speed = 300.f;
     
     if (cntLifetime < 90)
     {
-        forwardSpeed = -speed;
+        forwardSpeed = -300.f;
     }
-    else forwardSpeed = 0.f;
-
-    if (cntLifetime == 120)
+    else if (cntLifetime < 600)
     {
-        for (int i = 0; i < MAX_DONUTS; i++)
-        {
-            if (!donuts[i]->GetDisp())
-            {
-                donuts[i]->Appear(GetPosition(), 0);
-                break;
-            }
-        }
+        forwardSpeed = 0.f;
+    }
+    else
+    {
+        forwardSpeed = -150.f;
+    }
+
+    if (cntLifetime == 120 || cntLifetime == 200 || cntLifetime == 280 ||
+        cntLifetime == 360 || cntLifetime == 440 || cntLifetime == 520)
+    {
+        ShotDonuts();
     }
 
 
@@ -145,7 +139,6 @@ void MoaiEnemy::Behavior_3(float deltaTime)
 void MoaiEnemy::CheckCllider()
 {
 
-    collComp->SetDisp(isDisp);
     if(collComp->GetCollided())
     {
         for(auto col : collComp->GetTargetColliders())
@@ -171,9 +164,44 @@ void MoaiEnemy::CheckCllider()
 void MoaiEnemy::Appear(Vector3 pos, int type)
 {
     StageObjectActor::Appear(pos, type);
+    state = StateNormal;
+    collComp->SetDisp(isDisp);
+    meshComp->SetVisible(true);
+    collComp->GetBoundingVolume()->SetVisible(true);
 }
 
 void MoaiEnemy::Disappear()
 {
+    StageObjectActor::Disappear();
+    isDisp = false;
+    meshComp->SetVisible(false);
+    collComp->GetBoundingVolume()->SetVisible(false);
+    collComp->SetCollided(false);
+}
+
+void MoaiEnemy::ShotDonuts()
+{
+    if (state != StateNormal)
+    {
+        return;
+    }
     
+    Vector3 v = GetPosition();
+    for (int i = 0; i < MAX_DONUTS; i++)
+    {
+        if (!donuts[i]->GetDisp())
+        {
+            donuts[i]->Appear(Vector3(v.x-10, v.y, v.z-5 ), 0);
+            break;
+        }
+    }
+    
+    for (int i = 0; i < MAX_DONUTS; i++)
+    {
+        if (!donuts[i]->GetDisp())
+        {
+            donuts[i]->Appear(Vector3(v.x+10, v.y, v.z-5 ), 0);
+            break;
+        }
+    }
 }
