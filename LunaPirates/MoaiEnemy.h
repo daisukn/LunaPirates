@@ -3,6 +3,7 @@
 #include "StageObjectActor.h"
 #include "ExplosionActor.h"
 #include "BulletActor.h"
+#include "DonutsActor.h"
 #include <memory>
 #include <vector>
 #include <functional>
@@ -21,6 +22,8 @@ public:
 private:
     std::unique_ptr<class ExplosionActor> explosion;
     std::vector<std::unique_ptr<class BulletActor>> bullet;
+    std::vector<std::unique_ptr<class DonutsActor>> donuts;
+    
     std::unique_ptr<class MoveComponent> moveComp;
     
     void CheckCllider();

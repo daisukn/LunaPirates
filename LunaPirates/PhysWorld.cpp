@@ -183,15 +183,13 @@ bool PhysWorld::IsCollideBoxOBB(const OBB* cA, const OBB* cB){
     return true;
 }
 
-
+// バウンディングスフィアの距離で判定
 bool PhysWorld::JudgeWithRadius(class ColliderComponent* col1, class ColliderComponent* col2)
 {
     auto ditance = col1->GetPosition() - col2->GetPosition();
     float len = ditance.Length();
     float thleshold = col1->GetBoundingVolume()->GetRadius() + col2->GetBoundingVolume()->GetRadius();
-    
-    std::cout << col1->GetBoundingVolume()->GetRadius() << "  " << col2->GetBoundingVolume()->GetRadius() << std::endl;
-    
+
     
     if(thleshold > len)
     {

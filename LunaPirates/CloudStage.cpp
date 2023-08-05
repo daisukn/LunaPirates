@@ -22,7 +22,7 @@ const float APEAR_POINT = 600.f;
 const std::string stageFileName = "Setting/stage.csv";
 
 
-#define RANDOM_DEBUG
+//#define RANDOM_DEBUG
 //#define STAGE_DEBUG
 
 CloudStage::CloudStage(class Application* a)

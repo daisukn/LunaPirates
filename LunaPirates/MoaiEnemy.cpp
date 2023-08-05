@@ -5,6 +5,7 @@
 #include "Mesh.h"
 
 const int MAX_MOAIBULLET = 50;
+const int MAX_DONUTS = 5;
 
 MoaiEnemy::MoaiEnemy(Application* a)
     : StageObjectActor(a)
@@ -27,16 +28,19 @@ MoaiEnemy::MoaiEnemy(Application* a)
     collComp = std::make_unique<ColliderComponent>(this);
     collComp->SetColliderType(C_ENEMY);
     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/moai.lwo")->GetVertexArray());
-    //collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
     
     
     // 弾幕
-    for(int i = 0; i < MAX_MOAIBULLET; i++)
+    for (int i = 0; i < MAX_MOAIBULLET; i++)
     {
         bullet.emplace_back(std::make_unique<BulletActor>(a));
     }
     
+    for (int i = 0; i < MAX_DONUTS; i++)
+    {
+        donuts.emplace_back(std::make_unique<DonutsActor>(a));
+    }
     
     // 移動用コンポーネント
     moveComp = std::make_unique<MoveComponent>(this);
@@ -47,8 +51,6 @@ MoaiEnemy::MoaiEnemy(Application* a)
     BehaviorTable.push_back(&MoaiEnemy::Behavior_2);
     BehaviorTable.push_back(&MoaiEnemy::Behavior_3);
 
-    
-    
 }
 
 MoaiEnemy::~MoaiEnemy()
@@ -100,11 +102,25 @@ void MoaiEnemy::Behavior_0(float deltaTime)
 
     float speed = 300.f;
     
-    if (cntLifetime < 100)
+    if (cntLifetime < 90)
     {
         forwardSpeed = -speed;
     }
     else forwardSpeed = 0.f;
+
+    if (cntLifetime == 120)
+    {
+        for (int i = 0; i < MAX_DONUTS; i++)
+        {
+            if (!donuts[i]->GetDisp())
+            {
+                donuts[i]->Appear(GetPosition(), 0);
+                break;
+            }
+        }
+    }
+
+
     moveComp->SetForwardSpeed(forwardSpeed);
     moveComp->SetAngularSpeed(anglerSpeed);
         
