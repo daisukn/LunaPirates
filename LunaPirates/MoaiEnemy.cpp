@@ -13,6 +13,8 @@ MoaiEnemy::MoaiEnemy(Application* a)
     , anglerSpeed(0.0f)
     , upSpeed(0.0f)
     , angle(0.0f)
+    , life(10)
+    , cntShot(0)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/moai.lwo"));
@@ -105,13 +107,15 @@ void MoaiEnemy::Behavior_0(float deltaTime)
     }
     else
     {
-        forwardSpeed = -150.f;
+        forwardSpeed = -100.f;
     }
 
-    if (cntLifetime == 120 || cntLifetime == 200 || cntLifetime == 280 ||
-        cntLifetime == 360 || cntLifetime == 440 || cntLifetime == 520)
+    if (cntLifetime > 120 && cntLifetime < 600)
     {
-        ShotDonuts();
+        if (cntLifetime % 30 == 0)
+        {
+            ShotDonuts();
+        }
     }
 
 
@@ -146,12 +150,17 @@ void MoaiEnemy::CheckCllider()
             if(col->GetColliderType() == C_PLAYER
                    || col->GetColliderType() == C_LASER)
             {
-                meshComp->SetVisible(false);
-                collComp->GetBoundingVolume()->SetVisible(false);
-                collComp->SetCollided(false);
+                
+                life--;
+                if (life <= 0)
+                {
+                    meshComp->SetVisible(false);
+                    collComp->GetBoundingVolume()->SetVisible(false);
+                    collComp->SetCollided(false);
                     
-                state = StateExploted;
-                explosion->Appear(GetPosition());
+                    state = StateExploted;
+                    explosion->Appear(GetPosition());
+                }
                 break;
                     
             }
@@ -168,6 +177,8 @@ void MoaiEnemy::Appear(Vector3 pos, int type)
     collComp->SetDisp(isDisp);
     meshComp->SetVisible(true);
     collComp->GetBoundingVolume()->SetVisible(true);
+    life = 10;
+    cntShot = 0;
 }
 
 void MoaiEnemy::Disappear()
@@ -186,21 +197,19 @@ void MoaiEnemy::ShotDonuts()
         return;
     }
     
+    cntShot++;
+    float xOffset = 10.f;
+    if (cntShot % 2 == 0)
+    {
+        xOffset = -10.f;
+    }
+    
     Vector3 v = GetPosition();
     for (int i = 0; i < MAX_DONUTS; i++)
     {
         if (!donuts[i]->GetDisp())
         {
-            donuts[i]->Appear(Vector3(v.x-10, v.y, v.z-5 ), 0);
-            break;
-        }
-    }
-    
-    for (int i = 0; i < MAX_DONUTS; i++)
-    {
-        if (!donuts[i]->GetDisp())
-        {
-            donuts[i]->Appear(Vector3(v.x+10, v.y, v.z-5 ), 0);
+            donuts[i]->Appear(Vector3(v.x + xOffset, v.y, v.z-5 ), 0);
             break;
         }
     }

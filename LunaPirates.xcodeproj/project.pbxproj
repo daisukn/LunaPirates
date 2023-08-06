@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7E1812902A6AE15F001C84A4 /* ExplosionActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E18128E2A6AE15F001C84A4 /* ExplosionActor.cpp */; };
 		7E6DD2952A7DCC7200CC5DC8 /* DonutsActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6DD2932A7DCC7200CC5DC8 /* DonutsActor.cpp */; };
+		7E6DD2982A7F5D9500CC5DC8 /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6DD2962A7F5D9500CC5DC8 /* UIElement.cpp */; };
+		7E6DD29B2A7F645A00CC5DC8 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E6DD2992A7F645A00CC5DC8 /* Font.cpp */; };
 		7EA399672A65584500856DB1 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399252A65582F00856DB1 /* Application.cpp */; };
 		7EA399682A65584500856DB1 /* Bone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3995E2A65583300856DB1 /* Bone.cpp */; };
 		7EA399692A65584500856DB1 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EA399592A65583300856DB1 /* Component.cpp */; };
@@ -71,6 +73,10 @@
 		7E66F5AC2A749FB800147C1D /* SolidColor.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = SolidColor.frag; sourceTree = "<group>"; };
 		7E6DD2932A7DCC7200CC5DC8 /* DonutsActor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DonutsActor.cpp; sourceTree = "<group>"; };
 		7E6DD2942A7DCC7200CC5DC8 /* DonutsActor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonutsActor.h; sourceTree = "<group>"; };
+		7E6DD2962A7F5D9500CC5DC8 /* UIElement.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
+		7E6DD2972A7F5D9500CC5DC8 /* UIElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIElement.h; sourceTree = "<group>"; };
+		7E6DD2992A7F645A00CC5DC8 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		7E6DD29A2A7F645A00CC5DC8 /* Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
 		7EA398DE2A65581C00856DB1 /* LunaPirates */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LunaPirates; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA398E82A65582D00856DB1 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		7EA398E92A65582D00856DB1 /* MoveComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MoveComponent.cpp; sourceTree = "<group>"; };
@@ -280,8 +286,6 @@
 				7EA399432A65583100856DB1 /* StageObjectActor.h */,
 				7EA399942A65743800856DB1 /* BulletActor.cpp */,
 				7EA399952A65743800856DB1 /* BulletActor.h */,
-				7E6DD2932A7DCC7200CC5DC8 /* DonutsActor.cpp */,
-				7E6DD2942A7DCC7200CC5DC8 /* DonutsActor.h */,
 			);
 			name = Actor;
 			sourceTree = "<group>";
@@ -320,6 +324,8 @@
 				7EA399652A65583400856DB1 /* Texture.h */,
 				7EA3995D2A65583300856DB1 /* VertexArray.cpp */,
 				7EA3994D2A65583200856DB1 /* VertexArray.h */,
+				7E6DD2992A7F645A00CC5DC8 /* Font.cpp */,
+				7E6DD29A2A7F645A00CC5DC8 /* Font.h */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -362,6 +368,8 @@
 				7EA398F32A65582E00856DB1 /* Stage.h */,
 				7EA399562A65583200856DB1 /* TitleStage.cpp */,
 				7EA398F22A65582E00856DB1 /* TitleStage.h */,
+				7E6DD2962A7F5D9500CC5DC8 /* UIElement.cpp */,
+				7E6DD2972A7F5D9500CC5DC8 /* UIElement.h */,
 			);
 			name = Stage;
 			sourceTree = "<group>";
@@ -377,6 +385,8 @@
 				7EA398F12A65582E00856DB1 /* UfoEnemy.h */,
 				7EA399272A65582F00856DB1 /* DragonActor.cpp */,
 				7EA399472A65583100856DB1 /* DragonActor.h */,
+				7E6DD2932A7DCC7200CC5DC8 /* DonutsActor.cpp */,
+				7E6DD2942A7DCC7200CC5DC8 /* DonutsActor.h */,
 			);
 			name = Enemy;
 			sourceTree = "<group>";
@@ -442,7 +452,9 @@
 				7EA399802A65584500856DB1 /* Shader.cpp in Sources */,
 				7EA399962A65743800856DB1 /* BulletActor.cpp in Sources */,
 				7EA399742A65584500856DB1 /* DragonActor.cpp in Sources */,
+				7E6DD2982A7F5D9500CC5DC8 /* UIElement.cpp in Sources */,
 				7EA399702A65584500856DB1 /* CloudStage.cpp in Sources */,
+				7E6DD29B2A7F645A00CC5DC8 /* Font.cpp in Sources */,
 				7EA399782A65584500856DB1 /* main.cpp in Sources */,
 				7EA399882A65584500856DB1 /* LaserActor.cpp in Sources */,
 				7EA3996C2A65584500856DB1 /* CloudBGActor.cpp in Sources */,

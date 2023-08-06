@@ -42,6 +42,9 @@ private:
     float upSpeed;
     float angle;
     
+    int life;
+    int cntShot;
+    
     void ShotDonuts();
 };
 

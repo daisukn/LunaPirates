@@ -9,6 +9,7 @@
 #include "UfoEnemy.h"
 #include "ShipEnemy.h"
 #include "LaserActor.h"
+#include "UIElement.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -76,6 +77,11 @@ void CloudStage::LoadStageData()
     skyMesh->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/sky.lwo"));
     
 
+    // UI
+    ui = std::make_unique<UIElement>(app);
+    
+    
+    
     isQuitStage = false;
     
     app->GetRenderer()->SetClearColor(0.596f, 0.733f, 0.858f);
@@ -106,6 +112,8 @@ void CloudStage::UpdateStage()
 {
     stageCounter++;
     GenerateCloud();
+    
+    ui->Update();
 
 #ifdef RANDOM_DEBUG
     AppearRandom();
