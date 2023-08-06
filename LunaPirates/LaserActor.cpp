@@ -14,7 +14,6 @@ LaserActor::LaserActor(Application* a)
     
     SetScale(0.05f);
     
-    
     effectMesh = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
     effectMesh->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/stripe.lwo"));
     effectMesh->SetVisible(false);
@@ -31,16 +30,11 @@ LaserActor::LaserActor(Application* a)
     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/laser.lwo")->GetVertexArray());
     collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 1, 1));
     collComp->GetBoundingVolume()->CreateVArray();
-    
-    
-    
 }
 
 void LaserActor::UpdateActor(float deltaTime)
 {
     if(!isDisp) return;
-    
-
     
     auto v = GetPosition();
     float speed = 1000.0f * deltaTime;
@@ -70,7 +64,7 @@ void LaserActor::Appear(Vector3 pos, int type)
     StageObjectActor::Appear(pos, type);
     
     StageObjectActor::Appear(pos, type);
-    particle->CreateParticles(Vector3(0,0,-100), 10, 5.f, 0.2f, 60.0f);
+    particle->CreateParticles(Vector3(0,0,-100), 5, 5.f, 0.2f, 60.0f);
     particle->SetParticleSpeed(5);
     
     meshComp->SetVisible(true);

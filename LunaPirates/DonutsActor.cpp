@@ -18,6 +18,7 @@ DonutsActor::DonutsActor(Application* a)
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/donuts.lwo"));
     meshComp->SetVisible(false);
+    meshComp->SetToonRender(true);
     SetScale(scale);
     
     lightning = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
@@ -81,6 +82,7 @@ void DonutsActor::UpdateActor(float deltaTime)
         if(!explosion->GetDisp())
         {
             isDisp = false;
+            Disappear();
         }
     }
     
@@ -156,7 +158,7 @@ void DonutsActor::CheckCllider()
     {
         for(auto col : collComp->GetTargetColliders())
         {
-            if(col->GetColliderType() == C_LASER)
+            if(col->GetColliderType() == C_LASER || col->GetColliderType() == C_PLAYER)
             {
                 meshComp->SetVisible(false);
                 lightning->SetVisible(false);

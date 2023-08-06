@@ -14,16 +14,16 @@ BulletActor::BulletActor(Application* a)
 {
     
     
-    meshComp = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
+    meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/bullet.lwo"));
     meshComp->SetVisible(false);
     SetScale(0.15f);
 
-    flare = std::make_unique<BillboardComponent>(this);
+/*    flare = std::make_unique<BillboardComponent>(this);
     flare->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/flare.png"));
     flare->SetScale(0.1f);
     flare->SetVisible(false);
-
+*/
     smoke = std::make_unique<BillboardComponent>(this);
     smoke->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/smoke_add.png"));
     smoke->SetScale(0.2);
@@ -99,8 +99,7 @@ void BulletActor::Appear(Vector3 pos, int type)
     StageObjectActor::Appear(pos, type);
     collComp->SetDisp(true);
     meshComp->SetVisible(true);
-    //blackMesh->SetVisible(true);
-    flare->SetVisible(true);
+    //flare->SetVisible(true);
     smoke->SetVisible(true);
     collComp->GetBoundingVolume()->SetVisible(true);
 }
@@ -109,8 +108,7 @@ void BulletActor::Disappear()
 {
     isDisp = false;
     meshComp->SetVisible(false);
-    //blackMesh->SetVisible(false);
-    flare->SetVisible(false);
+    //flare->SetVisible(false);
     smoke->SetVisible(false);
     collComp->GetBoundingVolume()->SetVisible(false);
     collComp->SetDisp(false);

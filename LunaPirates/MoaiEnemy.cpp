@@ -89,6 +89,7 @@ void MoaiEnemy::UpdateActor(float deltaTime)
         if (!explosion->GetDisp())
         {
             isDisp = false;
+            Disappear();
         }
     }
 }
@@ -174,7 +175,7 @@ void MoaiEnemy::Appear(Vector3 pos, int type)
 {
     StageObjectActor::Appear(pos, type);
     state = StateNormal;
-    collComp->SetDisp(isDisp);
+    collComp->SetDisp(true);
     meshComp->SetVisible(true);
     collComp->GetBoundingVolume()->SetVisible(true);
     life = 10;

@@ -28,7 +28,6 @@ void SkeletalMeshComponent::Draw(Shader* shader)
 {
     if (mesh)
     {
-        //glDisable( GL_CULL_FACE );
 
         // ワールドマトリックスを送る
         Matrix4 m = Matrix4::CreateScale(scale);
