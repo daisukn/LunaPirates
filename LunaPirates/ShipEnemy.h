@@ -8,7 +8,7 @@
 class ShipEnemy : public StageObjectActor
 {
 public:
-    ShipEnemy(class Application* a);
+    ShipEnemy(class Application* a, class Stage* s);
     virtual ~ShipEnemy();
     void UpdateActor(float deltaTime) override;
 private:

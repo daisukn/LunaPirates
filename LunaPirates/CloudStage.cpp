@@ -55,15 +55,15 @@ void CloudStage::LoadStageData()
     }
     for(int i = 0;  i < MAX_UFO; i++)
     {
-        ufoEnemy.emplace_back( std::make_unique<UfoEnemy>(app));
+        ufoEnemy.emplace_back( std::make_unique<UfoEnemy>(app, this));
     }
     for(int i = 0;  i < MAX_MOAI; i++)
     {
-        moaiEnemy.emplace_back( std::make_unique<MoaiEnemy>(app));
+        moaiEnemy.emplace_back( std::make_unique<MoaiEnemy>(app, this));
     }
     for(int i = 0;  i < MAX_SHIP; i++)
     {
-        shipEnemy.emplace_back( std::make_unique<ShipEnemy>(app));
+        shipEnemy.emplace_back( std::make_unique<ShipEnemy>(app, this));
     }
     
     
@@ -90,9 +90,8 @@ void CloudStage::LoadStageData()
     
     // 飛行機
     
-    planeActor = std::make_unique<PlaneActor>(app);
+    planeActor = std::make_unique<PlaneActor>(app, this);
     planeActor->SetPosition(Vector3(0, 0, 30));
-    planeActor->SetOwnerStage(this);
     
     LoadStageLayout(stageFileName);
 
@@ -110,6 +109,15 @@ void CloudStage::StageInput(const struct InputState &state)
 
 void CloudStage::UpdateStage()
 {
+    
+    Vector3 v = planeActor->GetPosition();
+    for (auto a : stageActors)
+    {
+        a->SetPlayerPosition(v);
+    }
+    
+    
+    
     stageCounter++;
     GenerateCloud();
     

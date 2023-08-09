@@ -4,8 +4,8 @@
 #include "BoundingVolumeComponent.h"
 #include "Mesh.h"
 
-LaserActor::LaserActor(Application* a)
-    : StageObjectActor(a)
+LaserActor::LaserActor(Application* a, Stage* s)
+    : StageObjectActor(a, s)
 {
     meshComp = std::make_unique<MeshComponent>(this);
     meshComp->SetMesh(GetApp()->GetRenderer()->GetMesh("Assets/Models/laser.lwo"));

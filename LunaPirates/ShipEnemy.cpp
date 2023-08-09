@@ -8,8 +8,8 @@
 #include "Stage.h"
 
 
-ShipEnemy::ShipEnemy(Application* a)
-    : StageObjectActor(a)
+ShipEnemy::ShipEnemy(Application* a, Stage* s)
+    : StageObjectActor(a, s)
 {
 
     meshComp = std::make_unique<SkeletalMeshComponent>(this);

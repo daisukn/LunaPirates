@@ -11,6 +11,7 @@ Stage::Stage(class Application* a)
     , isQuitStage(false)
     , numLayout(0)
     , cntLayout(0)
+    , playerPos(Vector3(0,0,0))
 {
     
 }
@@ -84,6 +85,11 @@ void Stage::LoadStageLayout(std::string filename)
     numLayout = static_cast<int>(layout.size());
     file.close();
     
+}
+
+void Stage::AddStageActor(StageObjectActor* a)
+{
+    stageActors.push_back(a);
 }
 
 void Stage::AppearLayout()

@@ -8,7 +8,7 @@
 class TargetScopeActor : public StageObjectActor
 {
 public:
-    TargetScopeActor(class Application* a);
+    TargetScopeActor(class Application* a, class Stage* s);
     void UpdateActor(float deltaTime) override;
 private:
     std::unique_ptr<class BillboardComponent> scopeBillboard;

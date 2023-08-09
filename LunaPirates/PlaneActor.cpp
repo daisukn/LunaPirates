@@ -19,15 +19,15 @@ const int MAX_LASER = 20;
 const float AREA_LIMIT_H = 45.f;
 const float AREA_LIMIT_W = 75.f;
 
-PlaneActor::PlaneActor(Application* app)
-    : StageObjectActor(app)
+PlaneActor::PlaneActor(Application* a, Stage* s)
+    : StageObjectActor(a, s)
     , animID(0)
     , isMovable(true)
     , barrierCnt(0)
  {
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
-     meshComp->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/plane.fbx"));
+     meshComp->SetMesh(a->GetRenderer()->GetMesh("Assets/Models/plane.fbx"));
      meshComp->SetAnimID(animID, PLAY_CYCLIC);
      meshComp->SetToonRender(true);
      
@@ -45,7 +45,7 @@ PlaneActor::PlaneActor(Application* app)
      // コライダー
      collComp = std::make_unique<ColliderComponent>(this);
      collComp->SetColliderType(C_PLAYER);
-     collComp->GetBoundingVolume()->ComputeBoundingVolume(app->GetRenderer()->GetMesh("Assets/Models/plane.fbx")->GetVertexArray());
+     collComp->GetBoundingVolume()->ComputeBoundingVolume(a->GetRenderer()->GetMesh("Assets/Models/plane.fbx")->GetVertexArray());
      collComp->GetBoundingVolume()->AdjustBoundingBox(Vector3(0, 0, 0), Vector3(1, 0.5, 1));
      collComp->GetBoundingVolume()->CreateVArray();
      collComp->GetBoundingVolume()->SetVisible(true);
@@ -54,19 +54,19 @@ PlaneActor::PlaneActor(Application* app)
      // レーザー
      for (int i = 0; i < MAX_LASER; i++)
      {
-         laserActor.emplace_back( std::make_unique<LaserActor>(app));
+         laserActor.emplace_back( std::make_unique<LaserActor>(a, ownerStage));
      }
      
 
      // ターゲットスコープ
-     scopeActor = std::make_unique<TargetScopeActor>(app);
+     scopeActor = std::make_unique<TargetScopeActor>(a, ownerStage);
      scopeActor->SetOwnerStage(ownerStage);
      scopeActor->SetDisp(true);
      
 
      // 稲妻
      lightning = std::make_unique<MeshComponent>(this, false, MESH_EFFECT);
-     lightning->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/lightning2.lwo"));
+     lightning->SetMesh(a->GetRenderer()->GetMesh("Assets/Models/lightning2.lwo"));
      lightning->SetBlendAdd(true);
      lightning->SetVisible(false);
 }
@@ -78,6 +78,8 @@ void PlaneActor::FieldMove(const InputState &state)
     
     float speed = 80;
 
+    upSpeed = speed * state.Controller.GetLeftStick().y;
+    rightSpeed = speed * state.Controller.GetLeftStick().x;
     
     if (state.Keyboard.GetKeyState(SDL_SCANCODE_UP) == EHeld)
     {
@@ -108,7 +110,8 @@ void PlaneActor::ActorInput(const InputState &state)
 {
     FieldMove(state);
     
-    if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed)
+    if (state.Keyboard.GetKeyState(SDL_SCANCODE_Z) == EPressed ||
+        state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == EPressed )
     {
         ShotLaser();
     }

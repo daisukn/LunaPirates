@@ -9,7 +9,7 @@
 class UfoEnemy : public StageObjectActor
 {
 public:
-    UfoEnemy(class Application* a);
+    UfoEnemy(class Application* a, class Stage* s);
     ~UfoEnemy();
     void UpdateActor(float deltaTime) override;
     void Appear(Vector3 pos, int type) override;

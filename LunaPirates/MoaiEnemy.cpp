@@ -7,8 +7,8 @@
 const int MAX_MOAIBULLET = 50;
 const int MAX_DONUTS = 8;
 
-MoaiEnemy::MoaiEnemy(Application* a)
-    : StageObjectActor(a)
+MoaiEnemy::MoaiEnemy(Application* a, Stage* s)
+    : StageObjectActor(a, s)
     , forwardSpeed(0.0f)
     , anglerSpeed(0.0f)
     , upSpeed(0.0f)
@@ -36,12 +36,12 @@ MoaiEnemy::MoaiEnemy(Application* a)
     // 弾幕
     for (int i = 0; i < MAX_MOAIBULLET; i++)
     {
-        bullet.emplace_back(std::make_unique<BulletActor>(a));
+        bullet.emplace_back(std::make_unique<BulletActor>(a, ownerStage));
     }
     
     for (int i = 0; i < MAX_DONUTS; i++)
     {
-        donuts.emplace_back(std::make_unique<DonutsActor>(a));
+        donuts.emplace_back(std::make_unique<DonutsActor>(a, ownerStage));
     }
     
     // 移動用コンポーネント

@@ -1,12 +1,13 @@
 #include "StageObjectActor.h"
 
-StageObjectActor::StageObjectActor(Application* a)
+StageObjectActor::StageObjectActor(Application* a, class Stage* s)
     : Actor(a)
     , isDisp(false)
     , state(StateNormal)
     , cntLifetime(0)
+    , ownerStage(s)
 {
-    
+    s->AddStageActor(this);
 }
 
 void StageObjectActor::UpdateActor(float deltaTime)

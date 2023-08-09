@@ -9,8 +9,8 @@
 
 const int MAX_BULLET = 50;
 
-UfoEnemy::UfoEnemy(Application* a)
-    : StageObjectActor(a)
+UfoEnemy::UfoEnemy(Application* a, class Stage* s)
+    : StageObjectActor(a, s)
     , forwardSpeed(0.0f)
     , anglerSpeed(0.0f)
     , upSpeed(0.0f)
@@ -27,7 +27,7 @@ UfoEnemy::UfoEnemy(Application* a)
     // 弾幕
     for(int i = 0; i < MAX_BULLET; i++)
     {
-        bullets.emplace_back(std::make_unique<BulletActor>(a));
+        bullets.emplace_back(std::make_unique<BulletActor>(a, ownerStage));
     }
     
     

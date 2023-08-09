@@ -5,8 +5,8 @@
 #include "Mesh.h"
 #include "BillboardComponent.h"
 
-BulletActor::BulletActor(Application* a)
-    : StageObjectActor(a)
+BulletActor::BulletActor(Application* a, class Stage* s)
+    : StageObjectActor(a, s)
     , angle(0.0f)
     , xSpeed(0.0f)
     , ySpeed(0.0f)

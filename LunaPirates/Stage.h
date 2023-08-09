@@ -40,6 +40,10 @@ public:
     
     bool GetQuitStage() const { return isQuitStage; }
     
+    void AddStageActor(class StageObjectActor* a);
+    
+    Vector3 GetPlayerPosition() const { return playerPos;}
+    
     
 protected:
     class Application* app;
@@ -53,6 +57,10 @@ protected:
     int numLayout;
     
     GameStatus gameStatus;
+    
+    std::vector<class StageObjectActor*> stageActors;
+    
+    Vector3 playerPos;
     
 
 private:

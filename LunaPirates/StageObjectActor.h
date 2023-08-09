@@ -5,6 +5,7 @@
 #include "MoveComponent.h"
 #include "FollowCamera.h"
 #include "ColliderComponent.h"
+#include "Stage.h"
 #include <memory>
 
 enum ObjectState
@@ -17,7 +18,7 @@ enum ObjectState
 class StageObjectActor : public Actor
 {
 public:
-    StageObjectActor(class Application* a);
+    StageObjectActor(class Application* a, class Stage* s);
 
     void UpdateActor(float deltaTime) override;
 
@@ -35,6 +36,8 @@ public:
     void SetBehaveType(int t) { behaveType = t; }
     int GetBehaveType() const { return behaveType; }
     
+    void SetPlayerPosition(Vector3 v) { playerPos = v; }
+    
 protected:
     std::unique_ptr<class MeshComponent> meshComp;
     std::unique_ptr<class ColliderComponent> collComp;
@@ -42,10 +45,13 @@ protected:
 
     ObjectState state;
     
+    
     int behaveType;
     
     // カウンター
     int cntLifetime;
+    
+    Vector3 playerPos;
     
     // オーナーのステージ
     class Stage* ownerStage;

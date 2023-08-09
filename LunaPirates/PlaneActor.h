@@ -17,7 +17,7 @@
 class PlaneActor : public StageObjectActor
 {
 public:
-    PlaneActor(class Application* app);
+    PlaneActor(class Application* app, class Stage* s);
 
     void ActorInput(const struct InputState& state) override;
     void UpdateActor(float deltaTime) override;

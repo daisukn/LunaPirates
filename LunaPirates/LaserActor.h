@@ -6,7 +6,7 @@
 class LaserActor : public StageObjectActor
 {
 public:
-    LaserActor(class Application* a);
+    LaserActor(class Application* a, class Stage* s);
     void UpdateActor(float deltaTime) override;
     virtual void Appear(Vector3 pos, int type) override;
     virtual void Disappear() override;

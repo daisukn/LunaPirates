@@ -5,8 +5,8 @@
 #include "Mesh.h"
 
 
-TargetScopeActor::TargetScopeActor(Application* a)
-    : StageObjectActor(a)
+TargetScopeActor::TargetScopeActor(Application* a, Stage* s)
+    : StageObjectActor(a, s)
 {
     isDisp = true;
     scopeBillboard = std::make_unique<BillboardComponent>(this, 200);

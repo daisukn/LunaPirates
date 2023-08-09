@@ -10,7 +10,7 @@
 class DonutsActor : public StageObjectActor
 {
 public:
-    DonutsActor(class Application* a);
+    DonutsActor(class Application* a, class Stage* s);
     void UpdateActor(float deltaTime) override;
     void SetAngle(float f) { angle = f; }
     float GetAngle() const { return angle; }

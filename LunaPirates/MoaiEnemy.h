@@ -11,7 +11,7 @@
 class MoaiEnemy : public StageObjectActor
 {
 public:
-    MoaiEnemy(class Application* a);
+    MoaiEnemy(class Application* a, class Stage* s);
     ~MoaiEnemy();
     void UpdateActor(float deltaTime) override;
     void Appear(Vector3 pos, int type) override;

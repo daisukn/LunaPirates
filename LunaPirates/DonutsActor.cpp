@@ -5,8 +5,8 @@
 #include "BoundingVolumeComponent.h"
 #include "Mesh.h"
 
-DonutsActor::DonutsActor(Application* a)
-    : StageObjectActor(a)
+DonutsActor::DonutsActor(Application* a, Stage* s)
+    : StageObjectActor(a, s)
     , angle(0.0f)
     , xSpeed(0.0f)
     , ySpeed(0.0f)
