@@ -34,7 +34,7 @@ LaserActor::LaserActor(Application* a, Stage* s)
 
 void LaserActor::UpdateActor(float deltaTime)
 {
-    if(!isDisp) return;
+    if (!isDisp) return;
     
     auto v = GetPosition();
     float speed = 1000.0f * deltaTime;
@@ -48,9 +48,9 @@ void LaserActor::UpdateActor(float deltaTime)
     collComp->SetDisp(isDisp);
     if (collComp->GetCollided())
     {
-        for(auto col : collComp->GetTargetColliders())
+        for (auto col : collComp->GetTargetColliders())
         {
-            if(col->GetColliderType() == C_ENEMY)
+            if (col->GetColliderType() == C_ENEMY)
             {
                 Disappear();
                 break;

@@ -20,7 +20,6 @@ BoundingVolumeComponent::BoundingVolumeComponent(Actor* a)
     , radius(0.0f)
     , isVisible(false)
 {
-    // new するタイミングは要検討
     boundingBox = std::make_unique<Cube>();
     obb = std::make_unique<OBB>();
     polygons.reset(new Polygon[NUM_VERTEX]);
