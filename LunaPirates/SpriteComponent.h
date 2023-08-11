@@ -19,12 +19,17 @@ public:
     void SetVisible(bool visible) { isVisible = visible; }
     bool GetVisible() const { return isVisible; }
     
+    void SetScale(float w, float h) { scWidth = w; scHeight = h; }
+    
 protected:
     // スプライト用のテクスチャ
     class Texture* texture;
     int drawOrder;
     int texWidth;
     int texHeight;
+    
+    float scWidth;
+    float scHeight;
     
     bool isBackGround;
     bool isVisible;

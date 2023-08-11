@@ -43,6 +43,7 @@ public:
     void AddStageActor(class StageObjectActor* a);
     
     Vector3 GetPlayerPosition() const { return playerPos;}
+    int GetPlayerLife() { return playerLife; }
     
     
 protected:
@@ -61,6 +62,7 @@ protected:
     std::vector<class StageObjectActor*> stageActors;
     
     Vector3 playerPos;
+    int playerLife;
     
 
 private:

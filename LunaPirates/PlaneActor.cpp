@@ -24,6 +24,8 @@ PlaneActor::PlaneActor(Application* a, Stage* s)
     , animID(0)
     , isMovable(true)
     , barrierCnt(0)
+    , maxLife(100)
+    , life(100)
  {
      // メッシュ初期化
      meshComp = std::make_unique<SkeletalMeshComponent>(this);
@@ -130,6 +132,7 @@ void PlaneActor::UpdateActor(float deltaTime)
             if (col->GetColliderType() == C_BULLET || col->GetColliderType() == C_ENEMY)
             {
                 DamageEffect(true);
+                life--;
                 break;
             }
         }

@@ -16,6 +16,8 @@ SpriteComponent::SpriteComponent(Actor* a, int order, bool isBG)
     , texHeight(0)
     , isBackGround(isBG)
     , isVisible(true)
+    , scWidth(1.0f)
+    , scHeight(1.0f)
 {
     if(isBG)
     {
@@ -52,7 +54,22 @@ void SpriteComponent::Draw(Shader* shader)
 	if (texture)
     {
 		// Textureサイズからスケールマトリックスを作成
-		Matrix4 scaleMat = Matrix4::CreateScale(static_cast<float>(texWidth), static_cast<float>(texHeight), 1.0f);
+        
+        float width = static_cast<float>(texWidth);
+        float height = static_cast<float>(texHeight);
+        
+        if (scWidth != 1.0f)
+        {
+            width = width * scWidth;
+        }
+        if (scHeight != 1.0f)
+        {
+            height = height * scHeight;
+        }
+        
+        Matrix4 scaleMat = Matrix4::CreateScale(width, height, 1.0f);
+    
+	//	Matrix4 scaleMat = Matrix4::CreateScale(static_cast<float>(texWidth), static_cast<float>(texHeight), 1.0f);
 		// ワールド座標生成
         Matrix4 world = scaleMat * owner->GetWorldTransform();
 		

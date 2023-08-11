@@ -20,8 +20,8 @@ const int MAX_MOAI = 10;
 const int MAX_SHIP = 5;
 
 const float APEAR_POINT = 800.f;
-//const std::string stageFileName = "Setting/stage.csv";
-const std::string stageFileName = "Setting/stage1.txt";
+const std::string stageFileName = "Setting/stage.csv";
+//const std::string stageFileName = "Setting/stage1.txt";
 
 
 //#define RANDOM_DEBUG
@@ -76,25 +76,18 @@ void CloudStage::LoadStageData()
     skyMesh = std::make_unique<MeshComponent>(skyActor.get(), false, MESH_BG);
     skyMesh->SetMesh(app->GetRenderer()->GetMesh("Assets/Models/sky.lwo"));
     
-
-    // UI
-    ui = std::make_unique<UIElement>(app);
-    
-    
-    
-    isQuitStage = false;
-    
-    app->GetRenderer()->SetClearColor(0.596f, 0.733f, 0.858f);
-    
-    
-    
     // 飛行機
-    
     planeActor = std::make_unique<PlaneActor>(app, this);
     planeActor->SetPosition(Vector3(0, 0, 30));
     
     LoadStageLayout(stageFileName);
 
+    // UI
+    ui = std::make_unique<UIElement>(app);
+    ui->SetMaxLife(planeActor->GetMaxLife());
+
+    isQuitStage = false;
+    app->GetRenderer()->SetClearColor(0.596f, 0.733f, 0.858f);
 }
 
 void CloudStage::UnloadStageData()
@@ -110,17 +103,19 @@ void CloudStage::StageInput(const struct InputState &state)
 void CloudStage::UpdateStage()
 {
     
-    Vector3 v = planeActor->GetPosition();
+    playerPos = planeActor->GetPosition();
+    playerLife = planeActor->GetLife();
+    ui->SetLife(playerLife);
+    
     for (auto a : stageActors)
     {
-        a->SetPlayerPosition(v);
+        a->SetPlayerPosition(playerPos);
     }
     
     
     
     stageCounter++;
     GenerateCloud();
-    
     ui->Update();
 
 #ifdef RANDOM_DEBUG

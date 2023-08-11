@@ -24,6 +24,9 @@ public:
 
     void SetMeshVisible(bool visible);
     
+    int GetLife() const { return life; }
+    int GetMaxLife() const { return maxLife; }
+    
     
 private:
    
@@ -50,6 +53,9 @@ private:
     
     int barrierCnt;
     void DamageEffect(bool b);
+    
+    int life;
+    int maxLife;
 
 };
 
