@@ -79,5 +79,6 @@ void LaserActor::Disappear()
     effectMesh->SetVisible(false);
     particle->SetVisible(false);
     collComp->GetBoundingVolume()->SetVisible(false);
+    collComp->SetDisp(false);
 }
 

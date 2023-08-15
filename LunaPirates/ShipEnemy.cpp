@@ -11,6 +11,7 @@ const int MAX_SHIPBULLET = 50;
 
 ShipEnemy::ShipEnemy(Application* a, Stage* s)
     : StageObjectActor(a, s)
+    , life(100)
 {
 
     meshComp = std::make_unique<SkeletalMeshComponent>(this);

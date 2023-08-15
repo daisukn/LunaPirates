@@ -138,6 +138,15 @@ void PlaneActor::UpdateActor(float deltaTime)
         }
     }
     barrierCnt--;
+    if (barrierCnt > 0)
+    {
+        collComp->SetDisp(false);
+    }
+    else
+    {
+        collComp->SetDisp(true);
+    }
+    
     if (barrierCnt == 0)
     {
         DamageEffect(false);
