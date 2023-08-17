@@ -12,7 +12,7 @@ TargetScopeActor::TargetScopeActor(Application* a, Stage* s)
     scopeBillboard = std::make_unique<BillboardComponent>(this, 200);
     scopeBillboard->SetTexture(a->GetRenderer()->GetTexture("Assets/Textures/target_scope.png"));
     scopeBillboard->SetVisible(true);
-    SetPosition(Vector3(0, 0, 100));
+    SetPosition(Vector3(0, 0, 150));
     SetScale(0.1f);
 }
 
