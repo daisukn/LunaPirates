@@ -71,3 +71,4 @@ Vector3 FollowCamera::ComputeCameraPos() const
     //cameraPos += Vector3::UnitY * vertDist;
 	return cameraPos;
 }
+
