@@ -11,7 +11,7 @@ const int MAX_SHIPBULLET = 50;
 
 ShipEnemy::ShipEnemy(Application* a, Stage* s)
     : StageObjectActor(a, s)
-    , life(100)
+    , life(30)
 {
 
     meshComp = std::make_unique<SkeletalMeshComponent>(this);
@@ -176,7 +176,7 @@ void ShipEnemy::Appear(Vector3 pos, int type)
     collComp->SetDisp(true);
     meshComp->SetVisible(true);
     collComp->GetBoundingVolume()->SetVisible(true);
-    life = 100;
+    life = 30;
 }
 
 void ShipEnemy::Disappear()

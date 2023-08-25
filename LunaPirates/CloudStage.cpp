@@ -24,7 +24,7 @@ const std::string stageFileName = "Setting/stage.csv";
 //const std::string stageFileName = "Setting/Stage1.txt";
 
 
-//#define RANDOM_DEBUG
+#define RANDOM_DEBUG
 //#define STAGE_DEBUG
 
 CloudStage::CloudStage(class Application* a)
