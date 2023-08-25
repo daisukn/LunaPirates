@@ -72,3 +72,4 @@ Vector3 FollowCamera::ComputeCameraPos() const
 	return cameraPos;
 }
 
+// test
